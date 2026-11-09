@@ -24,6 +24,9 @@
   import '#lib/enhanced/styles/portal.css';
   import '#lib/enhanced/styles/intro.css';
   import Intro from '#lib/enhanced/components/Intro.svelte';
+  // Speed, stage 2 (docs/figma-enhanced-speed.md): clips first, inlined so it acts while the page is being read.
+  import clipsFirst from '#lib/enhanced/clips-first.js?raw';
+  const clipsFirstScript = '<script>' + clipsFirst.replace(/^\s*\/\/.*$/gm, '').replace(/\n\s*\n/g, '\n') + '</' + 'script>';
   // Moderate prewarming: the fonts of the first screen load with the page (the same files the stylesheets name).
   import garamond from '../../assets/fonts/eb-garamond-latin-wght-normal.woff2?url';
   import roboto400 from '#lib/enhanced/fonts/roboto-400.woff2?url';
@@ -128,6 +131,7 @@
   <link rel="preload" href={roboto400} as="font" type="font/woff2" crossorigin="anonymous" />
   <link rel="preload" href={roboto500} as="font" type="font/woff2" crossorigin="anonymous" />
   {#if hero}<link rel="preload" href={`${base.replace(/\/$/, '')}${hero}`} as="image" fetchpriority="high" />{/if}
+  {@html clipsFirstScript}
   {@html `<script>try{if(!sessionStorage.getItem('vessyl:intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){var d=document.documentElement;d.dataset.intro='on';sessionStorage.setItem('vessyl:intro','1');setTimeout(function(){if(d.dataset.intro==='on'){d.dataset.intro='leaving';setTimeout(function(){d.dataset.intro='done'},800)}},3600)}}catch(e){}</script>`}
 </svelte:head>
 

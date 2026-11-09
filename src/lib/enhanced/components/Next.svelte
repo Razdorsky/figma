@@ -21,7 +21,10 @@
     <span class="next-frame">
       <span class="next-media" data-next-media>
         {#if 'loop' in media}
-          <video data-loop muted loop playsinline preload="none" poster={`${base}/bp/video/${media.loop}.webp`} aria-hidden="true" tabindex="-1">
+          <!-- Speed, stage 2: the clip's first frame as a lazy picture beneath it, so it waits with the other pictures
+               below the first screen (clips-first.js); the clip loads on approach (interactions.js, setupClipsFirst). -->
+          <img data-clip-frame src={`${base}/bp/video/${media.loop}.webp`} alt="" loading="lazy" decoding="async" />
+          <video data-loop muted loop playsinline preload="none" aria-hidden="true" tabindex="-1">
             {#if media.mobile}<source media="(max-width: 767px)" src={`${base}/bp/video/${media.loop}-m.mp4`} type="video/mp4" />{/if}
             <source src={`${base}/bp/video/${media.loop}.mp4`} type="video/mp4" />
           </video>

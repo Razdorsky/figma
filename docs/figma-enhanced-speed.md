@@ -51,3 +51,32 @@ Clips further down the page started loading only once 15% of them was on screen 
 Home — section — poolview; The Treehouse — opening — treehouse; Glamping Tents — opening — tents; The Day and the Half Day — opening — rancho-pool; The Frequency Experience — opening — dome, section — inside; For Two — opening — evening; Horses and the River — opening — river, section — saddle; The Frequency Dome — opening — stars; The Harmonic Hearth — opening — hearth, section — plunge; Sound and movement — sections — yoga, tuning; Horses and the land — opening — pasture, sections — halter, swim; The recording studio — opening — studio, section — handpan; El Rancho — opening — rancho; Take the whole property — opening — estate; Retreats — opening — retreat; Arenal — opening — arenal.
 
 The designer's photographs stay in `public/media/` and in the frozen /figma/ edition; the commit of this stage shows which photograph each figure held, should a clip ever be taken out.
+
+## Stage 2. Clips first (2026-11-09)
+
+**What was wrong.** The clip of the first screen shared the connection with everything else from the first moment: the pictures further down (a lazy picture still loads early, as soon as it lies within a screen or two of the view), the stills and data of the clips further down, and the next page's warming. It also loaded its data only after the page script had arrived and called it to play (`preload="metadata"`). The clips further down started loading only when 15% of them was on screen, so the visitor saw a still first.
+
+**The mechanics, in the order they act.**
+
+1. **The clip of the first screen loads at once.** The openings' clips are `preload="auto"` in the markup (14 opening figures; the arch films of Home, Experiences and The Vessyl Presents already were), so the browser asks for the clip while it reads the page, beside its first frame and the fonts.
+2. **It starts before the page script arrives.** A small script in the head of every page (`src/lib/enhanced/clips-first.js`, inlined by `+layout.svelte`) starts a clip on screen the moment it can play (`canplay`). Once the page script has arrived (`window.vessylClips.app`), `syncVideo` in `interactions.js` decides as before: on screen, visible tab, no reduced motion.
+3. **Everything below the first screen waits until that clip moves.** As the page is read, the same head script takes the address off every lazy picture (`data-held-src`) before the browser could ask for it, and gives them all back when the first clip on screen fires `playing`. A lazy picture is asked for only after layout, so this stops it in time; a video's `poster` is asked for the moment it is read, so the stills of clips further down are lazy pictures beneath the clip instead (`img[data-clip-frame]`, the stage 1 figures and the next-page block) and the clips have no `poster`. The pictures are given back at once when the first screen has no clip, under reduced motion (clips stand still), and in any case after 4s. While a picture is held its description is kept unseen (`img[data-held-src]{color:transparent}`, added by the same script), so its box looks like a lazy picture that has not arrived yet. The event `vessyl:first-clip` tells the page script.
+4. **Clips further down load a screen and a half ahead.** They are `preload="none"` in the markup (sections and the next-page block). Once the first clip moves, an observer with a margin of 150% of the screen above and below (`setupClipsFirst`, `approach`) switches each to `preload="auto"` as it comes near, so it is ready when it comes into view and `syncVideo` starts it at once.
+5. **The next page is warmed after that** (`warmNext`, from `docs/figma-enhanced-step2.md`), no longer as soon as the page has loaded.
+6. **The opening mark** (first visit) leaves once the fonts are in, the first frame is decoded and the first clip moves (`firstClipMoving`), still between 2.1s and 3s.
+7. **Navigation inside the site** puts the new page through the same: `setupClipsFirst` calls `window.vessylClips.page()`, which holds the new page's lazy pictures and waits for its first clip.
+
+**Without JavaScript** none of this runs: the clips stand on their first frames and the lazy pictures load as the browser decides.
+
+**Measured** (phone 390×844, the moment the first clip starts moving, two runs each, both builds served locally and compressed like GitHub Pages; fast 4G 9 Mbit/s 60 ms, slow 4G 1.6 Mbit/s 150 ms). "Before" is the published site after stage 1 and the removal of the Atlas (ab49416):
+
+| Page | Before, fast | Stage 2, fast | Before, slow | Stage 2, slow |
+|---|---|---|---|---|
+| Home | 0.82 s | 0.68 s | 3.93 s | 2.92 s |
+| The Day and the Half Day | 0.79 s | 0.68 s | 3.65 s | 2.97 s |
+| The Treehouse | 1.29 s | 1.07 s | 6.49 s | 5.61 s |
+| The Frequency Experience | 1.37 s | 1.01 s | 6.90 s | 5.85 s |
+
+Checked as well: the pictures held at the start are all given back (none left without an address), on a first load and after a navigation inside the site; a clip further down is loaded (`readyState` 4) before it comes into view; with the clips' files blocked, the first frame stands beneath each clip in Chrome, WebKit and Firefox, so no clip box is ever empty; the position and size of every clip figure and the height of every page are unchanged (28 pages × 8 widths).
+
+On slow connections the rest of what the clip waits for is the page itself (its scripts, styles and fonts) and its first frame; on The Frequency Experience the phone still loads the 5.7 MB desktop clip (stage 3).

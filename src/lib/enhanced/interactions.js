@@ -72,6 +72,41 @@ function setupFilms() {
   document.querySelectorAll('.current-page video[data-loop], .current-page video[data-film], .current-page video[data-still]').forEach(video => {video.muted = true;filmObserver.observe(video);});
   setupArch();
 }
+
+// Speed, stage 2 (docs/figma-enhanced-speed.md): clips first. The head script (clips-first.js) holds the lazy pictures
+// until the clip of the first screen moves and starts that clip before this script arrives. Here: once it moves, the
+// clips further down start loading a screen and a half before they come into view, and the next page is warmed.
+let approach, clipsGate = 0, lastPath = '';
+function afterFirstClip(fn) {
+  const gate = window.vessylClips;
+  if (!gate || gate.isOpen()) {fn();return;}
+  const token = clipsGate;
+  document.addEventListener('vessyl:first-clip', () => {if (token === clipsGate) fn();}, {once: true});
+}
+function firstClipMoving() {
+  return new Promise(resolve => {
+    const gate = window.vessylClips;
+    if (!gate || gate.isOpen()) resolve(); else document.addEventListener('vessyl:first-clip', () => resolve(), {once: true});
+  });
+}
+function setupClipsFirst() {
+  approach?.disconnect();
+  clipsGate++;
+  // A navigation inside the site puts the new page through the same as a first load.
+  if (lastPath && lastPath !== location.pathname) window.vessylClips?.page(document.querySelector('.current-page'));
+  lastPath = location.pathname;
+  afterFirstClip(() => {
+    approach = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        approach.unobserve(entry.target);
+        entry.target.preload = 'auto';
+      }
+    }, {rootMargin: '150% 0px 150% 0px'});
+    document.querySelectorAll('.current-page video[data-loop][preload="none"], .current-page video[data-loop][preload="metadata"]').forEach(video => approach.observe(video));
+    if (document.readyState === 'complete') warmNext(); else addEventListener('load', warmNext, {once: true});
+  });
+}
 // Placement map, 2026-11-08: every loop cut from footage with sound sits in a [data-film-box] with a button. A box
 // with data-start and data-end plays that scene of the source film with sound, the sound fading in and out, then
 // returns to the silent loop; a box without them plays the whole film (the arches, Take the whole property). One
@@ -576,7 +611,7 @@ export function enhancePage() {
   setupRail();
   setupChange(true);
   setupPortals();
-  if (document.readyState === 'complete') warmNext(); else addEventListener('load', warmNext, {once: true});
+  setupClipsFirst();
   refreshHeader();
   document.querySelectorAll('[data-gallery] img[data-gallery-image]').forEach(img => {
     img.tabIndex = 0;
@@ -604,15 +639,17 @@ export function installInteractions() {
   const menu = () => document.querySelector('#site-menu');
   const gallery = () => document.querySelector('.gallery-dialog');
 
+  if (window.vessylClips) window.vessylClips.app = true;
   if (!reduced.matches) lenis = new Lenis({lerp: 0.09, wheelMultiplier: 0.9, smoothWheel: true, autoRaf: true, stopInertiaOnNavigate: true});
-  // The opening mark (components/Intro.svelte): it leaves when the fonts are in and the page's first picture is decoded,
-  // not before the mark has played and held a moment (2.1s from the start of the load) and not after 3s; the page scrolls only then.
+  // The opening mark (components/Intro.svelte): it leaves when the fonts are in, the page's first picture is decoded and
+  // its first clip moves (speed, stage 2), not before the mark has played and held a moment (2.1s from the start of the
+  // load) and not after 3s; the page scrolls only then.
   const root = document.documentElement;
   if (root.dataset.intro === 'on') {
     lenis?.stop();
     const slug = location.pathname.match(/\/figma-enhanced\/(.*?)\/?$/)?.[1] ?? '';
     const pictures = (heroes[slug] || []).map(path => {const img = new Image();img.src = siteBase.replace(/\/$/, '') + path;return img.decode().catch(() => {});});
-    const ready = Promise.all([document.fonts?.ready, ...pictures]).catch(() => {});
+    const ready = Promise.all([document.fonts?.ready, firstClipMoving(), ...pictures]).catch(() => {});
     const cap = new Promise(resolve => setTimeout(resolve, Math.max(0, 3000 - performance.now())));
     Promise.race([ready, cap]).then(() => {
       setTimeout(() => {
