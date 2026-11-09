@@ -413,6 +413,7 @@ The owner: one of the site's versions opens with the Vessyl logo appearing smoot
 
 - **Fonts:** Roboto is now WOFF2 (`src/lib/enhanced/fonts/roboto-{400,500,600,700}.woff2`, from the same TTF files with fontTools: each ~124 KB → ~56 KB). EB Garamond and Roboto 400/500, the faces of the first screen, are preloaded.
 - **The mega menu:** its panels are hidden with `visibility`, so their pictures loaded at once even though they stand in the viewport: about 19 covers at 2400px, ~22 MB on every first load. They now use 640px thumbnails (`public/media/thumbs/`, 27 files; the menu dialog uses them too) and load only when a panel is pointed at, focused or opened.
+- **The page's own first picture** (the same list) is preloaded at high priority in the page head, so it is asked for before the stylesheets and scripts reveal it.
 - **A page's first picture** loads at low priority when a link to it is pointed at, focused or touched (`warmPage`, the list in `src/lib/enhanced/heroes.json`: the poster of a page's opening film, or its opening photograph; text openings have none). SvelteKit also fetches the page's data on hover (`data-sveltekit-preload-data="hover"`).
 - **The next page:** once the current page has loaded and the browser is idle, the first picture of the page behind the next-page block is fetched (`warmNext`).
 - **No films are prefetched.** Nothing depends on data saver or the connection speed.
