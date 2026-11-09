@@ -28,5 +28,8 @@
   },
   "imports": {
     "#lib/*": "./src/lib/*"
+  },
+  "dependencies": {
+    "three": "^0.185.1"
   }
 }

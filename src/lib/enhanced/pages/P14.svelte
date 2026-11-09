@@ -19,7 +19,7 @@
 <p data-part="paragraph">George Augspurger</p></div><div data-part="fact"><p data-part="eyebrow">Floor</p>
 <p data-part="paragraph">Vibro-tactile, no furniture</p></div><div data-part="fact"><p data-part="eyebrow">Ceiling</p>
 <p data-part="paragraph">It opens</p></div></div></section>
-<section data-name="Section - 50/50 image text" data-node-id="862:15937" data-role="split" data-layout="image-first" data-variant="editorial"><figure data-part="media" data-aspect="portrait"><img src="{base}/media/7625b812d3c4d8a8132d.webp" alt="A close view of the Dome's copper shingles" loading="lazy" decoding="async" width="1600" height="2400"></figure>
+<section data-name="Section - 50/50 image text" data-node-id="862:15937" data-role="split" data-layout="image-first" data-variant="editorial"><figure data-part="media" data-aspect="portrait" data-dome-3d data-backdrop="{base}/media/atlas/arenal-frame.webp"><img src="{base}/media/7625b812d3c4d8a8132d.webp" alt="A close view of the Dome's copper shingles" loading="lazy" decoding="async" width="1600" height="2400"></figure>
 <div data-part="copy"><p data-node-id="" data-part="eyebrow">Why a dome</p>
 <h2 data-node-id="" class="c-heading" data-part="heading">Geometry, not mysticism</h2>
 <p data-part="paragraph">A dome is not a decorative choice. Sound behaves differently in a sphere than it does in a box. In a rectangular room, sound hits flat walls and bounces back at you in hard reflections. In a dome, the curve sends everything toward the center. You are lying in the place where it all arrives at once.</p>

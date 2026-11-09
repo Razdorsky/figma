@@ -356,7 +356,7 @@ The early prototype (owner's references 15 and 16; `~/Documents/Questionarie/Ves
 - **Where** (my proposal in the placement map; the owner said "2.8 приступай" without choosing another): the three tall 50/50 photographs that look into the Dome. Frequency Experience, "Into the Dome" (guests under the projection, with its loop and sound scene): the arch. Arenal After Dark, "Lit from inside" (the Dome at night): the arch, the Dome's own outline. For Two, "A private session in the Dome": the rounding below, the prototype's second shape. One portal a page, so each page keeps one shape.
 - **Kept from the reference**: both shapes, the inner frame at 0.7rem, the deep soft shadow, the gradient on the far end, the rise of 2rem and the six-second zoom from 130%. **Changed**: no captions (the owner); the straight corners take the site's 10px; the prototype's darkening filter on the photograph is left out (on a light page it dulls the picture), only the gradient remains.
 - **Phones**: the designer turns these photographs landscape (4:3) on phones, where an arch comes out low and wide (the owner's worry about wide photographs); a portal keeps an upright 4:5 frame.
-- **Glass**: the fill was already on the text of twelve openings, every film button and the mega menu, and since 2.6 on the next-page button. New: the two loops in the change circles that come from footage with sound (the violinist on the Dome, Amenities overview 70.3–80.5; the Hearth's round room, programming 48.7–56.5 from its own shot) get the same frosted button, round at the foot of the circle; only the current picture's button can be pressed, and a scene playing with sound ends when its step leaves. Every loop from footage with sound now has its button; the loops without one come from silent cuts. The 3D scene's caption follows in 2.10.
+- **Glass**: the fill was already on the text of twelve openings, every film button and the mega menu, and since 2.6 on the next-page button. New: the two loops in the change circles that come from footage with sound (the violinist on the Dome, Amenities overview 70.3–80.5; the Hearth's round room, programming 48.7–56.5 from its own shot) get the same frosted button, round at the foot of the circle; only the current picture's button can be pressed, and a scene playing with sound ends when its step leaves. Every loop from footage with sound now has its button; the loops without one come from silent cuts. (The 3D scene in 2.10 needed no caption: the designer's text beside it tells its point.)
 
 ### Built (2026-11-09)
 
@@ -393,3 +393,27 @@ One plate was drawn first, for the opening of Arenal, in two styles, each with a
 - Markup: `data-develop="hold|pass"` with `data-plate` and `data-life` on the opening figures (P26, P01); `data-plate-card` and an `img.plate-img` on the map (P02, "scroll") and the three cards (P26); `data-fireflies` (P14, P10). (The margin drawings and their code were removed the same day.)
 - Styles: `styles/atlas.css`. Behaviour in `interactions.js`: `setupDevelop`, `drawDevelop`, `updateDevelop` (WebGL), `setupPlates`, `updatePlates`, `plateFrom`, `setupFireflies`, `drawFireflies`; the film under a developing plate waits on its first frame (`syncVideo`).
 - Checked: layout at 69 widths in Chrome, WebKit and Firefox; axe 0 on all pages; the development, the cards, the drawings and the fireflies in the three engines at 1440 and 390 and under reduced motion; the drawings never touch text and never leave their section at eight widths from 900 to 2560.
+
+## 2.10 The 3D Dome (2026-11-09)
+
+### What the reference does
+
+The early prototype (owner's reference 14; `~/Documents/Questionarie/Vessyl-Prototype`, commit 5dc5649, `app/components/DomeScene.tsx` and `domeCladding.ts`): a copper-clad Dome in front of a photograph of Arenal; as the page scrolls the camera moves between framings and rings spread from the base. The owner: "very cool", but a small scene that tells something about the Dome, not a whole page.
+
+### The owner's words (2026-11-09)
+
+The Dome must be copper in the site's colours, and the waves leaving it must take the site's other colours.
+
+### Decisions
+
+- **Where** (placement map): the slot of the designer's photograph of the copper shingles on the Frequency Dome, beside "Geometry, not mysticism". The designer's text tells the one thing (a dome gathers sound), so the scene carries no caption of its own.
+- **The scene**: the prototype's Dome shape and its shingle cladding (`dome/cladding.js`, compiled from the prototype and recoloured: the site's copper surface `#311500`, link brown `#733a11`, copper accent `#a2551b`, sand `#d3a079` for the few highlights), metal with soft reflections. The rendered copper was measured against the site's accent (close-up average about rgb(167, 86, 37) for `#a2551b` = rgb(162, 85, 27)).
+- **The waves** leave the base one after another in the site's other colours: sand, beige, forest green and the warm label pink, on a soft disc of the site's deep forest green that melts into the photograph.
+- **Arenal behind**: the first frame of the Arenal footage (the plate's own frame), on a far plane so the camera's travel gives it a little parallax, shifted so the volcano stands to the right of the Dome.
+- **The camera** follows the section across the screen: it starts on the shingles, draws back through three quarters to the whole Dome with Arenal behind, and the waves rise as it draws back. Narrow frames move the far framings back so the Dome still fits.
+- **Fallback**: the designer's photograph of the shingles stays underneath and is all that shows under reduced motion, on a saved-data connection, on a device with fewer than four cores or without WebGL. three.js and the scene (132 KB gzipped) load only on this page, when the section comes within a screen, and render only while on screen.
+
+### Built (2026-11-09)
+
+- `src/lib/enhanced/dome/scene.js` (the scene), `dome/cladding.js` (the cladding), `styles/dome.css`; `setupDome` and `updateDome` in `interactions.js`; `data-dome-3d` and `data-backdrop` on the figure (P14). Dependency: `three` 0.185.1, the prototype's version.
+- Checked: layout at 69 widths in Chrome, WebKit and Firefox; axe 0 on all pages; the scene, the fallback under reduced motion and on a two-core device, and leaving and returning through the router in the three engines at 1440 and 390; three.js is never preloaded on other pages.
