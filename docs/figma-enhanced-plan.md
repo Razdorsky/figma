@@ -132,7 +132,7 @@ The owner likes these as techniques, not as the places where they first appeared
 
   No generated night versions of real places.
 
-2.10 **The 3D Dome scene** (reference 14; published 2026-11-09 on the Frequency Dome, copper in the site's colours with waves in its other colours, see `docs/figma-enhanced-step2.md`): a small scene, not a page. The copper Dome against Arenal, a scroll-driven camera and rings at its base, telling one thing about the Dome. Build it with a fallback still for weak devices and reduced motion.
+2.10 **The 3D Dome scene** (reference 14) — **cancelled by the owner, 2026-11-09** ("we cancel the 3D scene with the Dome and skip this step"); it was built and published that day (aeae673) and reverted. Planned as: a small scene, not a page. The copper Dome against Arenal, a scroll-driven camera and rings at its base, telling one thing about the Dome. Build it with a fallback still for weak devices and reduced motion.
 
 **Checkpoint 2:**
 - The owner reviews each feature as it lands.

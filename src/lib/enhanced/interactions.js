@@ -662,36 +662,6 @@ function drawFireflies(now) {
   fireflies.frame = fireflies.items.some(f => f.visible) ? requestAnimationFrame(drawFireflies) : 0;
 }
 
-// Step 2.10 (docs/figma-enhanced-step2.md): the 3D Dome (dome/scene.js), loaded only when its section comes within a
-// screen or so, and only where it can run well: not under reduced motion, on a saved-data connection or on a device
-// with fewer than four cores. The camera follows the section across the screen.
-const dome = {observer: null, scene: null};
-function setupDome() {
-  dome.observer?.disconnect();
-  dome.scene?.destroy();
-  dome.scene = null;
-  const host = document.querySelector('.current-page [data-dome-3d]');
-  const weak = (navigator.hardwareConcurrency || 4) < 4 || navigator.connection?.saveData;
-  if (!host || weak || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  dome.observer = new IntersectionObserver(entries => {
-    if (!entries.some(e => e.isIntersecting)) return;
-    dome.observer.disconnect();
-    import('./dome/scene.js').then(({createDomeScene}) => {
-      if (!host.isConnected || dome.scene) return;
-      dome.scene = createDomeScene(host, {backdrop: host.dataset.backdrop, compact: innerWidth < 768});
-      updateDome();
-    }).catch(() => {});
-  }, {rootMargin: '900px 0px'});
-  dome.observer.observe(host);
-}
-function updateDome() {
-  if (!dome.scene) return;
-  const box = dome.scene.host.getBoundingClientRect();
-  const p = Math.min(1, Math.max(0, (innerHeight - box.top) / (innerHeight + box.height)));
-  const q = Math.min(1, Math.max(0, (p - 0.12) / 0.66));
-  dome.scene.setProgress(q * q * (3 - 2 * q));
-}
-
 // The Home arch (/blueprint/ 452c7d0): it opens with the scroll through its 185svh block, following the page
 // with a short lag (scrub), on screens from 900px and without reduced motion.
 const arch = {el: null, target: 0, current: 0, frame: 0};
@@ -781,7 +751,6 @@ export function enhancePage() {
   setupDevelop();
   setupPlates();
   setupFireflies();
-  setupDome();
   refreshHeader();
   document.querySelectorAll('[data-gallery] img[data-gallery-image]').forEach(img => {
     img.tabIndex = 0;
@@ -811,8 +780,8 @@ export function installInteractions() {
 
   if (!reduced.matches) lenis = new Lenis({lerp: 0.09, wheelMultiplier: 0.9, smoothWheel: true, autoRaf: true, stopInertiaOnNavigate: true});
   let railFrame = 0, headerFrame = 0;
-  addEventListener('resize', () => {cancelAnimationFrame(railFrame);railFrame = requestAnimationFrame(() => {markRails();setupArch();updateDrift();updateRise();updateNext();setupRail();setupChange();updateDevelop();updatePlates();updateDome();updateHeader();});}, {signal});
-  addEventListener('scroll', () => {if (!headerFrame) headerFrame = requestAnimationFrame(() => {headerFrame = 0;updateArch();updateDrift();updateRise();updateNext();updateRail();updateChange();updateDevelop();updatePlates();updateDome();updateHeader();});}, {passive:true, signal});
+  addEventListener('resize', () => {cancelAnimationFrame(railFrame);railFrame = requestAnimationFrame(() => {markRails();setupArch();updateDrift();updateRise();updateNext();setupRail();setupChange();updateDevelop();updatePlates();updateHeader();});}, {signal});
+  addEventListener('scroll', () => {if (!headerFrame) headerFrame = requestAnimationFrame(() => {headerFrame = 0;updateArch();updateDrift();updateRise();updateNext();updateRail();updateChange();updateDevelop();updatePlates();updateHeader();});}, {passive:true, signal});
   on('visibilitychange', () => document.querySelectorAll('.current-page video[data-loop], .current-page video[data-film], .current-page video[data-still]').forEach(syncVideo));
   for (const name of ['play', 'pause', 'ended', 'volumechange']) on(name, event => {
     const box = event.target instanceof HTMLVideoElement ? event.target.closest('[data-film-box]') : null;

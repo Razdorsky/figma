@@ -1,7 +1,0 @@
-/* Figma Enhanced — step 2.10 (docs/figma-enhanced-step2.md): the 3D Dome in the slot of the designer's photograph of
-   the copper shingles on the Frequency Dome ("Geometry, not mysticism"). The scene fades in over the photograph once
-   it has drawn; the photograph stays for weak devices, a saved-data connection, reduced motion or no WebGL. */
-body[data-edition="figma-enhanced"] .current-page [data-dome-3d] > .dome-canvas {
-  position: absolute; inset: 0; z-index: 1; display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 800ms var(--ease);
-}
-body[data-edition="figma-enhanced"] .current-page [data-dome-3d][data-dome-ready] > .dome-canvas { opacity: 1; }

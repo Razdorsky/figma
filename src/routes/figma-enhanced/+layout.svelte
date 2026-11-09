@@ -22,7 +22,6 @@
   import '#lib/enhanced/styles/change.css';
   import '#lib/enhanced/styles/portal.css';
   import '#lib/enhanced/styles/atlas.css';
-  import '#lib/enhanced/styles/dome.css';
 
   let {children}: {children:Snippet} = $props();
   onMount(installInteractions);
