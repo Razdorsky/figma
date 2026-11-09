@@ -22,7 +22,6 @@
   import '#lib/enhanced/styles/rail.css';
   import '#lib/enhanced/styles/change.css';
   import '#lib/enhanced/styles/portal.css';
-  import '#lib/enhanced/styles/atlas.css';
   import '#lib/enhanced/styles/intro.css';
   import Intro from '#lib/enhanced/components/Intro.svelte';
   // Moderate prewarming: the fonts of the first screen load with the page (the same files the stylesheets name).

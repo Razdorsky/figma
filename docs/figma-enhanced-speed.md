@@ -22,7 +22,7 @@ What a phone (390×844, 3×) downloads without scrolling:
 | Frequency Experience | 8.2 MB | desktop clip 5.7 MB (no phone version), photos 0.9 + 0.4 + 0.4 MB |
 | Treehouse | 4.5 MB | clip 1.5 MB, photo under the clip 1.2 MB, photo further down 1.1 MB, first frame 0.3 MB |
 | The Frequency Dome | 3.8 MB | desktop clip 1.9 MB (no phone version), photo under the clip 0.8 MB, photo 0.6 MB |
-| Home | 3.4 MB | photos far down 1.0 + 0.4 MB, clip 0.9 MB, engraving plates for a section 8,000 px down 0.5 MB |
+| Home | 3.4 MB | photos far down 1.0 + 0.4 MB, clip 0.9 MB, engraving plates for a section 8,000 px down 0.5 MB (the Atlas, removed since) |
 | Villas | 1.3 MB | one 2400px photo 0.9 MB |
 
 When the first clip starts moving on a phone (no opening mark), and the same with the competing photos blocked:

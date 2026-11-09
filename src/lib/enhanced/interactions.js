@@ -53,12 +53,6 @@ function openMega(trigger, focusFirst) {
 // then only the visitor's own taps play it.
 let filmObserver;
 function syncVideo(video) {
-  const plate = video.closest('[data-develop]');
-  if (plate && plate.dataset.developed === 'false' && video.dataset.activated !== 'true') {
-    video.pause();
-    if (video.currentTime > 0.05) video.currentTime = 0;
-    return;
-  }
   const shot = video.closest('[data-armed] [data-shot]');
   if (shot && !shot.hasAttribute('data-current')) {video.pause();return;}
   const visible = video.dataset.visible === 'true' && !document.hidden;
@@ -467,212 +461,8 @@ function setupPortals() {
   });
 }
 
-// Step 2.9 (docs/figma-enhanced-step2.md): the Atlas layer, in the engraving style the owner chose (variant A).
-// The engraving that develops into the film (reference 17), as in the Atlas prototype: a WebGL canvas over the film holds
-// the plate and the film's first frame; a front with a ragged edge climbs from the foot as the page scrolls, and near the
-// front the plate's lines linger over the picture. The film holds its first frame until the plate has gone, then plays;
-// scrolling back brings the lines back. "hold": the opening holds the screen while it develops (Arenal); "pass": it
-// develops as its section crosses the screen (Home). Without WebGL or motion the film simply plays.
-const DEV_VS = 'attribute vec2 p;varying vec2 uv;void main(){uv=p*.5+.5;gl_Position=vec4(p,0,1);}';
-const DEV_FS = `precision highp float;varying vec2 uv;uniform sampler2D uPic,uPlate;uniform float uDev;uniform vec4 uCover;
-float hash(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
-float noise(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1,0)),u.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y);}
-float fbm(vec2 p){float s=0.,a=.5;for(int i=0;i<5;i++){s+=a*noise(p);p*=2.03;a*=.5;}return s;}
-void main(){vec2 s=vec2(uv.x,1.-uv.y);vec2 t=s*uCover.xy+uCover.zw;vec3 life=texture2D(uPic,t).rgb;vec3 plate=texture2D(uPlate,t).rgb;
-float ink=clamp(1.-dot(plate,vec3(.299,.587,.114))/.92,0.,1.);float n=fbm(t*vec2(3.,4.)+4.);float front=uDev*1.12-.06;
-float reveal=1.-smoothstep(front-.08,front+.08,(1.-t.y)*.62+n*.3+ink*.08);float lines=ink*(1.-smoothstep(.45,1.,reveal));
-gl_FragColor=vec4(mix(plate,life*(1.-lines*.75),reveal),1.);}`;
-const develop = {items: [], frame: 0};
-function developProgram(gl) {
-  const shader = (type, src) => {const sh = gl.createShader(type);gl.shaderSource(sh, src);gl.compileShader(sh);return sh;};
-  const prog = gl.createProgram();
-  gl.attachShader(prog, shader(gl.VERTEX_SHADER, DEV_VS));
-  gl.attachShader(prog, shader(gl.FRAGMENT_SHADER, DEV_FS));
-  gl.linkProgram(prog);
-  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return null;
-  gl.useProgram(prog);
-  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
-  const at = gl.getAttribLocation(prog, 'p');
-  gl.enableVertexAttribArray(at);
-  gl.vertexAttribPointer(at, 2, gl.FLOAT, false, 0, 0);
-  gl.uniform1i(gl.getUniformLocation(prog, 'uPic'), 0);
-  gl.uniform1i(gl.getUniformLocation(prog, 'uPlate'), 1);
-  return {dev: gl.getUniformLocation(prog, 'uDev'), cover: gl.getUniformLocation(prog, 'uCover')};
-}
-function developTexture(gl, unit, src, done) {
-  const image = new Image();
-  image.decoding = 'async';
-  image.onload = () => {
-    gl.activeTexture(gl.TEXTURE0 + unit);
-    gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
-    for (const [k, v] of [[gl.TEXTURE_MIN_FILTER, gl.LINEAR], [gl.TEXTURE_MAG_FILTER, gl.LINEAR], [gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE], [gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE]]) gl.texParameteri(gl.TEXTURE_2D, k, v);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
-    done();
-  };
-  image.src = src;
-}
-function setupDevelop() {
-  cancelAnimationFrame(develop.frame);
-  develop.frame = 0;
-  develop.items.forEach(item => {item.canvas.remove();item.wrap?.removeAttribute('data-holding');});
-  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  develop.items = [...document.querySelectorAll('.current-page [data-develop]')].map(fig => {
-    const video = fig.querySelector('video');
-    const canvas = document.createElement('canvas');
-    canvas.className = 'develop-canvas';
-    canvas.setAttribute('aria-hidden', 'true');
-    const gl = still ? null : canvas.getContext('webgl', {antialias: false, preserveDrawingBuffer: false});
-    const uniforms = gl && developProgram(gl);
-    if (!uniforms) {fig.dataset.developed = 'true';if (video) syncVideo(video);return null;}
-    fig.append(canvas);
-    const wrap = fig.dataset.develop === 'hold' ? fig.closest('[data-rise]') : null;
-    wrap?.setAttribute('data-holding', '');
-    const item = {fig, video, canvas, gl, uniforms, wrap, loaded: 0, dev: 0, target: 0, aspect: Number(fig.dataset.frameAspect) || 16 / 9};
-    fig.dataset.developed = 'false';
-    for (const [unit, src] of [[0, fig.dataset.life], [1, fig.dataset.plate]]) developTexture(gl, unit, src, () => {item.loaded++;drawDevelop(item);});
-    return item;
-  }).filter(Boolean);
-  updateDevelop(true);
-}
-function drawDevelop(item) {
-  if (item.loaded < 2) return;
-  const {gl, canvas} = item;
-  const ratio = Math.min(devicePixelRatio || 1, 1.5);
-  const w = Math.round(canvas.clientWidth * ratio), h = Math.round(canvas.clientHeight * ratio);
-  if (!w || !h) return;
-  if (canvas.width !== w || canvas.height !== h) {canvas.width = w;canvas.height = h;}
-  gl.viewport(0, 0, w, h);
-  // object-fit: cover, centred, like the film beneath.
-  const box = w / h;
-  const sx = box > item.aspect ? 1 : box / item.aspect, sy = box > item.aspect ? item.aspect / box : 1;
-  gl.uniform4f(item.uniforms.cover, sx, sy, (1 - sx) / 2, (1 - sy) / 2);
-  gl.uniform1f(item.uniforms.dev, item.dev);
-  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-}
-function developTarget(item) {
-  const vh = innerHeight;
-  if (item.wrap) return Math.min(1, Math.max(0, -item.wrap.getBoundingClientRect().top / (vh * 0.6)));
-  const box = item.fig.getBoundingClientRect();
-  return Math.min(1, Math.max(0, (vh * 0.9 - box.top) / (vh * 0.65)));
-}
-function updateDevelop(jump = false) {
-  if (!develop.items.length) return;
-  for (const item of develop.items) {
-    item.target = developTarget(item);
-    if (jump) item.dev = item.target;
-  }
-  const step = () => {
-    let moving = false;
-    for (const item of develop.items) {
-      item.dev += (item.target - item.dev) * 0.12;
-      if (Math.abs(item.target - item.dev) < 0.001) item.dev = item.target; else moving = true;
-      const box = item.fig.getBoundingClientRect();
-      if (box.bottom > 0 && box.top < innerHeight) drawDevelop(item);
-      const done = String(item.dev > 0.995 || item.video?.dataset.activated === 'true');
-      if (item.fig.dataset.developed !== done) {item.fig.dataset.developed = done;if (item.video) syncVideo(item.video);}
-    }
-    develop.frame = moving ? requestAnimationFrame(step) : 0;
-  };
-  if (jump) step(); else if (!develop.frame) develop.frame = requestAnimationFrame(step);
-}
-
-// Engraved plates that develop into photographs (reference 19). With a pointer, the plate opens in a circle from the
-// point where it enters the card and closes when it leaves; on a touch screen it opens from the middle when the card
-// reaches the middle of the screen, or on a tap; a keyboard focus opens it too. The map ("scroll") develops with the
-// scroll as it crosses the screen and keeps its labels.
-let plateObserver;
-function setupPlates() {
-  plateObserver?.disconnect();
-  const cards = [...document.querySelectorAll('.current-page [data-plate-card]')];
-  if (!cards.length || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const touch = !matchMedia('(hover: hover) and (pointer: fine)').matches;
-  plateObserver = new IntersectionObserver(entries => {
-    for (const entry of entries) if (entry.isIntersecting) {entry.target.setAttribute('data-open', '');plateObserver.unobserve(entry.target);}
-  }, {rootMargin: '-38% 0px -38% 0px'});
-  for (const fig of cards) {
-    if (fig.dataset.plateCard === 'scroll') continue;
-    fig.style.setProperty('--mx', '50%');
-    fig.style.setProperty('--my', '50%');
-    if (touch) plateObserver.observe(fig);
-  }
-  updatePlates();
-}
-function updatePlates() {
-  document.querySelectorAll('.current-page [data-plate-card="scroll"]').forEach(fig => {
-    const box = fig.getBoundingClientRect();
-    const progress = Math.min(1, Math.max(0, (innerHeight * 0.85 - box.top) / (innerHeight * 0.75)));
-    fig.querySelector('.plate-img')?.style.setProperty('--r', `${(progress * progress * (3 - 2 * progress) * 160).toFixed(1)}%`);
-  });
-}
-function plateFrom(card, event) {
-  const fig = card.querySelector('[data-plate-card]');
-  if (!fig || fig.dataset.plateCard === 'scroll') return null;
-  const box = fig.getBoundingClientRect();
-  if (event) {
-    fig.style.setProperty('--mx', `${Math.min(100, Math.max(0, (event.clientX - box.left) / box.width * 100)).toFixed(1)}%`);
-    fig.style.setProperty('--my', `${Math.min(100, Math.max(0, (event.clientY - box.top) / box.height * 100)).toFixed(1)}%`);
-  }
-  return fig;
-}
-
-// Fireflies (reference 20): few, slow and warm, over the forest of real night footage only, as in the Atlas. They live
-// in one part of the picture (data-fireflies="top bottom [left right]" as fractions), draw only while on screen and keep still
-// under reduced motion.
-const fireflies = {items: [], frame: 0, observer: null};
-function setupFireflies() {
-  cancelAnimationFrame(fireflies.frame);
-  fireflies.frame = 0;
-  fireflies.observer?.disconnect();
-  fireflies.items.forEach(item => item.canvas.remove());
-  fireflies.items = [];
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  fireflies.observer = new IntersectionObserver(entries => {
-    for (const entry of entries) {
-      const item = fireflies.items.find(f => f.host === entry.target);
-      if (item) item.visible = entry.isIntersecting;
-    }
-    if (!fireflies.frame && fireflies.items.some(f => f.visible)) fireflies.frame = requestAnimationFrame(drawFireflies);
-  });
-  document.querySelectorAll('.current-page [data-fireflies]').forEach(host => {
-    const [top, bottom, left = 0, right = 1] = (host.dataset.fireflies || '0.55 0.9').split(' ').map(Number);
-    const canvas = document.createElement('canvas');
-    canvas.className = 'fireflies';
-    canvas.setAttribute('aria-hidden', 'true');
-    host.append(canvas);
-    const count = Number(host.dataset.count || 18);
-    const swarm = Array.from({length: count}, () => ({x: left + Math.random() * (right - left), y: top + Math.random() * (bottom - top), p: Math.random() * 6.28, s: 0.4 + Math.random() * 0.8, r: 0.8 + Math.random() * 1.6}));
-    fireflies.items.push({host, canvas, ctx: canvas.getContext('2d'), swarm, visible: false});
-    fireflies.observer.observe(host);
-  });
-}
-function drawFireflies(now) {
-  const t = now / 1000;
-  for (const item of fireflies.items) {
-    if (!item.visible) continue;
-    const {canvas, ctx} = item;
-    const W = canvas.clientWidth, H = canvas.clientHeight, d = Math.min(devicePixelRatio || 1, 2);
-    if (canvas.width !== Math.round(W * d)) {canvas.width = Math.round(W * d);canvas.height = Math.round(H * d);}
-    ctx.setTransform(d, 0, 0, d, 0, 0);
-    ctx.clearRect(0, 0, W, H);
-    for (const f of item.swarm) {
-      const a = 0.35 + 0.65 * Math.max(0, Math.sin(t * f.s * 1.7 + f.p));
-      const x = (f.x + Math.sin(t * 0.07 * f.s + f.p) * 0.02) * W, y = (f.y + Math.cos(t * 0.09 * f.s + f.p) * 0.015) * H;
-      const g = ctx.createRadialGradient(x, y, 0, x, y, f.r * 7);
-      g.addColorStop(0, `rgba(255,214,140,${a})`);
-      g.addColorStop(0.25, `rgba(255,190,110,${a * 0.35})`);
-      g.addColorStop(1, 'rgba(255,180,90,0)');
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(x, y, f.r * 7, 0, 6.283);
-      ctx.fill();
-    }
-  }
-  fireflies.frame = fireflies.items.some(f => f.visible) ? requestAnimationFrame(drawFireflies) : 0;
-}
-
-// Moderate prewarming (owner, 2026-11-09): the first picture of a page (its photograph, or the poster of its loop,
-// which covers the photograph; on Arenal its plate and first frame) loads quietly when a link to it is pointed at,
+// Moderate prewarming (owner, 2026-11-09): the first picture of a page (its photograph, or the first frame of its
+// clip) loads quietly when a link to it is pointed at,
 // touched or focused, so the page transition shows it at once; once a page has settled, the page its next-page block
 // leads to is warmed the same way. Films are never fetched ahead. heroes.json lists the pictures.
 const warmed = new Set();
@@ -786,9 +576,6 @@ export function enhancePage() {
   setupRail();
   setupChange(true);
   setupPortals();
-  setupDevelop();
-  setupPlates();
-  setupFireflies();
   if (document.readyState === 'complete') warmNext(); else addEventListener('load', warmNext, {once: true});
   refreshHeader();
   document.querySelectorAll('[data-gallery] img[data-gallery-image]').forEach(img => {
@@ -836,8 +623,8 @@ export function installInteractions() {
     });
   }
   let railFrame = 0, headerFrame = 0;
-  addEventListener('resize', () => {cancelAnimationFrame(railFrame);railFrame = requestAnimationFrame(() => {markRails();setupArch();updateDrift();updateRise();updateNext();setupRail();setupChange();updateDevelop();updatePlates();updateHeader();});}, {signal});
-  addEventListener('scroll', () => {if (!headerFrame) headerFrame = requestAnimationFrame(() => {headerFrame = 0;updateArch();updateDrift();updateRise();updateNext();updateRail();updateChange();updateDevelop();updatePlates();updateHeader();});}, {passive:true, signal});
+  addEventListener('resize', () => {cancelAnimationFrame(railFrame);railFrame = requestAnimationFrame(() => {markRails();setupArch();updateDrift();updateRise();updateNext();setupRail();setupChange();updateHeader();});}, {signal});
+  addEventListener('scroll', () => {if (!headerFrame) headerFrame = requestAnimationFrame(() => {headerFrame = 0;updateArch();updateDrift();updateRise();updateNext();updateRail();updateChange();updateHeader();});}, {passive:true, signal});
   on('visibilitychange', () => document.querySelectorAll('.current-page video[data-loop], .current-page video[data-film], .current-page video[data-still]').forEach(syncVideo));
   for (const name of ['play', 'pause', 'ended', 'volumechange']) on(name, event => {
     const box = event.target instanceof HTMLVideoElement ? event.target.closest('[data-film-box]') : null;
@@ -850,8 +637,6 @@ export function installInteractions() {
     const target = event.target instanceof Element ? event.target : null;
     if (target?.closest('[data-header]')) document.querySelector('[data-header]')?.classList.remove('is-away');
     if (target && !target.closest('[data-mega], [data-mega-trigger]')) closeMegas();
-    const plateCard = target?.closest('[data-part="card"]');
-    if (plateCard) plateFrom(plateCard)?.setAttribute('data-open', '');
     // The browser brings the focused card into view after this event; the rail settles on the next frame.
     if (target?.closest('[data-rail][data-armed]')) requestAnimationFrame(() => railFocus(target));
   });
@@ -866,28 +651,6 @@ export function installInteractions() {
   on('pointerover', intent);
   on('focusin', intent);
   on('touchstart', intent, {passive: true});
-  // Step 2.9: engraved plates open from where the pointer enters their card and close when it leaves; a tap opens or
-  // closes one on a touch screen; leaving a card with the keyboard closes it again.
-  const fine = () => matchMedia('(hover: hover) and (pointer: fine)').matches;
-  on('pointerover', event => {
-    if (event.pointerType !== 'mouse') return;
-    const card = event.target instanceof Element ? event.target.closest('[data-part="card"]') : null;
-    if (card && !card.contains(event.relatedTarget)) plateFrom(card, event)?.setAttribute('data-open', '');
-  });
-  on('pointerout', event => {
-    if (event.pointerType !== 'mouse') return;
-    const card = event.target instanceof Element ? event.target.closest('[data-part="card"]') : null;
-    if (!card || card.contains(event.relatedTarget) || card.contains(document.activeElement)) return;
-    plateFrom(card)?.removeAttribute('data-open');
-  });
-  on('focusout', event => {
-    const card = event.target instanceof Element ? event.target.closest('[data-part="card"]') : null;
-    if (card && !card.contains(event.relatedTarget) && !card.matches(':hover') && fine()) plateFrom(card)?.removeAttribute('data-open');
-  });
-  on('click', event => {
-    const fig = event.target instanceof Element ? event.target.closest('[data-plate-card]') : null;
-    if (fig && fig.dataset.plateCard !== 'scroll' && !fine()) fig.toggleAttribute('data-open');
-  });
   resetPendingMenu=()=>{clearTimeout(menuCloseTimer);menuCloseTimer=undefined;menu()?.classList.remove('closing');};
   // Placement map, 2026-11-08: on wide screens the menu shows the photograph of the page under the pointer or focus
   // (Menu.svelte). The new photograph is decoded first, then crossfades in; a later hover wins.

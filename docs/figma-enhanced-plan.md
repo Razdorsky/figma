@@ -124,7 +124,7 @@ The owner likes these as techniques, not as the places where they first appeared
 
 2.8 **Photo portals and frosted glass** from the early prototype (references 15–16; published 2026-11-09 on the tall 50/50 photographs of P09, P10 and P11, see `docs/figma-enhanced-step2.md`): arched or rounded-bottom frames with an inner border and a slow zoom-in on arrival, and frosted panels over film or 3D. No captions inside the photos.
 
-2.9 **The artistic layer** from the "atlas" prototype (references 17–20; published 2026-11-09 in the owner's chosen engraving style A, see `docs/figma-enhanced-step2.md`):
+2.9 **The artistic layer** from the "atlas" prototype (references 17–20) — **cancelled by the owner, 2026-11-09** ("roll back all the Atlas effects we made, all of them; the Atlas step is skipped"); it was published that day in the owner's chosen engraving style A and then removed entirely, see `docs/figma-enhanced-step2.md`. Planned as:
 - the engraving that develops into the film as you scroll;
 - margin drawings of animals and plants that draw themselves (built, then removed on the owner's word, 2026-11-09);
 - engraved plates that develop into photos, with a mobile mechanic (develop at screen centre or on tap);

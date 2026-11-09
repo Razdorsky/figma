@@ -364,7 +364,10 @@ The early prototype (owner's references 15 and 16; `~/Documents/Questionarie/Ves
 - Styles: `styles/portal.css`. Behaviour: `setupPortals` in `interactions.js` (arrives once at a fifth on screen; the waiting state is set without motion, so nothing fades on load); `showChange` ends a scene whose picture leaves.
 - Checked: layout at 69 widths in Chrome, WebKit and Firefox (nothing new); axe 0 on all pages; arrival, zoom, shape and proportion in the three engines at 1440 and 390, and still under reduced motion; the circle buttons play their scene with sound and stop when the step changes; galleries, menu and newsletter.
 
-## 2.9 The artistic layer of the Atlas (2026-11-09)
+## 2.9 The artistic layer of the Atlas — cancelled (2026-11-09)
+
+Built and published the same day (22b2b71; the margin drawings were taken out first, 862b447). Later that day the owner cancelled the whole step: "roll back all the Atlas effects we made, all of them; the Atlas step is skipped". Both commits were reverted: the engraving that developed into the film (Arenal, Home), the plates that developed into photographs (the map on Where you sleep, the three cards on Arenal), the fireflies (The Frequency Dome, Arenal After Dark), their WebGL and scroll code, `styles/atlas.css` and every picture in `public/media/atlas/` are gone. Arenal's opening no longer holds the screen, and its first picture (prewarming, `heroes.json`) is the first frame of its clip again. What follows is the record of what was built.
+
 
 ### What the reference does
 
