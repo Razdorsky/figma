@@ -29,23 +29,6 @@ body[data-edition="figma-enhanced"] .current-page [data-plate-card][data-open] >
 body[data-edition="figma-enhanced"] .current-page [data-plate-card="scroll"] > .plate-img { transition: none; }
 body[data-edition="figma-enhanced"] .current-page [data-role="map"] [data-part="map-key"] { z-index: 2; }
 
-/* ---- Drawings in the margins (reference 18) ------------------------------------------------------------------------
-   Species of the place, drawn from our footage and photographs (macaw, toucan, kiskadee, torch ginger) and from the
-   Atlas (morpho, monstera). Each draws itself from the top as its section comes up (--draw from 1 to 0) and lies on
-   the page in multiply. Only beside the designer's centred headings, where the margins are free; phones have none. */
-body[data-edition="figma-enhanced"] .current-page section:has(> .specimen) { position: relative; }
-body[data-edition="figma-enhanced"] .current-page .specimen {
-  /* Out of the section's grid, so that its offsets are measured from the section's edge, not from a grid area. */
-  grid-column: auto; grid-row: auto;
-  position: absolute; z-index: 0; width: var(--w, clamp(110px, 10.5vw, 240px)); top: var(--t, 50%); left: var(--l, auto); right: var(--rt, auto);
-  translate: 0 -50%; transform: rotate(var(--rot, 0deg)); pointer-events: none; clip-path: inset(0 0 calc(var(--draw, 0) * 100%) 0);
-}
-body[data-edition="figma-enhanced"] .current-page .specimen img { display: block; width: 100%; height: auto; mix-blend-mode: multiply; }
-body[data-edition="figma-enhanced"] .current-page section:has(> .specimen) > :not(.specimen) { position: relative; z-index: 1; }
-@media (max-width: 899px) {
-  body[data-edition="figma-enhanced"] .current-page .specimen { display: none; }
-}
-
 /* ---- Fireflies (reference 20) ----------------------------------------------------------------------------------------
    Few, slow and warm, only over real night footage: the Dome under the Milky Way and the Dome at night. */
 body[data-edition="figma-enhanced"] .current-page [data-fireflies] > .fireflies { position: absolute; inset: 0; z-index: 1; display: block; width: 100%; height: 100%; pointer-events: none; }
@@ -54,5 +37,4 @@ body[data-edition="figma-enhanced"] .current-page [data-fireflies] > .fireflies 
   body[data-edition="figma-enhanced"] .current-page [data-plate-card] > .plate-img,
   body[data-edition="figma-enhanced"] .current-page [data-develop] > .develop-canvas,
   body[data-edition="figma-enhanced"] .current-page [data-fireflies] > .fireflies { display: none; }
-  body[data-edition="figma-enhanced"] .current-page .specimen { clip-path: none; }
 }

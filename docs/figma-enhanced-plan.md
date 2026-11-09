@@ -126,7 +126,7 @@ The owner likes these as techniques, not as the places where they first appeared
 
 2.9 **The artistic layer** from the "atlas" prototype (references 17–20; published 2026-11-09 in the owner's chosen engraving style A, see `docs/figma-enhanced-step2.md`):
 - the engraving that develops into the film as you scroll;
-- margin drawings of animals and plants that draw themselves;
+- margin drawings of animals and plants that draw themselves (built, then removed on the owner's word, 2026-11-09);
 - engraved plates that develop into photos, with a mobile mechanic (develop at screen centre or on tap);
 - fireflies over real night footage.
 

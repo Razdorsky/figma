@@ -607,47 +607,6 @@ function plateFrom(card, event) {
   return fig;
 }
 
-// Drawings in the margins (reference 18): each stands in the free margin beside its section's text, measured on the
-// page (the designer's centred headings run long, and the margin changes with the width): it takes the width the margin
-// allows, up to its own, centred in the margin, and stays away when the margin is under 72px. Placed again after a
-// resize and once the fonts have loaded.
-function placeSpecimens() {
-  document.querySelectorAll('.current-page .specimen').forEach(sp => {
-    const section = sp.parentElement;
-    const box = section.getBoundingClientRect();
-    const range = document.createRange();
-    let minX = Infinity, maxX = -Infinity;
-    const walker = document.createTreeWalker(section, NodeFilter.SHOW_TEXT, {acceptNode: n => n.textContent.trim() && !n.parentElement.closest('.specimen') ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT});
-    while (walker.nextNode()) {
-      range.selectNodeContents(walker.currentNode);
-      for (const r of range.getClientRects()) {minX = Math.min(minX, r.left);maxX = Math.max(maxX, r.right);}
-    }
-    const left = sp.dataset.side === 'left';
-    const gap = left ? minX - box.left : box.right - maxX;
-    const most = Math.min(240, Math.max(110, innerWidth * 0.105)) * Number(sp.dataset.scale || 1);
-    // The drawing is turned a little: its turned outline, not its width, has to fit the margin.
-    const turn = Math.abs(parseFloat(sp.style.getPropertyValue('--rot')) || 0) * Math.PI / 180;
-    const ratio = Number(sp.dataset.ratio || 1);
-    const width = Math.min(most, (gap - 32) / (Math.cos(turn) + ratio * Math.sin(turn)));
-    sp.hidden = !(width >= 72 && isFinite(gap));
-    if (sp.hidden) return;
-    sp.style.setProperty('--w', `${Math.round(width)}px`);
-    sp.style.setProperty(left ? '--l' : '--rt', `${Math.round((gap - width) / 2)}px`);
-  });
-}
-// Each draws itself from the top as its bottom comes up from the foot of the screen (--draw from 1 to 0 over a fifth of
-// the screen), as in the Atlas.
-function updateSpecimens() {
-  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.querySelectorAll('.current-page .specimen').forEach(sp => {
-    if (still) {sp.style.removeProperty('--draw');return;}
-    const b = sp.getBoundingClientRect();
-    const x = Math.min(1, Math.max(0, (innerHeight * 0.99 - b.bottom) / (innerHeight * 0.2)));
-    const d = x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
-    sp.style.setProperty('--draw', (1 - d).toFixed(3));
-  });
-}
-
 // Fireflies (reference 20): few, slow and warm, over the forest of real night footage only, as in the Atlas. They live
 // in one part of the picture (data-fireflies="top bottom [left right]" as fractions), draw only while on screen and keep still
 // under reduced motion.
@@ -791,9 +750,6 @@ export function enhancePage() {
   setupPortals();
   setupDevelop();
   setupPlates();
-  placeSpecimens();
-  document.fonts?.ready.then(placeSpecimens);
-  updateSpecimens();
   setupFireflies();
   refreshHeader();
   document.querySelectorAll('[data-gallery] img[data-gallery-image]').forEach(img => {
@@ -824,8 +780,8 @@ export function installInteractions() {
 
   if (!reduced.matches) lenis = new Lenis({lerp: 0.09, wheelMultiplier: 0.9, smoothWheel: true, autoRaf: true, stopInertiaOnNavigate: true});
   let railFrame = 0, headerFrame = 0;
-  addEventListener('resize', () => {cancelAnimationFrame(railFrame);railFrame = requestAnimationFrame(() => {markRails();setupArch();updateDrift();updateRise();updateNext();setupRail();setupChange();updateDevelop();updatePlates();placeSpecimens();updateSpecimens();updateHeader();});}, {signal});
-  addEventListener('scroll', () => {if (!headerFrame) headerFrame = requestAnimationFrame(() => {headerFrame = 0;updateArch();updateDrift();updateRise();updateNext();updateRail();updateChange();updateDevelop();updatePlates();updateSpecimens();updateHeader();});}, {passive:true, signal});
+  addEventListener('resize', () => {cancelAnimationFrame(railFrame);railFrame = requestAnimationFrame(() => {markRails();setupArch();updateDrift();updateRise();updateNext();setupRail();setupChange();updateDevelop();updatePlates();updateHeader();});}, {signal});
+  addEventListener('scroll', () => {if (!headerFrame) headerFrame = requestAnimationFrame(() => {headerFrame = 0;updateArch();updateDrift();updateRise();updateNext();updateRail();updateChange();updateDevelop();updatePlates();updateHeader();});}, {passive:true, signal});
   on('visibilitychange', () => document.querySelectorAll('.current-page video[data-loop], .current-page video[data-film], .current-page video[data-still]').forEach(syncVideo));
   for (const name of ['play', 'pause', 'ended', 'volumechange']) on(name, event => {
     const box = event.target instanceof HTMLVideoElement ? event.target.closest('[data-film-box]') : null;
