@@ -20,8 +20,8 @@ import path from 'node:path';
 
 const target = process.argv[2] || '';
 const edition = /^blueprint\d*$/.test(target) ? 'blueprint' : target;
-if (edition !== 'figma' && edition !== 'blueprint' && edition !== 'figma-enhanced') {
-  console.error('Usage: node scripts/build-pages.mjs figma|figma-enhanced|blueprint|blueprint<n>');
+if (edition !== 'figma' && edition !== 'blueprint' && edition !== 'figma-enhanced' && edition !== 'figma-pr') {
+  console.error('Usage: node scripts/build-pages.mjs figma|figma-enhanced|figma-pr|blueprint|blueprint<n>');
   process.exit(1);
 }
 
@@ -29,7 +29,7 @@ const dist = path.resolve('dist');
 const out = path.resolve('outputs/github-pages');
 // bp holds the Blueprint edition's own photographs and films; enhanced holds files only Figma Enhanced uses (the phone
 // versions of its clips, docs/figma-enhanced-speed.md, stage 3).
-const roots = ['_app', 'media', 'brand', ...(edition === 'blueprint' ? ['bp'] : []), ...(edition === 'figma-enhanced' ? ['enhanced'] : [])];
+const roots = ['_app', 'media', 'brand', ...(edition === 'blueprint' ? ['bp'] : []), ...(edition === 'figma-enhanced' || edition === 'figma-pr' ? ['enhanced'] : [])];
 
 await fs.rm(out, { recursive: true, force: true });
 await fs.mkdir(out, { recursive: true });
@@ -46,7 +46,7 @@ async function* files(dir) {
 
 // The enhanced edition plays a few of the brand films cut for Blueprint (docs/figma-enhanced-step2.md, 2.3) and
 // shows a few of its approved photographs (2.7): copy only the files its pages name, not the whole bp folder.
-if (edition === 'figma-enhanced') {
+if (edition === 'figma-enhanced' || edition === 'figma-pr') {
   const used = new Set();
   for await (const file of files(out)) {
     if (file.endsWith('.html')) for (const [, name] of (await fs.readFile(file, 'utf8')).matchAll(/\/bp\/((?:video|img)\/[\w.-]+)/g)) used.add(name);

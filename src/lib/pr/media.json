@@ -1,0 +1,873 @@
+[
+  {
+    "index": 1,
+    "aliases": {
+      "imgVessylSymbol": "/media/4aeeef77306ab03a2bd8.svg",
+      "imgVessylWordmark": "/media/eb7619ed17d11a3fdcc8.svg",
+      "imgColor": "/media/c51ac0d35aac68dae7f2.svg",
+      "imgPattern": "/media/5944a54399f13575128b.svg",
+      "img16109382143891": "/media/475782777018244eff8a.webp",
+      "imgTheNewYorkTimesLogoSvg1": "/media/ae6b496ab66d71e5b97e.webp",
+      "imgDwellLogoFreelogovectorsNet1": "/media/04dd67845422361266a6.webp",
+      "imgPeopleIncLogoSvg1": "/media/2d1d21e0ebbc1c5a2373.webp",
+      "imgTheSkimmLogo1": "/media/c96d31fcfc210e7f30f5.webp",
+      "imgVector": "/media/7011d3d7d75430e2b83e.svg",
+      "imgGroup12": "/media/33e0a6ed4360de92c1cb.svg",
+      "imgVector1": "/media/9bc8b4feecb8046bf649.svg",
+      "imgGroup13": "/media/4e43abc9edb08ae2dd79.svg",
+      "imgRectangle12": "/media/132a77fa6bcddbf7ca83.svg",
+      "imgVessylSymbol1": "/media/b94bb9abeb2acb9762c1.svg",
+      "imgVessylSymbol2": "/media/c637e0d8e458864a395d.svg",
+      "imgVideoRef1": "/media/e8e1d1c262ffea471760.webp",
+      "imgVessy4Room4Tent2Edit1": "/media/0ef67cbaf17027aee6cb.webp",
+      "imgContainer011": "/media/81536a0be9ccf3efc5a4.webp",
+      "imgVessyHorsesRiver92": "/media/81f157d1df8ad03594c6.webp",
+      "imgVessyHorsesRiver93": "/media/2d21c7985bf17587473c.webp",
+      "imgVessyHorsesRiver94": "/media/11358b370ad895b42644.webp",
+      "imgVessyHorsesRiver95": "/media/61222bcc50543c4f065a.webp",
+      "imgVessyHorsesRiver96": "/media/bfa86c72291543bb877a.webp",
+      "imgVessyHorsesRiver97": "/media/ff4ec2454b6182720297.webp",
+      "imgVessy4Room4Tent2Edit2": "/media/d0b94379dbbf70b5d921.webp",
+      "imgVolcano1Updated2": "/media/9772fed083830cf825f9.webp",
+      "imgVideoRef": "/media/0376d193694728c64756.svg",
+      "imgVessylSymbol3": "/media/c637e0d8e458864a395d.svg"
+    },
+    "assets": [
+      {
+        "url": "/media/2d21c7985bf17587473c.webp",
+        "sourceHash": "2d21c7985bf17587473c995933d5b0100fa22d4c5b27b1a6453235a97a6a0209"
+      },
+      {
+        "url": "/media/81536a0be9ccf3efc5a4.webp",
+        "sourceHash": "81536a0be9ccf3efc5a429ec067295ac65546743b48f4cf6502c3ec56a86f0b6"
+      },
+      {
+        "url": "/media/9bc8b4feecb8046bf649.svg",
+        "sourceHash": "9bc8b4feecb8046bf649d9d7d77b8aa02e93c7148b2df4c2003fd7c5ae60da05"
+      },
+      {
+        "url": "/media/4aeeef77306ab03a2bd8.svg",
+        "sourceHash": "4aeeef77306ab03a2bd8d2c3e7e21527fcfd9a3ecfb9f0020a27b6ec9c03588d"
+      },
+      {
+        "url": "/media/33e0a6ed4360de92c1cb.svg",
+        "sourceHash": "33e0a6ed4360de92c1cbbeafbee8ea42daea9213dd110e900844013212988115"
+      },
+      {
+        "url": "/media/d0b94379dbbf70b5d921.webp",
+        "sourceHash": "d0b94379dbbf70b5d921a0878ad3186462ae664fe7b06e63134f1ea138d57691"
+      },
+      {
+        "url": "/media/5944a54399f13575128b.svg",
+        "sourceHash": "5944a54399f13575128be97e05742376bfe2fa3e6caf47d416ff9bc9562bb343"
+      },
+      {
+        "url": "/media/11358b370ad895b42644.webp",
+        "sourceHash": "11358b370ad895b4264466fb1e7534c03e43736e0db1bf7f6235f3d7c79eb97a"
+      },
+      {
+        "url": "/media/475782777018244eff8a.webp",
+        "sourceHash": "475782777018244eff8ab42e9f17ac4b1e943018355e667b5e1c2107af930e61"
+      },
+      {
+        "url": "/media/c637e0d8e458864a395d.svg",
+        "sourceHash": "c637e0d8e458864a395d0c3917778b43514f3706c611ff471646fcfc6959213e"
+      },
+      {
+        "url": "/media/2d1d21e0ebbc1c5a2373.webp",
+        "sourceHash": "2d1d21e0ebbc1c5a237364119e938b84ca465f6c2da121636f21d3dd7b7c05b9"
+      },
+      {
+        "url": "/media/61222bcc50543c4f065a.webp",
+        "sourceHash": "61222bcc50543c4f065ae885282d5e90f5625516b7593e38dc1412b65f7d52d4"
+      },
+      {
+        "url": "/media/c51ac0d35aac68dae7f2.svg",
+        "sourceHash": "c51ac0d35aac68dae7f27b29139ca3273aff4df8a0b2812740367694c13f95e8"
+      },
+      {
+        "url": "/media/b94bb9abeb2acb9762c1.svg",
+        "sourceHash": "b94bb9abeb2acb9762c11cd3b63d9a40fe9b7a8fa83a4d0ff6e3afe60666677b"
+      },
+      {
+        "url": "/media/ae6b496ab66d71e5b97e.webp",
+        "sourceHash": "ae6b496ab66d71e5b97ece1461c7437c79d3d27b25343ea786839f07c5497b23"
+      },
+      {
+        "url": "/media/eb7619ed17d11a3fdcc8.svg",
+        "sourceHash": "eb7619ed17d11a3fdcc8949613de62d124cafa7c80abca07fac1b16f29af086e"
+      },
+      {
+        "url": "/media/ff4ec2454b6182720297.webp",
+        "sourceHash": "ff4ec2454b61827202972c7f439dbd6d45b3466a09aa447d5f451d54bde05919"
+      },
+      {
+        "url": "/media/c637e0d8e458864a395d.svg",
+        "sourceHash": "c637e0d8e458864a395d0c3917778b43514f3706c611ff471646fcfc6959213e"
+      },
+      {
+        "url": "/media/7011d3d7d75430e2b83e.svg",
+        "sourceHash": "7011d3d7d75430e2b83e194b49ec974b9014f8542060bc16319be964ac230a88"
+      },
+      {
+        "url": "/media/bfa86c72291543bb877a.webp",
+        "sourceHash": "bfa86c72291543bb877a75b6a2038b0795c9e25637ed611ed82d74073572fd6e"
+      },
+      {
+        "url": "/media/9772fed083830cf825f9.webp",
+        "sourceHash": "9772fed083830cf825f9336f9f84dfbecfb655bf6fc080eba6520884e44a47a3"
+      },
+      {
+        "url": "/media/0376d193694728c64756.svg",
+        "sourceHash": "0376d193694728c64756a6455f141b9faa5c40815a556cc200de8e07d1fb7784"
+      },
+      {
+        "url": "/media/132a77fa6bcddbf7ca83.svg",
+        "sourceHash": "132a77fa6bcddbf7ca8371b4661865ff177b702a9c6c1e46678f39e7cb17ecc5"
+      },
+      {
+        "url": "/media/04dd67845422361266a6.webp",
+        "sourceHash": "04dd67845422361266a6381a4066fcc8100748009d435a48c4644539b444de6f"
+      },
+      {
+        "url": "/media/81f157d1df8ad03594c6.webp",
+        "sourceHash": "81f157d1df8ad03594c61921c4f435357e3aca3cf1f6688e50cee77c19729059"
+      },
+      {
+        "url": "/media/4e43abc9edb08ae2dd79.svg",
+        "sourceHash": "4e43abc9edb08ae2dd7930a74e4d3626b787e83ffe85899c92db2f5f645dd6d6"
+      },
+      {
+        "url": "/media/c96d31fcfc210e7f30f5.webp",
+        "sourceHash": "c96d31fcfc210e7f30f51f34ef2a70eb8d85ec72fa6fd83af2696b5e9972003b"
+      },
+      {
+        "url": "/media/0ef67cbaf17027aee6cb.webp",
+        "sourceHash": "0ef67cbaf17027aee6cb0a4ff759c59f944c42e044edc9c90f0b6e98a3c9ad59"
+      },
+      {
+        "url": "/media/e8e1d1c262ffea471760.webp",
+        "sourceHash": "e8e1d1c262ffea471760a168e8fe25311bf6c1529ce3fbb4bd5b58916813209a"
+      }
+    ]
+  },
+  {
+    "index": 2,
+    "aliases": {
+      "imgVessylSymbol": "/media/4aeeef77306ab03a2bd8.svg",
+      "imgVessylWordmark": "/media/eb7619ed17d11a3fdcc8.svg",
+      "imgColor": "/media/c51ac0d35aac68dae7f2.svg",
+      "imgPattern": "/media/64b3f01cb7ef5d6059a0.svg",
+      "imgScreenshot20261020At111751Am1": "/media/0b6f7938d784334e4a7e.webp",
+      "imgEllipse15": "/media/827fb99057197badf415.svg",
+      "imgRectangle12": "/media/9371adf7034a491e2803.svg",
+      "imgVessy4Room4Tent2Edit2": "/media/90e7a43ef89cdaa5b7f6.webp",
+      "imgVessy4Room4Tent2Edit3": "/media/38bd44acd09f7a1caa67.webp",
+      "imgVessy4Room4Tent2Edit4": "/media/1cf43cba02fcc0f90ae8.webp",
+      "imgRectangle13": "/media/98afd0b3e75462d3402d.svg",
+      "imgVessylSymbol1": "/media/1a6f0b440e693b0c8078.svg",
+      "imgVessylWordmark1": "/media/cc0e4c663bb5d345cae6.svg"
+    },
+    "assets": [
+      {
+        "url": "/media/1cf43cba02fcc0f90ae8.webp",
+        "sourceHash": "1cf43cba02fcc0f90ae8c9a409378b7d72cadd945ef3da868a5948853fb1cc47"
+      },
+      {
+        "url": "/media/4aeeef77306ab03a2bd8.svg",
+        "sourceHash": "4aeeef77306ab03a2bd8d2c3e7e21527fcfd9a3ecfb9f0020a27b6ec9c03588d"
+      },
+      {
+        "url": "/media/64b3f01cb7ef5d6059a0.svg",
+        "sourceHash": "64b3f01cb7ef5d6059a0efc7b56bd48f65b9cc5ee8b8acfb25239cc51b08299e"
+      },
+      {
+        "url": "/media/cc0e4c663bb5d345cae6.svg",
+        "sourceHash": "cc0e4c663bb5d345cae624fa69427d846b09f25c25ea3ad0d31a8548a4d917a5"
+      },
+      {
+        "url": "/media/c51ac0d35aac68dae7f2.svg",
+        "sourceHash": "c51ac0d35aac68dae7f27b29139ca3273aff4df8a0b2812740367694c13f95e8"
+      },
+      {
+        "url": "/media/98afd0b3e75462d3402d.svg",
+        "sourceHash": "98afd0b3e75462d3402d87ddfa332276312f9b191868b94c63336497c7589bec"
+      },
+      {
+        "url": "/media/827fb99057197badf415.svg",
+        "sourceHash": "827fb99057197badf415acd913bbcb8ae08ed63438c6682aae2064ce1cb6148c"
+      },
+      {
+        "url": "/media/eb7619ed17d11a3fdcc8.svg",
+        "sourceHash": "eb7619ed17d11a3fdcc8949613de62d124cafa7c80abca07fac1b16f29af086e"
+      },
+      {
+        "url": "/media/9371adf7034a491e2803.svg",
+        "sourceHash": "9371adf7034a491e2803ab94d56a3f78a5df87d660dff1440239b1cc4e8a7f46"
+      },
+      {
+        "url": "/media/1a6f0b440e693b0c8078.svg",
+        "sourceHash": "1a6f0b440e693b0c80782adee3d20da225a82891721af40b67c4c7996f454b73"
+      },
+      {
+        "url": "/media/38bd44acd09f7a1caa67.webp",
+        "sourceHash": "38bd44acd09f7a1caa67d6b33230d0a5900b405b288e1d513e895ea5a13d9ef5"
+      },
+      {
+        "url": "/media/0b6f7938d784334e4a7e.webp",
+        "sourceHash": "0b6f7938d784334e4a7e4e293fc880b3e3a8b6600bc9c42e645a4a2f41831bb7"
+      },
+      {
+        "url": "/media/90e7a43ef89cdaa5b7f6.webp",
+        "sourceHash": "90e7a43ef89cdaa5b7f6cd5347c70bb32af14878c2f2b77d6f33b3b5fcb69515"
+      }
+    ]
+  },
+  {
+    "index": 3,
+    "aliases": {
+      "imgVessylSymbol": "/media/4aeeef77306ab03a2bd8.svg",
+      "imgVessylWordmark": "/media/eb7619ed17d11a3fdcc8.svg",
+      "imgColor": "/media/c51ac0d35aac68dae7f2.svg",
+      "imgPattern": "/media/549730f6c2562b3d77d2.svg",
+      "imgHeroSection": "/media/2b61d0b9909a48665218.webp",
+      "imgContainer011": "/media/14b7b4c25a37fe7fd2f3.webp",
+      "imgVessy4Room4Tent2Edit2": "/media/38bd44acd09f7a1caa67.webp",
+      "imgVessy4Room4Tent2Edit3": "/media/1cf43cba02fcc0f90ae8.webp",
+      "imgRectangle33": "/media/611f11f8aaf7603db59a.svg",
+      "imgRectangle34": "/media/ad3f518bca583e9f727b.svg",
+      "imgRectangle12": "/media/98afd0b3e75462d3402d.svg"
+    },
+    "assets": [
+      {
+        "url": "/media/611f11f8aaf7603db59a.svg",
+        "sourceHash": "611f11f8aaf7603db59adf25ba222d9cd2adcb7e32dece072de680d03118d6b7"
+      },
+      {
+        "url": "/media/1cf43cba02fcc0f90ae8.webp",
+        "sourceHash": "1cf43cba02fcc0f90ae8c9a409378b7d72cadd945ef3da868a5948853fb1cc47"
+      },
+      {
+        "url": "/media/4aeeef77306ab03a2bd8.svg",
+        "sourceHash": "4aeeef77306ab03a2bd8d2c3e7e21527fcfd9a3ecfb9f0020a27b6ec9c03588d"
+      },
+      {
+        "url": "/media/549730f6c2562b3d77d2.svg",
+        "sourceHash": "549730f6c2562b3d77d2971a44e59801637dc9ee7df990682afa16473be34386"
+      },
+      {
+        "url": "/media/c51ac0d35aac68dae7f2.svg",
+        "sourceHash": "c51ac0d35aac68dae7f27b29139ca3273aff4df8a0b2812740367694c13f95e8"
+      },
+      {
+        "url": "/media/98afd0b3e75462d3402d.svg",
+        "sourceHash": "98afd0b3e75462d3402d87ddfa332276312f9b191868b94c63336497c7589bec"
+      },
+      {
+        "url": "/media/2b61d0b9909a48665218.webp",
+        "sourceHash": "2b61d0b9909a486652180cf7ed4c282b68891e61cc37aafec6dfa73529cc4f3e"
+      },
+      {
+        "url": "/media/eb7619ed17d11a3fdcc8.svg",
+        "sourceHash": "eb7619ed17d11a3fdcc8949613de62d124cafa7c80abca07fac1b16f29af086e"
+      },
+      {
+        "url": "/media/14b7b4c25a37fe7fd2f3.webp",
+        "sourceHash": "14b7b4c25a37fe7fd2f346494f02effce1d245a011c2e6cb3c7f68622aca9b55"
+      },
+      {
+        "url": "/media/ad3f518bca583e9f727b.svg",
+        "sourceHash": "ad3f518bca583e9f727bd0872612bd85b97c24b1d9cf66121b8585f3f152b9c1"
+      },
+      {
+        "url": "/media/38bd44acd09f7a1caa67.webp",
+        "sourceHash": "38bd44acd09f7a1caa67d6b33230d0a5900b405b288e1d513e895ea5a13d9ef5"
+      }
+    ]
+  },
+  {
+    "index": 4,
+    "aliases": {
+      "imgVessylSymbol": "/media/4aeeef77306ab03a2bd8.svg",
+      "imgVessylWordmark": "/media/eb7619ed17d11a3fdcc8.svg",
+      "imgColor": "/media/c51ac0d35aac68dae7f2.svg",
+      "imgPattern": "/media/549730f6c2562b3d77d2.svg",
+      "imgHeroSection": "/media/38bd44acd09f7a1caa67.webp",
+      "imgContainer011": "/media/21e5409013ca53f27943.webp",
+      "imgVessy4Room4Tent2Edit2": "/media/fdd181b05dbb6040950f.webp",
+      "imgVessy4Room4Tent2Edit3": "/media/1cf43cba02fcc0f90ae8.webp",
+      "imgRectangle33": "/media/611f11f8aaf7603db59a.svg",
+      "imgRectangle34": "/media/ad3f518bca583e9f727b.svg",
+      "imgRectangle12": "/media/98afd0b3e75462d3402d.svg"
+    },
+    "assets": [
+      {
+        "url": "/media/611f11f8aaf7603db59a.svg",
+        "sourceHash": "611f11f8aaf7603db59adf25ba222d9cd2adcb7e32dece072de680d03118d6b7"
+      },
+      {
+        "url": "/media/1cf43cba02fcc0f90ae8.webp",
+        "sourceHash": "1cf43cba02fcc0f90ae8c9a409378b7d72cadd945ef3da868a5948853fb1cc47"
+      },
+      {
+        "url": "/media/4aeeef77306ab03a2bd8.svg",
+        "sourceHash": "4aeeef77306ab03a2bd8d2c3e7e21527fcfd9a3ecfb9f0020a27b6ec9c03588d"
+      },
+      {
+        "url": "/media/549730f6c2562b3d77d2.svg",
+        "sourceHash": "549730f6c2562b3d77d2971a44e59801637dc9ee7df990682afa16473be34386"
+      },
+      {
+        "url": "/media/c51ac0d35aac68dae7f2.svg",
+        "sourceHash": "c51ac0d35aac68dae7f27b29139ca3273aff4df8a0b2812740367694c13f95e8"
+      },
+      {
+        "url": "/media/98afd0b3e75462d3402d.svg",
+        "sourceHash": "98afd0b3e75462d3402d87ddfa332276312f9b191868b94c63336497c7589bec"
+      },
+      {
+        "url": "/media/21e5409013ca53f27943.webp",
+        "sourceHash": "21e5409013ca53f279432b4e3b47088008d35555e39c820c438f0f1be561ac30"
+      },
+      {
+        "url": "/media/eb7619ed17d11a3fdcc8.svg",
+        "sourceHash": "eb7619ed17d11a3fdcc8949613de62d124cafa7c80abca07fac1b16f29af086e"
+      },
+      {
+        "url": "/media/fdd181b05dbb6040950f.webp",
+        "sourceHash": "fdd181b05dbb6040950f9ade86480ffde1c4bec3fc826e84e1348e0534782802"
+      },
+      {
+        "url": "/media/ad3f518bca583e9f727b.svg",
+        "sourceHash": "ad3f518bca583e9f727bd0872612bd85b97c24b1d9cf66121b8585f3f152b9c1"
+      },
+      {
+        "url": "/media/38bd44acd09f7a1caa67.webp",
+        "sourceHash": "38bd44acd09f7a1caa67d6b33230d0a5900b405b288e1d513e895ea5a13d9ef5"
+      }
+    ]
+  },
+  {
+    "index": 5,
+    "aliases": {
+      "imgVessylSymbol": "/media/4aeeef77306ab03a2bd8.svg",
+      "imgVessylWordmark": "/media/eb7619ed17d11a3fdcc8.svg",
+      "imgColor": "/media/c51ac0d35aac68dae7f2.svg",
+      "imgPattern": "/media/b2c21612d7c843f3c42a.svg",
+      "imgHeroSection": "/media/2b61d0b9909a48665218.webp",
+      "imgContainer011": "/media/ee15d395b3c7cb628797.webp",
+      "imgVessy4Room4Tent2Edit2": "/media/38bd44acd09f7a1caa67.webp",
+      "imgVessy4Room4Tent2Edit3": "/media/fdd181b05dbb6040950f.webp",
+      "imgRectangle33": "/media/611f11f8aaf7603db59a.svg",
+      "imgRectangle34": "/media/ad3f518bca583e9f727b.svg",
+      "imgRectangle12": "/media/98afd0b3e75462d3402d.svg"
+    },
+    "assets": [
+      {
+        "url": "/media/611f11f8aaf7603db59a.svg",
+        "sourceHash": "611f11f8aaf7603db59adf25ba222d9cd2adcb7e32dece072de680d03118d6b7"
+      },
+      {
+        "url": "/media/4aeeef77306ab03a2bd8.svg",
+        "sourceHash": "4aeeef77306ab03a2bd8d2c3e7e21527fcfd9a3ecfb9f0020a27b6ec9c03588d"
+      },
+      {
+        "url": "/media/b2c21612d7c843f3c42a.svg",
+        "sourceHash": "b2c21612d7c843f3c42a939964d5e11a7ef18d5c48b2b9757febad97de2c3eed"
+      },
+      {
+        "url": "/media/c51ac0d35aac68dae7f2.svg",
+        "sourceHash": "c51ac0d35aac68dae7f27b29139ca3273aff4df8a0b2812740367694c13f95e8"
+      },
+      {
+        "url": "/media/98afd0b3e75462d3402d.svg",
+        "sourceHash": "98afd0b3e75462d3402d87ddfa332276312f9b191868b94c63336497c7589bec"
+      },
+      {
+        "url": "/media/2b61d0b9909a48665218.webp",
+        "sourceHash": "2b61d0b9909a486652180cf7ed4c282b68891e61cc37aafec6dfa73529cc4f3e"
+      },
+      {
+        "url": "/media/eb7619ed17d11a3fdcc8.svg",
+        "sourceHash": "eb7619ed17d11a3fdcc8949613de62d124cafa7c80abca07fac1b16f29af086e"
+      },
+      {
+        "url": "/media/fdd181b05dbb6040950f.webp",
+        "sourceHash": "fdd181b05dbb6040950f9ade86480ffde1c4bec3fc826e84e1348e0534782802"
+      },
+      {
+        "url": "/media/ad3f518bca583e9f727b.svg",
+        "sourceHash": "ad3f518bca583e9f727bd0872612bd85b97c24b1d9cf66121b8585f3f152b9c1"
+      },
+      {
+        "url": "/media/38bd44acd09f7a1caa67.webp",
+        "sourceHash": "38bd44acd09f7a1caa67d6b33230d0a5900b405b288e1d513e895ea5a13d9ef5"
+      },
+      {
+        "url": "/media/ee15d395b3c7cb628797.webp",
+        "sourceHash": "ee15d395b3c7cb62879783708d00eeb1313e908ede83aa8ce4af92189bac469b"
+      }
+    ]
+  },
+  {
+    "index": 6,
+    "aliases": {
+      "imgVessylSymbol": "/media/4aeeef77306ab03a2bd8.svg",
+      "imgVessylWordmark": "/media/eb7619ed17d11a3fdcc8.svg",
+      "imgColor": "/media/c51ac0d35aac68dae7f2.svg",
+      "imgPattern": "/media/9b4404771bfcfc0519c2.svg",
+      "imgVessy4Room4Tent2Edit2": "/media/90e7a43ef89cdaa5b7f6.webp",
+      "imgVessy4Room4Tent2Edit3": "/media/38bd44acd09f7a1caa67.webp",
+      "imgVessy4Room4Tent2Edit4": "/media/1cf43cba02fcc0f90ae8.webp",
+      "imgRectangle12": "/media/98afd0b3e75462d3402d.svg",
+      "imgVessy4Room4Tent2Edit5": "/media/0ef67cbaf17027aee6cb.webp",
+      "img16109382143891": "/media/53aa5ba8e622d63f0ff1.webp",
+      "imgVessylSymbol1": "/media/1a6f0b440e693b0c8078.svg",
+      "imgVessylWordmark1": "/media/cc0e4c663bb5d345cae6.svg",
+      "imgRectangle35": "/media/50e5e3a65c3dbda665e8.svg",
+      "imgRectangle36": "/media/24f6fde5bb269003966e.svg",
+      "imgRectangle37": "/media/9d57b21622e06215b19f.svg"
+    },
+    "assets": [
+      {
+        "url": "/media/1cf43cba02fcc0f90ae8.webp",
+        "sourceHash": "1cf43cba02fcc0f90ae8c9a409378b7d72cadd945ef3da868a5948853fb1cc47"
+      },
+      {
+        "url": "/media/4aeeef77306ab03a2bd8.svg",
+        "sourceHash": "4aeeef77306ab03a2bd8d2c3e7e21527fcfd9a3ecfb9f0020a27b6ec9c03588d"
+      },
+      {
+        "url": "/media/9b4404771bfcfc0519c2.svg",
+        "sourceHash": "9b4404771bfcfc0519c280640e6016ea23bd5d34ad89e202d1367feac0f20818"
+      },
+      {
+        "url": "/media/cc0e4c663bb5d345cae6.svg",
+        "sourceHash": "cc0e4c663bb5d345cae624fa69427d846b09f25c25ea3ad0d31a8548a4d917a5"
+      },
+      {
+        "url": "/media/c51ac0d35aac68dae7f2.svg",
+        "sourceHash": "c51ac0d35aac68dae7f27b29139ca3273aff4df8a0b2812740367694c13f95e8"
+      },
+      {
+        "url": "/media/98afd0b3e75462d3402d.svg",
+        "sourceHash": "98afd0b3e75462d3402d87ddfa332276312f9b191868b94c63336497c7589bec"
+      },
+      {
+        "url": "/media/24f6fde5bb269003966e.svg",
+        "sourceHash": "24f6fde5bb269003966e4d4f1b9ba9e322983152d7a00cd41fb385a35e1bd4ad"
+      },
+      {
+        "url": "/media/eb7619ed17d11a3fdcc8.svg",
+        "sourceHash": "eb7619ed17d11a3fdcc8949613de62d124cafa7c80abca07fac1b16f29af086e"
+      },
+      {
+        "url": "/media/9d57b21622e06215b19f.svg",
+        "sourceHash": "9d57b21622e06215b19f1cf705ade2dc940917a8ed1b351a14f76c0cb12027b7"
+      },
+      {
+        "url": "/media/50e5e3a65c3dbda665e8.svg",
+        "sourceHash": "50e5e3a65c3dbda665e8cd0d43f17a91e2a612ca5fcb5277c0682e383364670d"
+      },
+      {
+        "url": "/media/53aa5ba8e622d63f0ff1.webp",
+        "sourceHash": "53aa5ba8e622d63f0ff1dabfba71d6d62bd04800b8f4e132ca2abd1b85f0ed3a"
+      },
+      {
+        "url": "/media/0ef67cbaf17027aee6cb.webp",
+        "sourceHash": "0ef67cbaf17027aee6cb0a4ff759c59f944c42e044edc9c90f0b6e98a3c9ad59"
+      },
+      {
+        "url": "/media/1a6f0b440e693b0c8078.svg",
+        "sourceHash": "1a6f0b440e693b0c80782adee3d20da225a82891721af40b67c4c7996f454b73"
+      },
+      {
+        "url": "/media/38bd44acd09f7a1caa67.webp",
+        "sourceHash": "38bd44acd09f7a1caa67d6b33230d0a5900b405b288e1d513e895ea5a13d9ef5"
+      },
+      {
+        "url": "/media/90e7a43ef89cdaa5b7f6.webp",
+        "sourceHash": "90e7a43ef89cdaa5b7f6cd5347c70bb32af14878c2f2b77d6f33b3b5fcb69515"
+      }
+    ]
+  },
+  {
+    "index": 7,
+    "aliases": {
+      "imgVessylSymbol": "/media/4aeeef77306ab03a2bd8.svg",
+      "imgVessylWordmark": "/media/eb7619ed17d11a3fdcc8.svg",
+      "imgColor": "/media/c51ac0d35aac68dae7f2.svg",
+      "imgPattern": "/media/2c175ebbef92ca3ae7f8.svg",
+      "imgVessy4Room4Tent2Edit2": "/media/90e7a43ef89cdaa5b7f6.webp",
+      "imgVessy4Room4Tent2Edit3": "/media/38bd44acd09f7a1caa67.webp",
+      "imgVessy4Room4Tent2Edit4": "/media/1cf43cba02fcc0f90ae8.webp",
+      "imgRectangle12": "/media/98afd0b3e75462d3402d.svg",
+      "imgVessyHorsesRiver92": "/media/81f157d1df8ad03594c6.webp",
+      "imgVessyHorsesRiver93": "/media/2d21c7985bf17587473c.webp",
+      "imgVessyHorsesRiver94": "/media/11358b370ad895b42644.webp",
+      "imgVessyHorsesRiver95": "/media/61222bcc50543c4f065a.webp",
+      "imgVessyHorsesRiver96": "/media/bfa86c72291543bb877a.webp",
+      "imgVessyHorsesRiver97": "/media/ff4ec2454b6182720297.webp",
+      "imgVessylSymbol1": "/media/1a6f0b440e693b0c8078.svg",
+      "imgVessylWordmark1": "/media/cc0e4c663bb5d345cae6.svg"
+    },
+    "assets": [
+      {
+        "url": "/media/2d21c7985bf17587473c.webp",
+        "sourceHash": "2d21c7985bf17587473c995933d5b0100fa22d4c5b27b1a6453235a97a6a0209"
+      },
+      {
+        "url": "/media/1cf43cba02fcc0f90ae8.webp",
+        "sourceHash": "1cf43cba02fcc0f90ae8c9a409378b7d72cadd945ef3da868a5948853fb1cc47"
+      },
+      {
+        "url": "/media/4aeeef77306ab03a2bd8.svg",
+        "sourceHash": "4aeeef77306ab03a2bd8d2c3e7e21527fcfd9a3ecfb9f0020a27b6ec9c03588d"
+      },
+      {
+        "url": "/media/2c175ebbef92ca3ae7f8.svg",
+        "sourceHash": "2c175ebbef92ca3ae7f8f36e24f575dca4fc35814db996b49162a385a679dd3a"
+      },
+      {
+        "url": "/media/cc0e4c663bb5d345cae6.svg",
+        "sourceHash": "cc0e4c663bb5d345cae624fa69427d846b09f25c25ea3ad0d31a8548a4d917a5"
+      },
+      {
+        "url": "/media/11358b370ad895b42644.webp",
+        "sourceHash": "11358b370ad895b4264466fb1e7534c03e43736e0db1bf7f6235f3d7c79eb97a"
+      },
+      {
+        "url": "/media/61222bcc50543c4f065a.webp",
+        "sourceHash": "61222bcc50543c4f065ae885282d5e90f5625516b7593e38dc1412b65f7d52d4"
+      },
+      {
+        "url": "/media/c51ac0d35aac68dae7f2.svg",
+        "sourceHash": "c51ac0d35aac68dae7f27b29139ca3273aff4df8a0b2812740367694c13f95e8"
+      },
+      {
+        "url": "/media/98afd0b3e75462d3402d.svg",
+        "sourceHash": "98afd0b3e75462d3402d87ddfa332276312f9b191868b94c63336497c7589bec"
+      },
+      {
+        "url": "/media/eb7619ed17d11a3fdcc8.svg",
+        "sourceHash": "eb7619ed17d11a3fdcc8949613de62d124cafa7c80abca07fac1b16f29af086e"
+      },
+      {
+        "url": "/media/ff4ec2454b6182720297.webp",
+        "sourceHash": "ff4ec2454b61827202972c7f439dbd6d45b3466a09aa447d5f451d54bde05919"
+      },
+      {
+        "url": "/media/bfa86c72291543bb877a.webp",
+        "sourceHash": "bfa86c72291543bb877a75b6a2038b0795c9e25637ed611ed82d74073572fd6e"
+      },
+      {
+        "url": "/media/81f157d1df8ad03594c6.webp",
+        "sourceHash": "81f157d1df8ad03594c61921c4f435357e3aca3cf1f6688e50cee77c19729059"
+      },
+      {
+        "url": "/media/1a6f0b440e693b0c8078.svg",
+        "sourceHash": "1a6f0b440e693b0c80782adee3d20da225a82891721af40b67c4c7996f454b73"
+      },
+      {
+        "url": "/media/38bd44acd09f7a1caa67.webp",
+        "sourceHash": "38bd44acd09f7a1caa67d6b33230d0a5900b405b288e1d513e895ea5a13d9ef5"
+      },
+      {
+        "url": "/media/90e7a43ef89cdaa5b7f6.webp",
+        "sourceHash": "90e7a43ef89cdaa5b7f6cd5347c70bb32af14878c2f2b77d6f33b3b5fcb69515"
+      }
+    ]
+  },
+  {
+    "index": 8,
+    "aliases": {
+      "imgVessylSymbol": "/media/4aeeef77306ab03a2bd8.svg",
+      "imgVessylWordmark": "/media/eb7619ed17d11a3fdcc8.svg",
+      "imgColor": "/media/c51ac0d35aac68dae7f2.svg",
+      "imgPattern": "/media/7ea7be2050f4b5feea31.svg",
+      "imgHeroSection": "/media/f5ec5ec1897cef56ade3.webp",
+      "imgContainer011": "/media/4152c317a8ab599ba9a6.webp",
+      "imgVessy4Room4Tent2Edit2": "/media/5d6a60bd75812dff113a.webp",
+      "imgRectangle33": "/media/611f11f8aaf7603db59a.svg",
+      "imgRectangle34": "/media/ad3f518bca583e9f727b.svg",
+      "imgRectangle12": "/media/98afd0b3e75462d3402d.svg"
+    },
+    "assets": [
+      {
+        "url": "/media/611f11f8aaf7603db59a.svg",
+        "sourceHash": "611f11f8aaf7603db59adf25ba222d9cd2adcb7e32dece072de680d03118d6b7"
+      },
+      {
+        "url": "/media/4aeeef77306ab03a2bd8.svg",
+        "sourceHash": "4aeeef77306ab03a2bd8d2c3e7e21527fcfd9a3ecfb9f0020a27b6ec9c03588d"
+      },
+      {
+        "url": "/media/7ea7be2050f4b5feea31.svg",
+        "sourceHash": "7ea7be2050f4b5feea316aed487bea4dbdab177f298296858209889bb1bb24c6"
+      },
+      {
+        "url": "/media/c51ac0d35aac68dae7f2.svg",
+        "sourceHash": "c51ac0d35aac68dae7f27b29139ca3273aff4df8a0b2812740367694c13f95e8"
+      },
+      {
+        "url": "/media/4152c317a8ab599ba9a6.webp",
+        "sourceHash": "4152c317a8ab599ba9a680b3caa5bb443c1ad80deb68e9668f9a4f8cf4d9c3ab"
+      },
+      {
+        "url": "/media/98afd0b3e75462d3402d.svg",
+        "sourceHash": "98afd0b3e75462d3402d87ddfa332276312f9b191868b94c63336497c7589bec"
+      },
+      {
+        "url": "/media/eb7619ed17d11a3fdcc8.svg",
+        "sourceHash": "eb7619ed17d11a3fdcc8949613de62d124cafa7c80abca07fac1b16f29af086e"
+      },
+      {
+        "url": "/media/ad3f518bca583e9f727b.svg",
+        "sourceHash": "ad3f518bca583e9f727bd0872612bd85b97c24b1d9cf66121b8585f3f152b9c1"
+      },
+      {
+        "url": "/media/5d6a60bd75812dff113a.webp",
+        "sourceHash": "5d6a60bd75812dff113af6048476d1787ea1567c5296ccb9b67387e1c2ece5f5"
+      },
+      {
+        "url": "/media/f5ec5ec1897cef56ade3.webp",
+        "sourceHash": "f5ec5ec1897cef56ade3f42a5279d449e994f28283df6a175c8cdcb42276088f"
+      }
+    ]
+  },
+  {
+    "index": 9,
+    "aliases": {
+      "imgVessylSymbol": "/media/4aeeef77306ab03a2bd8.svg",
+      "imgVessylWordmark": "/media/eb7619ed17d11a3fdcc8.svg",
+      "imgColor": "/media/c51ac0d35aac68dae7f2.svg",
+      "imgPattern": "/media/bb634ec7774ca2e08429.svg",
+      "imgHeroSection": "/media/a32b1d05d2deb9142826.webp",
+      "imgVolcano1Updated2": "/media/a809581c17907f4e45ea.webp",
+      "img16109382143891": "/media/74d24d2bc43b341ebc91.webp"
+    },
+    "assets": [
+      {
+        "url": "/media/a32b1d05d2deb9142826.webp",
+        "sourceHash": "a32b1d05d2deb91428268f12aa6c70b9141bbbbfd4defa92e2f6c648eb5e409b"
+      },
+      {
+        "url": "/media/4aeeef77306ab03a2bd8.svg",
+        "sourceHash": "4aeeef77306ab03a2bd8d2c3e7e21527fcfd9a3ecfb9f0020a27b6ec9c03588d"
+      },
+      {
+        "url": "/media/bb634ec7774ca2e08429.svg",
+        "sourceHash": "bb634ec7774ca2e08429ebdb57c8bb5de93542e4ced75361c05cb8a789deb79c"
+      },
+      {
+        "url": "/media/74d24d2bc43b341ebc91.webp",
+        "sourceHash": "74d24d2bc43b341ebc9131e925958fd811fedb02afb4b36bb3316eacecdca01b"
+      },
+      {
+        "url": "/media/c51ac0d35aac68dae7f2.svg",
+        "sourceHash": "c51ac0d35aac68dae7f27b29139ca3273aff4df8a0b2812740367694c13f95e8"
+      },
+      {
+        "url": "/media/eb7619ed17d11a3fdcc8.svg",
+        "sourceHash": "eb7619ed17d11a3fdcc8949613de62d124cafa7c80abca07fac1b16f29af086e"
+      },
+      {
+        "url": "/media/a809581c17907f4e45ea.webp",
+        "sourceHash": "a809581c17907f4e45eaa41711ce74d20b229b33ec3fb49e3cc2a08d575fb803"
+      }
+    ]
+  },
+  {
+    "index": 10,
+    "aliases": {
+      "imgVessylSymbol": "/media/4aeeef77306ab03a2bd8.svg",
+      "imgVessylWordmark": "/media/eb7619ed17d11a3fdcc8.svg",
+      "imgColor": "/media/c51ac0d35aac68dae7f2.svg",
+      "imgPattern": "/media/8a468ab0512390b928c2.svg",
+      "imgHeroSection": "/media/217d8eafeb5342a6cc73.webp",
+      "imgVolcano1Updated2": "/media/46c02cfc7ce0c5cd9c65.webp"
+    },
+    "assets": [
+      {
+        "url": "/media/4aeeef77306ab03a2bd8.svg",
+        "sourceHash": "4aeeef77306ab03a2bd8d2c3e7e21527fcfd9a3ecfb9f0020a27b6ec9c03588d"
+      },
+      {
+        "url": "/media/8a468ab0512390b928c2.svg",
+        "sourceHash": "8a468ab0512390b928c274e0356c73d5ab509d02332d61e170e5f89956f6f46e"
+      },
+      {
+        "url": "/media/46c02cfc7ce0c5cd9c65.webp",
+        "sourceHash": "46c02cfc7ce0c5cd9c65819f29d118e94b2d3cee8a503ede185e0fc0494dc445"
+      },
+      {
+        "url": "/media/c51ac0d35aac68dae7f2.svg",
+        "sourceHash": "c51ac0d35aac68dae7f27b29139ca3273aff4df8a0b2812740367694c13f95e8"
+      },
+      {
+        "url": "/media/eb7619ed17d11a3fdcc8.svg",
+        "sourceHash": "eb7619ed17d11a3fdcc8949613de62d124cafa7c80abca07fac1b16f29af086e"
+      },
+      {
+        "url": "/media/217d8eafeb5342a6cc73.webp",
+        "sourceHash": "217d8eafeb5342a6cc73caddfa89ef060515801271911706d210cc5f6a325e18"
+      }
+    ]
+  },
+  {
+    "index": 11,
+    "aliases": {
+      "imgVessylSymbol": "/media/4aeeef77306ab03a2bd8.svg",
+      "imgVessylWordmark": "/media/eb7619ed17d11a3fdcc8.svg",
+      "imgColor": "/media/c51ac0d35aac68dae7f2.svg",
+      "imgPattern": "/media/e89502d3a85299dfe117.svg",
+      "imgVessy4Room4Tent2Edit2": "/media/90e7a43ef89cdaa5b7f6.webp",
+      "imgVessy4Room4Tent2Edit3": "/media/38bd44acd09f7a1caa67.webp",
+      "imgVessy4Room4Tent2Edit4": "/media/1cf43cba02fcc0f90ae8.webp",
+      "imgRectangle12": "/media/98afd0b3e75462d3402d.svg",
+      "imgHeroSection": "/media/52f6dfa2f4537874ca20.webp",
+      "imgVolcano1Updated2": "/media/c9f36f747db728e9734c.webp",
+      "imgVolcano1Updated3": "/media/1bf880cdd11cd773b398.webp"
+    },
+    "assets": [
+      {
+        "url": "/media/1cf43cba02fcc0f90ae8.webp",
+        "sourceHash": "1cf43cba02fcc0f90ae8c9a409378b7d72cadd945ef3da868a5948853fb1cc47"
+      },
+      {
+        "url": "/media/4aeeef77306ab03a2bd8.svg",
+        "sourceHash": "4aeeef77306ab03a2bd8d2c3e7e21527fcfd9a3ecfb9f0020a27b6ec9c03588d"
+      },
+      {
+        "url": "/media/e89502d3a85299dfe117.svg",
+        "sourceHash": "e89502d3a85299dfe11769e7c73d5ec38d70675fc3879950920e26654b99403a"
+      },
+      {
+        "url": "/media/c51ac0d35aac68dae7f2.svg",
+        "sourceHash": "c51ac0d35aac68dae7f27b29139ca3273aff4df8a0b2812740367694c13f95e8"
+      },
+      {
+        "url": "/media/98afd0b3e75462d3402d.svg",
+        "sourceHash": "98afd0b3e75462d3402d87ddfa332276312f9b191868b94c63336497c7589bec"
+      },
+      {
+        "url": "/media/eb7619ed17d11a3fdcc8.svg",
+        "sourceHash": "eb7619ed17d11a3fdcc8949613de62d124cafa7c80abca07fac1b16f29af086e"
+      },
+      {
+        "url": "/media/1bf880cdd11cd773b398.webp",
+        "sourceHash": "1bf880cdd11cd773b398f09aea5b7b156d1818c4b8389105e62963750ebf93fd"
+      },
+      {
+        "url": "/media/52f6dfa2f4537874ca20.webp",
+        "sourceHash": "52f6dfa2f4537874ca208fca01ad739fa4bbf988825e07d0269c204cbb018eef"
+      },
+      {
+        "url": "/media/c9f36f747db728e9734c.webp",
+        "sourceHash": "c9f36f747db728e9734c3208045c13891aac58dad82d6de66454909701388943"
+      },
+      {
+        "url": "/media/38bd44acd09f7a1caa67.webp",
+        "sourceHash": "38bd44acd09f7a1caa67d6b33230d0a5900b405b288e1d513e895ea5a13d9ef5"
+      },
+      {
+        "url": "/media/90e7a43ef89cdaa5b7f6.webp",
+        "sourceHash": "90e7a43ef89cdaa5b7f6cd5347c70bb32af14878c2f2b77d6f33b3b5fcb69515"
+      }
+    ]
+  },
+  {
+    "index": 12,
+    "aliases": {
+      "imgVessylSymbol": "/media/4aeeef77306ab03a2bd8.svg",
+      "imgVessylWordmark": "/media/eb7619ed17d11a3fdcc8.svg",
+      "imgColor": "/media/c51ac0d35aac68dae7f2.svg",
+      "imgPattern": "/media/43513bcd7e374b9f0c30.svg",
+      "imgHeroSection": "/media/ea5d3eb36b2031e294f0.webp",
+      "imgVolcano1Updated2": "/media/bb39a8510ce86bcd65fd.webp",
+      "imgContainer011": "/media/55161e7692315fc7eac4.webp",
+      "imgComponentArea": "/media/bbe044d5856f8ac10344.svg"
+    },
+    "assets": [
+      {
+        "url": "/media/4aeeef77306ab03a2bd8.svg",
+        "sourceHash": "4aeeef77306ab03a2bd8d2c3e7e21527fcfd9a3ecfb9f0020a27b6ec9c03588d"
+      },
+      {
+        "url": "/media/43513bcd7e374b9f0c30.svg",
+        "sourceHash": "43513bcd7e374b9f0c3074d174656df6644db049446306db5f4da65db6c17802"
+      },
+      {
+        "url": "/media/c51ac0d35aac68dae7f2.svg",
+        "sourceHash": "c51ac0d35aac68dae7f27b29139ca3273aff4df8a0b2812740367694c13f95e8"
+      },
+      {
+        "url": "/media/55161e7692315fc7eac4.webp",
+        "sourceHash": "55161e7692315fc7eac44beb9d68c86f7576d1ab47d900f0bbc6f5da17d6c600"
+      },
+      {
+        "url": "/media/eb7619ed17d11a3fdcc8.svg",
+        "sourceHash": "eb7619ed17d11a3fdcc8949613de62d124cafa7c80abca07fac1b16f29af086e"
+      },
+      {
+        "url": "/media/ea5d3eb36b2031e294f0.webp",
+        "sourceHash": "ea5d3eb36b2031e294f0ce11ed1054f81172183f11afd25f810dca74ab3a65a1"
+      },
+      {
+        "url": "/media/bb39a8510ce86bcd65fd.webp",
+        "sourceHash": "bb39a8510ce86bcd65fda0896e02f7bad3a15e13a574b423903c0c57ddaab14f"
+      },
+      {
+        "url": "/media/bbe044d5856f8ac10344.svg",
+        "sourceHash": "bbe044d5856f8ac10344e72180eb04258fef7d8b0c0560e333f6eaf1ca2381d3"
+      }
+    ]
+  },
+  {
+    "index": 13,
+    "aliases": {
+      "imgVessylSymbol": "/media/4aeeef77306ab03a2bd8.svg",
+      "imgVessylWordmark": "/media/eb7619ed17d11a3fdcc8.svg",
+      "imgContainer011": "/media/df44479df6d2cfd7b1f9.webp",
+      "imgVessylSymbol1": "/media/1a6f0b440e693b0c8078.svg",
+      "imgVessylWordmark1": "/media/cc0e4c663bb5d345cae6.svg",
+      "imgColor": "/media/c51ac0d35aac68dae7f2.svg",
+      "imgPattern": "/media/cf4473cbb674d646dfb3.svg",
+      "imgComponentArea": "/media/bbe044d5856f8ac10344.svg"
+    },
+    "assets": [
+      {
+        "url": "/media/4aeeef77306ab03a2bd8.svg",
+        "sourceHash": "4aeeef77306ab03a2bd8d2c3e7e21527fcfd9a3ecfb9f0020a27b6ec9c03588d"
+      },
+      {
+        "url": "/media/cc0e4c663bb5d345cae6.svg",
+        "sourceHash": "cc0e4c663bb5d345cae624fa69427d846b09f25c25ea3ad0d31a8548a4d917a5"
+      },
+      {
+        "url": "/media/c51ac0d35aac68dae7f2.svg",
+        "sourceHash": "c51ac0d35aac68dae7f27b29139ca3273aff4df8a0b2812740367694c13f95e8"
+      },
+      {
+        "url": "/media/cf4473cbb674d646dfb3.svg",
+        "sourceHash": "cf4473cbb674d646dfb3cc714654914957a5c1c78b266b64bba8389aca0c63b2"
+      },
+      {
+        "url": "/media/eb7619ed17d11a3fdcc8.svg",
+        "sourceHash": "eb7619ed17d11a3fdcc8949613de62d124cafa7c80abca07fac1b16f29af086e"
+      },
+      {
+        "url": "/media/bbe044d5856f8ac10344.svg",
+        "sourceHash": "bbe044d5856f8ac10344e72180eb04258fef7d8b0c0560e333f6eaf1ca2381d3"
+      },
+      {
+        "url": "/media/df44479df6d2cfd7b1f9.webp",
+        "sourceHash": "df44479df6d2cfd7b1f99b1ba20602061f272907b2d79bd56d15d1f42bd34dc3"
+      },
+      {
+        "url": "/media/1a6f0b440e693b0c8078.svg",
+        "sourceHash": "1a6f0b440e693b0c80782adee3d20da225a82891721af40b67c4c7996f454b73"
+      }
+    ]
+  }
+]

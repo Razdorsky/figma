@@ -1,0 +1,32 @@
+/* Figma PR — motion (docs/figma-pr-system.md, "Motion"). Four Seasons' scroll motion, kept quiet as Rosewood's:
+   pictures settle from 110% to 100% as they come up the screen (--z, set by interactions.js); the opening's darkening
+   and words ease off as the page leaves it (--hero-p); colours ease over 0.3 s. Nothing moves under reduced motion. */
+body[data-edition="figma-pr"] .current-page {
+  & figure[data-pr-zoom] > :is(img, video) { transform: scale(var(--z, 1.1)); transform-origin: 50% 50%; will-change: transform; }
+  & > section:is([data-role="photo-hero"], [data-pr-hero]) > [data-part="hero-image"] > :is(img, video) { transform: scale(calc(1 + var(--hero-p, 0) * 0.06)); transform-origin: 50% 40%; }
+  & > section:is([data-role="photo-hero"], [data-pr-hero]) > :is([data-part="hero-copy"], [data-part="copy"]) { transform: translateY(calc(var(--hero-p, 0) * -40px)); opacity: calc(1 - var(--hero-p, 0) * 1.4); }
+  /* The opening's words arrive once, gently, as the page opens. */
+  & > section:is([data-role="photo-hero"], [data-pr-hero]) > :is([data-part="hero-copy"], [data-part="copy"]) > * { animation: pr-rise 1s var(--ease-out) both; }
+  & > section:is([data-role="photo-hero"], [data-pr-hero]) > :is([data-part="hero-copy"], [data-part="copy"]) > *:nth-child(2) { animation-delay: 0.12s; }
+  & > section:is([data-role="photo-hero"], [data-pr-hero]) > :is([data-part="hero-copy"], [data-part="copy"]) > *:nth-child(3) { animation-delay: 0.24s; }
+  & > section:is([data-role="photo-hero"], [data-pr-hero]) > :is([data-part="hero-copy"], [data-part="copy"]) > *:nth-child(n+4) { animation-delay: 0.36s; }
+  /* Pause for the opening clip (a clip that plays for more than five seconds can be stopped, WCAG 2.2.2). */
+  & .pr-film-toggle {
+    position: absolute; right: var(--m); bottom: 24px; z-index: 3; display: grid; place-items: center; width: 44px; height: 44px; padding: 0;
+    border: 1px solid rgb(250 251 245 / 0.6); border-radius: 0; background: rgb(0 0 0 / 0.25); color: var(--on-dark); transition: background-color 0.3s ease-out;
+  }
+  & .pr-film-toggle:hover { background: rgb(0 0 0 / 0.5); }
+  & .pr-film-toggle svg { width: 14px; height: 14px; fill: currentColor; }
+  & .pr-film-toggle .icon-play { display: none; }
+  & .pr-film-toggle[aria-pressed="true"] .icon-play { display: block; }
+  & .pr-film-toggle[aria-pressed="true"] .icon-pause { display: none; }
+}
+@keyframes pr-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  body[data-edition="figma-pr"] .current-page {
+    & figure[data-pr-zoom] > :is(img, video) { transform: none; }
+    & > section:is([data-role="photo-hero"], [data-pr-hero]) > :is([data-part="hero-image"] > :is(img, video), [data-part="hero-copy"], [data-part="copy"]) { transform: none; opacity: 1; }
+    & > section:is([data-role="photo-hero"], [data-pr-hero]) > :is([data-part="hero-copy"], [data-part="copy"]) > * { animation: none; }
+  }
+  body[data-edition="figma-pr"] * { transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}

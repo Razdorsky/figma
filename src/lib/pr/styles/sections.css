@@ -1,0 +1,256 @@
+/* Figma PR — sections (docs/figma-pr-system.md, "Block mapping"). Each of the designer's section types takes the shape
+   of one of the references' blocks. The markup is the frozen edition's; only the presentation changes. */
+body[data-edition="figma-pr"] .current-page {
+  display: block;
+
+  & > section { position: relative; margin: var(--section) 0 0; }
+  & > section:first-child { margin-top: 0; }
+  & figure { position: relative; overflow: hidden; background: #e7e9e0; }
+  & figure > :is(img, video) { width: 100%; height: 100%; object-fit: cover; }
+  & figure > video { position: absolute; inset: 0; }
+
+  /* ---- 1. Opening with a clip or photograph (Rosewood hero, Four Seasons' fade) ---------------------------------
+     Full width, about 80% of the screen, a darkening that eases off as the page leaves it, the title centred in
+     capitals, a serif line, a small black button and an outlined one. */
+  & > section:is([data-role="photo-hero"], [data-pr-hero]) {
+    display: grid; place-items: center; min-height: min(82svh, 860px); margin-top: 0; overflow: hidden; color: var(--on-dark); text-align: center;
+  }
+  & > section:is([data-role="photo-hero"], [data-pr-hero]) > [data-part="hero-image"] { position: absolute; inset: 0; z-index: 0; background: #1b1e18; }
+  & > section:is([data-role="photo-hero"], [data-pr-hero]) > [data-part="hero-image"]::after {
+    content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: radial-gradient(ellipse 70% 55% at 50% 52%, rgb(0 0 0 / 0.32), rgb(0 0 0 / 0) 100%), linear-gradient(180deg, rgb(0 0 0 / 0.3), rgb(0 0 0 / 0.22) 40%, rgb(0 0 0 / 0.5));
+    opacity: calc(1 - var(--hero-p, 0) * 0.6);
+  }
+  & > section:is([data-role="photo-hero"], [data-pr-hero]) > :is([data-part="hero-copy"], [data-part="copy"]) {
+    position: relative; z-index: 2; display: grid; justify-items: center; width: min(100% - 2 * var(--m), 880px); padding: 120px 0 96px;
+  }
+  & > section:is([data-role="photo-hero"], [data-pr-hero]) [data-part="eyebrow"] { color: var(--on-dark); margin-bottom: 24px; }
+  & > section:is([data-role="photo-hero"], [data-pr-hero]) :is(h1, h2).c-heading {
+    font: 500 48px/1.05 var(--caps); font-stretch: 125%; letter-spacing: 0.1em; text-transform: uppercase; color: var(--on-dark); text-wrap: balance;
+  }
+  & > section:is([data-role="photo-hero"], [data-pr-hero]) [data-part="paragraph"] { max-width: 34em; margin: 24px auto 0; font: 300 22px/1.32 var(--text); color: var(--on-dark); }
+  & > section:is([data-role="photo-hero"], [data-pr-hero]) [data-part="actions"] { justify-content: center; }
+  & > section:is([data-role="photo-hero"], [data-pr-hero]) .current-action { min-height: 48px; background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  & > section:is([data-role="photo-hero"], [data-pr-hero]) .current-action + .current-action:not([data-name^="Link arrow"]) { background: transparent; border-color: rgb(250 251 245 / 0.7); color: var(--on-dark); }
+  & > section:is([data-role="photo-hero"], [data-pr-hero]) .current-action:hover { background: var(--paper); border-color: var(--paper); color: var(--ink); }
+  & > section:is([data-role="photo-hero"], [data-pr-hero]) .current-action[data-name^="Link arrow"] { color: var(--on-dark); }
+
+  /* ---- 2. Statement (text opening, heading title, copy block): Rosewood's centred eyebrow and statement ------- */
+  & > section:is([data-role="text-hero"], [data-role="copy"]):not([data-pr-hero]) { padding: 0 var(--m); text-align: center; }
+  & > section:is([data-role="text-hero"], [data-role="copy"]):not([data-pr-hero]) > [data-part="copy"] { display: grid; justify-items: center; max-width: 920px; margin: 0 auto; }
+  & > section:is([data-role="text-hero"], [data-role="copy"]):not([data-pr-hero]) [data-part="eyebrow"] { font-size: 14px; margin-bottom: 24px; }
+  & > section:is([data-role="text-hero"], [data-role="copy"]):not([data-pr-hero]) [data-part="paragraph"] { max-width: 40em; margin: 24px auto 0; }
+  & > section:is([data-role="text-hero"], [data-role="copy"]):not([data-pr-hero]) [data-part="actions"] { justify-content: center; }
+  & > section[data-role="text-hero"]:first-child:not([data-pr-hero]) { padding-top: 112px; }
+  & > section[data-role="text-hero"]:first-child:not([data-pr-hero]) h1.c-heading { font-size: 56px; }
+  /* A copy block with only an eyebrow is the label of the cards after it. */
+  & > section[data-role="copy"]:not(:has(.c-heading, [data-part="paragraph"])) + section { margin-top: 32px; }
+  & > section[data-role="copy"]:not(:has(.c-heading, [data-part="paragraph"])) [data-part="eyebrow"] { margin: 0; }
+
+  /* ---- 3. Description with the rate panel (Rosewood's offer page: a sticky panel beside the text) ------------- */
+  & > section[data-role="split"][data-variant="description"] {
+    display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: var(--gap); align-items: start; padding: 0 var(--m);
+  }
+  & > section[data-role="split"][data-variant="description"] > [data-part="copy"] [data-part="eyebrow"] { font-size: 14px; }
+  & > section[data-role="split"][data-variant="description"] > [data-part="copy"] .current-lede { max-width: 30em; font: 400 32px/1.18 var(--display); letter-spacing: -0.005em; }
+  & > section[data-role="split"][data-variant="description"] > [data-part="copy"] [data-part="paragraph"] + [data-part="paragraph"] { margin-top: 20px; }
+  & > section[data-role="split"][data-variant="description"] > :is([data-part="rate"], [data-part="callout-panel"], aside, div:not([data-part="copy"])) {
+    position: sticky; top: calc(var(--header-row) + 32px); padding: 40px; border: 1px solid var(--rule); background: var(--paper);
+  }
+  & > section[data-role="split"][data-variant="description"] [data-part="rate"] .c-heading { font-size: 32px; margin-bottom: 16px; }
+  & > section[data-role="split"][data-variant="description"] [data-part="rate"] .current-action { width: 100%; }
+
+  /* ---- 4. Editorial split (Rosewood's "Celebrate more", Four Seasons' picture rows) ---------------------------
+     A short text column beside a large picture that runs to the edge of the page; the picture settles as it
+     arrives (motion.css). Image-first puts the picture on the left. */
+  & > section[data-role="split"][data-variant="editorial"] {
+    display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--gap); align-items: center; padding-left: var(--m);
+  }
+  & > section[data-role="split"][data-variant="editorial"][data-layout="image-first"] { grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); padding: 0 var(--m) 0 0; }
+  & > section[data-role="split"][data-variant="editorial"] > [data-part="media"] { aspect-ratio: 16 / 11; }
+  & > section[data-role="split"][data-variant="editorial"][data-layout="image-first"] > [data-part="media"] { order: -1; }
+  & > section[data-role="split"][data-variant="editorial"] > [data-part="copy"] { max-width: 460px; }
+  & > section[data-role="split"][data-variant="editorial"] .c-heading { font-size: 40px; margin-bottom: 24px; }
+
+  /* ---- 5. Facts and amenities: Rosewood's terms under small capital labels, between hairlines --------------- */
+  & > section:is([data-role="facts"], [data-role="amenities"]) { padding: 0 var(--m); }
+  & > section:is([data-role="facts"], [data-role="amenities"]) > [data-part="facts"] {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0 var(--gap); margin: 0; border-top: 1px solid var(--rule-strong);
+  }
+  & > section:is([data-role="facts"], [data-role="amenities"]) [data-part="fact"] { padding: 24px 0 26px; border-bottom: 1px solid var(--rule); }
+  & > section:is([data-role="facts"], [data-role="amenities"]) [data-part="fact"] [data-part="eyebrow"] { margin: 0 0 10px; font-size: 11px; color: var(--ink-2); }
+  & > section:is([data-role="facts"], [data-role="amenities"]) [data-part="fact"] :is(dd, [data-part="paragraph"]) { margin: 0; font: 300 20px/1.3 var(--text); color: var(--ink); }
+  & > section[data-role="amenities"] > [data-part="facts"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  & > section:is([data-role="facts"], [data-role="amenities"]) + section:is([data-role="facts"], [data-role="amenities"]) { margin-top: 48px; }
+
+  /* ---- 6. Cards: three across (Rosewood's "What's on"), two across (Rosewood's dining cards) ----------------- */
+  & > section[data-role="cards"] > [data-part="card-grid"] { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 var(--gap); }
+  & > section[data-role="cards"] [data-part="card"] { display: grid; grid-template-rows: auto 1fr; align-content: start; }
+  & > section[data-role="cards"] [data-part="card"] > [data-part="media"] { aspect-ratio: 4 / 5; }
+  & > section[data-role="cards"] [data-part="card"] > [data-part="copy"] { display: grid; align-content: start; padding: 32px var(--m) 0; }
+  & > section[data-role="cards"] [data-part="card"] .c-heading { margin-bottom: 14px; font-size: 32px; line-height: 1.05; }
+  & > section[data-role="cards"] [data-part="card"] .c-heading a { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size 0.4s var(--ease-out); }
+  & > section[data-role="cards"] [data-part="card"]:hover .c-heading a { background-size: 100% 1px; }
+  & > section[data-role="cards"] [data-part="card"] [data-part="actions"] { margin-top: 24px; }
+  & > section[data-role="cards"] [data-part="card"] .current-action:first-child:not([data-name^="Link arrow"]) { min-height: 44px; padding: 0 20px; background: transparent; color: var(--ink); border-color: var(--rule-strong); }
+  & > section[data-role="cards"] [data-part="card"] .current-action:first-child:not([data-name^="Link arrow"]):hover { background: var(--ink); color: var(--paper); }
+  & > section[data-role="cards"][data-columns="2"] { padding: 0 var(--m); }
+  & > section[data-role="cards"][data-columns="2"] > [data-part="card-grid"] { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--gap); }
+  & > section[data-role="cards"][data-columns="2"] [data-part="card"] > [data-part="media"] { aspect-ratio: 3 / 2; }
+  & > section[data-role="cards"][data-columns="2"] [data-part="card"] > [data-part="copy"] { padding: 28px 0 0; }
+  & > section[data-role="cards"][data-columns="2"] [data-part="card"] .c-heading { font: 600 18px/1.2 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; }
+  & > section[data-role="cards"][data-columns="2"] [data-part="card"] .current-action:first-child:not([data-name^="Link arrow"]) { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  & > section[data-role="cards"] + section[data-role="cards"] { margin-top: 96px; }
+
+  /* ---- 7. Picture panel (overlay): Rosewood's full-bleed panel with a capital title and a black bar -------- */
+  & > section[data-role="overlay"] { display: grid; place-items: center; min-height: min(60vw, 90svh); color: var(--on-dark); text-align: center; overflow: hidden; }
+  & > section[data-role="overlay"] > [data-part="media"] { position: absolute; inset: 0; }
+  & > section[data-role="overlay"] > [data-part="media"]::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 50% 50%, rgb(0 0 0 / 0.3), rgb(0 0 0 / 0) 100%), rgb(0 0 0 / 0.34); pointer-events: none; }
+  & > section[data-role="overlay"] > [data-part="copy"] { position: relative; z-index: 1; display: grid; justify-items: center; width: min(100% - 2 * var(--m), 820px); padding: 96px 0; }
+  & > section[data-role="overlay"] [data-part="eyebrow"] { color: var(--on-dark); }
+  & > section[data-role="overlay"] .c-heading { font: 500 44px/1.08 var(--caps); font-stretch: 125%; letter-spacing: 0.1em; text-transform: uppercase; color: var(--on-dark); }
+  & > section[data-role="overlay"] [data-part="paragraph"] { margin: 24px auto 0; color: var(--on-dark); font-size: 18px; }
+  & > section[data-role="overlay"] [data-part="actions"] { justify-content: center; }
+  & > section[data-role="overlay"] .current-action + .current-action:not([data-name^="Link arrow"]) { background: transparent; border-color: rgb(250 251 245 / 0.7); color: var(--on-dark); }
+  & > section[data-role="overlay"] .current-action:hover { background: var(--paper); border-color: var(--paper); color: var(--ink); }
+  & > section[data-role="overlay"] [data-part="gallery-open"] {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; min-height: 56px; border: 0; background: var(--ink); color: var(--paper);
+    font: 600 12px/1 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; transition: background-color 0.3s ease-out;
+  }
+  & > section[data-role="overlay"] [data-part="gallery-open"]:hover { background: var(--green); }
+
+  /* ---- 8. Callout: Four Seasons' boxed banner, the text on the darkened left of the picture ---------------- */
+  & > section[data-role="callout"] { padding: 0 var(--m); }
+  & > section[data-role="callout"] > [data-part="callout-panel"] { position: relative; display: grid; align-items: center; min-height: 520px; overflow: hidden; background: var(--green); color: var(--on-dark); }
+  /* A callout picture smaller than the panel (the Vessyl mark, the founder's square portrait) stands whole on the green
+     instead of being enlarged and cut. */
+  & > section[data-role="callout"] [data-part="callout-panel"] > [data-part="media"] { background: transparent; }
+  & > section[data-role="callout"] [data-part="callout-panel"] > [data-part="media"][data-pr-graphic] > img { object-fit: contain; object-position: 85% 50%; padding: 48px; }
+  & > section[data-role="callout"] [data-part="callout-panel"] > [data-part="media"][data-pr-graphic]::after { display: none; }
+  & > section[data-role="callout"] [data-part="callout-panel"] > [data-part="media"] { position: absolute; inset: 0; }
+  & > section[data-role="callout"] [data-part="callout-panel"] > [data-part="media"]::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(0 0 0 / 0.66), rgb(0 0 0 / 0.32) 48%, rgb(0 0 0 / 0)); pointer-events: none; }
+  & > section[data-role="callout"] [data-part="callout-panel"] > [data-part="copy"] { position: relative; z-index: 1; max-width: 520px; padding: 64px 56px; }
+  & > section[data-role="callout"] [data-part="eyebrow"] { color: var(--on-dark); }
+  & > section[data-role="callout"] .c-heading { color: var(--on-dark); font-size: 36px; margin-bottom: 16px; }
+  & > section[data-role="callout"] [data-part="paragraph"] { color: var(--on-dark); font-size: 18px; }
+  & > section[data-role="callout"] .current-action { background: var(--paper); border-color: var(--paper); color: var(--ink); }
+  & > section[data-role="callout"] .current-action:hover { background: transparent; color: var(--on-dark); }
+  & > section[data-role="callout"] .current-action[data-name^="Link arrow"] { background: none; color: var(--on-dark); }
+
+  /* ---- 9. Gallery: Rosewood's centre-focus carousel, built from the page's own photographs (interactions.js) */
+  & > section[data-role="gallery"] { padding: 0; }
+  & > section[data-role="gallery"] > [data-part="media"] { width: min(100% - 2 * var(--m), 1100px); aspect-ratio: 16 / 9; margin: 0 auto; }
+  & > section[data-role="gallery"][data-pr-carousel] > [data-part="media"] { display: none; }
+  & > section[data-role="gallery"] [data-part="gallery-open"] {
+    position: absolute; left: 50%; bottom: 24px; z-index: 2; translate: -50% 0; min-height: 48px; padding: 0 24px; border: 0; background: var(--ink); color: var(--paper);
+    font: 600 12px/1 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  & .pr-carousel { position: relative; }
+  & .pr-carousel-track {
+    display: flex; align-items: center; gap: 64px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
+    padding: 0 calc(50vw - 225px); scrollbar-width: none;
+  }
+  & .pr-carousel-track::-webkit-scrollbar { display: none; }
+  & .pr-carousel-slide { flex: 0 0 390px; aspect-ratio: 3 / 4; margin: 0; overflow: hidden; scroll-snap-align: center; background: #e7e9e0; transition: flex-basis 0.5s ease, opacity 0.5s ease; opacity: 0.85; }
+  & .pr-carousel-slide[data-current] { flex-basis: 450px; opacity: 1; }
+  & .pr-carousel-slide img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
+  & .pr-carousel-bar { display: flex; align-items: center; justify-content: center; gap: 28px; margin: 36px var(--m) 0; }
+  & .pr-carousel-line { position: relative; width: min(240px, 40vw); height: 1px; background: var(--rule); }
+  & .pr-carousel-line i { position: absolute; inset: 0 auto 0 0; width: var(--w, 10%); left: var(--x, 0); background: var(--ink); transition: left 0.5s ease, width 0.5s ease; }
+  & .pr-carousel-arrow { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid var(--rule-strong); border-radius: 0; background: none; transition: background-color 0.3s ease-out, color 0.3s ease-out; }
+  & .pr-carousel-arrow:hover { background: var(--ink); color: var(--paper); }
+  & .pr-carousel-arrow svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.2; }
+
+  /* ---- 10. Table (comparison) and topics: Rosewood's capital headings and hairlines --------------------------- */
+  & > section[data-role="comparison"] { padding: 0 var(--m); }
+  & > section[data-role="comparison"] [data-part="table-scroll"] { overflow-x: auto; }
+  & > section[data-role="comparison"] table { width: 100%; border-collapse: collapse; }
+  & > section[data-role="comparison"] th { padding: 0 24px 16px 0; border-bottom: 1px solid var(--rule-strong); text-align: left; font: 600 11px/1.4 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); }
+  & > section[data-role="comparison"] td { padding: 22px 24px 22px 0; border-bottom: 1px solid var(--rule); vertical-align: top; font: 300 18px/1.35 var(--text); }
+  & > section[data-role="comparison"] td:first-child { font: 400 22px/1.2 var(--display); }
+  & > section[data-role="topics"] { padding: 0 var(--m); }
+  & > section[data-role="topics"] > [data-part="topics"] { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule-strong); }
+  & > section[data-role="topics"] li { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 72px; border-bottom: 1px solid var(--rule); }
+  & > section[data-role="topics"] h3.c-heading { font: 600 13px/1.4 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; }
+  & > section[data-role="topics"] [data-part="expand"] { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; background: none; font: 200 30px/1 var(--text); color: var(--ink); transition: rotate 0.3s ease-out; }
+  & > section[data-role="topics"] [data-part="expand"]:hover { rotate: 90deg; }
+
+  /* ---- 11. Events: Rosewood's event rows between hairlines ------------------------------------------------- */
+  & > section[data-role="events"] { padding: 0 var(--m); }
+  & > section[data-role="events"] > .c-heading { margin-bottom: 40px; text-align: center; }
+  & > section[data-role="events"] [data-part="event"] { display: grid; grid-template-columns: 180px minmax(0, 1.2fr) minmax(0, 1.6fr) minmax(0, 1fr) auto; gap: 24px; align-items: center; padding: 28px 0; border-top: 1px solid var(--rule); }
+  & > section[data-role="events"] [data-part="event"]:last-of-type { border-bottom: 1px solid var(--rule); }
+  & > section[data-role="events"] [data-part="event"] [data-part="paragraph"] { margin: 0; max-width: none; }
+  & > section[data-role="events"] [data-part="event"] [data-part="paragraph"]:first-child { font: 600 12px/1.4 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); }
+  & > section[data-role="events"] [data-part="event"] [data-part="paragraph"]:nth-child(2) { font: 400 26px/1.15 var(--display); color: var(--ink); }
+  & > section[data-role="events"] [data-part="event"] [data-part="actions"] { margin: 0; }
+
+  /* ---- 12. Introduction, quote, logos, map -------------------------------------------------------------------- */
+  & > section[data-role="introduction"] { display: grid; justify-items: center; gap: 40px; padding: 0 var(--m); text-align: center; }
+  & > section[data-role="introduction"] [data-part="artwork"] img { width: 72px; height: auto; }
+  & > section[data-role="introduction"] [data-part="copy"] { display: grid; justify-items: center; gap: 28px; }
+  & > section[data-role="introduction"] .display-prose { margin: 0; max-width: 24em; text-align: center; }
+  /* Four Seasons' black quote section. */
+  & > section[data-role="quote"] { display: grid; justify-items: center; padding: 112px var(--m); background: #000; color: var(--on-dark); text-align: center; }
+  & > section[data-role="quote"] [data-part="artwork"] { display: none; }
+  & > section[data-role="quote"] [data-part="copy"] { display: grid; justify-items: center; max-width: 980px; }
+  & > section[data-role="quote"] [data-part="eyebrow"] { color: var(--on-dark); margin-bottom: 32px; }
+  & > section[data-role="quote"] .display-prose { max-width: none; margin: 0 0 20px; font: italic 300 32px/1.4 var(--text); color: var(--on-dark); }
+  & > section[data-role="quote"] [data-part="attribution"] { display: flex; gap: 12px; margin-top: 16px; }
+  & > section[data-role="quote"] [data-part="attribution"] p { margin: 0; font: 600 11px/1.4 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; color: var(--on-dark); }
+  & > section[data-role="quote"] [data-part="author-role"] { opacity: 0.6; }
+  & > section[data-role="logos"] { padding: 0 var(--m); }
+  & > section[data-role="logos"] [data-part="artwork"] { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 32px 64px; padding: 40px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  & > section[data-role="logos"] [data-part="artwork"] img { width: auto; height: 22px; filter: grayscale(1); opacity: 0.75; }
+  & > section[data-role="map"] { margin-top: 72px; }
+  & > section[data-role="map"] > [data-part="media"] { aspect-ratio: 1440 / 870; }
+  & > section[data-role="map"] [data-part="map-key"] { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 28px; margin: 28px var(--m) 0; padding: 0; list-style: none; font: 600 11px/1.4 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; }
+}
+
+/* ---- Tablet and phone ------------------------------------------------------------------------------------------ */
+@media (max-width: 1099px) {
+  body[data-edition="figma-pr"] .current-page {
+    & > section[data-role="split"][data-variant="editorial"],
+    & > section[data-role="split"][data-variant="editorial"][data-layout="image-first"] { grid-template-columns: minmax(0, 1fr); gap: 40px; padding: 0; }
+    & > section[data-role="split"][data-variant="editorial"] > [data-part="copy"] { max-width: none; padding: 0 var(--m); }
+    & > section[data-role="split"][data-variant="editorial"] > [data-part="media"] { order: -1; }
+    & > section[data-role="amenities"] > [data-part="facts"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    & > section[data-role="events"] [data-part="event"] { grid-template-columns: minmax(0, 1fr) auto; }
+    & > section[data-role="events"] [data-part="event"] [data-part="paragraph"]:nth-child(n+3) { grid-column: 1; }
+  }
+}
+@media (max-width: 899px) {
+  body[data-edition="figma-pr"] .current-page {
+    & > section[data-role="split"][data-variant="description"] { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+    & > section[data-role="split"][data-variant="description"] > :is([data-part="rate"], div:not([data-part="copy"])) { position: static; padding: 28px; }
+    & > section[data-role="split"][data-variant="description"] > [data-part="copy"] .current-lede { font-size: 26px; }
+    & > section[data-role="cards"] > [data-part="card-grid"],
+    & > section[data-role="cards"][data-columns="2"] > [data-part="card-grid"] { grid-template-columns: minmax(0, 1fr); gap: 56px; }
+    & > section[data-role="cards"][data-columns="3"] [data-part="card"] > [data-part="copy"] { padding: 24px var(--m) 0; }
+    & > section[data-role="callout"] > [data-part="callout-panel"] { min-height: 0; color: var(--ink); background: transparent; }
+    & > section[data-role="callout"] [data-part="callout-panel"] > [data-part="media"] { position: relative; aspect-ratio: 4 / 3; background: var(--green); }
+    & > section[data-role="callout"] [data-part="callout-panel"] > [data-part="media"]::after { display: none; }
+    & > section[data-role="callout"] [data-part="callout-panel"] > [data-part="media"][data-pr-graphic] > img { object-position: 50% 50%; padding: 32px; }
+    & > section[data-role="callout"] [data-part="callout-panel"] > [data-part="copy"] { padding: 28px 0 0; max-width: none; }
+    & > section[data-role="callout"] :is([data-part="eyebrow"], .c-heading, [data-part="paragraph"]) { color: var(--ink); }
+    & > section[data-role="callout"] .current-action { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+    & > section[data-role="callout"] .current-action[data-name^="Link arrow"] { color: var(--ink); }
+    & > section[data-role="overlay"] .c-heading, & > section:is([data-role="photo-hero"], [data-pr-hero]) :is(h1, h2).c-heading { font-size: 30px; letter-spacing: 0.08em; }
+    & > section:is([data-role="photo-hero"], [data-pr-hero]) { min-height: 78svh; }
+    & > section:is([data-role="photo-hero"], [data-pr-hero]) [data-part="paragraph"] { font-size: 18px; }
+    & > section:is([data-role="photo-hero"], [data-pr-hero]) :is(h1, h2).c-heading { font-size: 26px; letter-spacing: 0.06em; }
+    & > section[data-role="text-hero"]:first-child:not([data-pr-hero]) h1.c-heading { font-size: 38px; }
+    & .pr-carousel-track { gap: 20px; padding: 0 calc(50vw - 140px); }
+    & .pr-carousel-slide { flex-basis: 240px; }
+    & .pr-carousel-slide[data-current] { flex-basis: 280px; }
+    & > section[data-role="quote"] .display-prose { font-size: 24px; }
+    & > section[data-role="comparison"] td:first-child { font-size: 18px; }
+  }
+}
+@media (max-width: 599px) {
+  body[data-edition="figma-pr"] .current-page {
+    & > section[data-role="amenities"] > [data-part="facts"] { grid-template-columns: minmax(0, 1fr); }
+    & > section[data-role="comparison"] table { min-width: 640px; }
+    & > section[data-role="events"] [data-part="event"] { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  }
+}

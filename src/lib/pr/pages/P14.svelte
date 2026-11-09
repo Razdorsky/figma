@@ -1,0 +1,39 @@
+<script lang="ts">
+  import Newsletter from '#lib/pr/components/Newsletter.svelte';
+
+  let { edition, base = '' }: { edition: 'figma-pr'; base?: string } = $props();
+</script>
+
+<section data-name="Hero Section" data-node-id="862:15934" data-role="photo-hero"><figure data-part="hero-image" data-aspect="landscape" data-film-box><img data-clip-frame src="{base}/bp/video/loop-stars.webp" alt="The Frequency Dome at night" loading="eager" decoding="async" fetchpriority="high" width="1600" height="900"><video data-loop muted loop playsinline preload="auto" poster="{base}/bp/video/loop-stars.webp" aria-hidden="true" tabindex="-1"><source media="(max-width: 767px)" src="{base}/enhanced/clips/loop-stars-m.mp4" type="video/mp4"><source src="{base}/bp/video/loop-stars.mp4" type="video/mp4"></video></figure><div data-part="hero-copy"><p data-node-id="I862:15934;756:1065" data-part="eyebrow">The Frequency Dome</p>
+<h1 data-node-id="I862:15934;756:1066" class="c-heading" data-part="heading">The Dome is{' '}<br data-frame-break>the reason this{' '}<br data-frame-break>place exists</h1></div></section>
+<section data-name="Description and info 60/40" data-node-id="862:15935" data-role="split" data-layout="copy-first" data-variant="description"><div data-part="copy"><p data-node-id="I862:15935;756:1501" data-part="eyebrow">What it is</p>
+<p data-node-id="I862:15935;756:1467" data-part="paragraph" class="current-lede">It is a geodesic dome, [x] feet across, built on a platform above the river. Inside there is no furniture. There is a floor you lie down on, a sound system tuned to the shape of the room, and a ceiling that opens.</p>
+<p data-part="paragraph" class="current-lede">Josh built it first and built the hotel around it.</p></div>
+<div data-part="rate"><p data-node-id="I862:15935;756:1469" data-part="eyebrow">Day visitors</p>
+<h2 data-node-id="I862:15935;756:1470" class="c-heading" data-part="heading">Open by reservation</h2>
+<p data-node-id="I862:15935;756:1493" data-part="paragraph">You do not need a room. Sessions and performances are listed on the booking page with times and prices.</p>
+<div data-part="actions"><button data-name="CTA" data-node-id="I862:15935;756:1490" class="current-action" data-part="action" type="button" data-pending-link="" aria-label="Book a Dome session — destination not supplied">Book a Dome session</button></div></div></section>
+<section data-name="included" data-node-id="862:15936" data-role="facts"><div data-part="facts"><div data-part="fact"><p data-part="eyebrow">Diameter</p>
+<p data-part="paragraph">[x] feet across</p></div><div data-part="fact"><p data-part="eyebrow">Acoustics</p>
+<p data-part="paragraph">George Augspurger</p></div><div data-part="fact"><p data-part="eyebrow">Floor</p>
+<p data-part="paragraph">Vibro-tactile, no furniture</p></div><div data-part="fact"><p data-part="eyebrow">Ceiling</p>
+<p data-part="paragraph">It opens</p></div></div></section>
+<section data-name="Section - 50/50 image text" data-node-id="862:15937" data-role="split" data-layout="image-first" data-variant="editorial"><figure data-part="media" data-aspect="portrait"><img src="{base}/media/7625b812d3c4d8a8132d.webp" alt="The Frequency Dome" loading="lazy" decoding="async" width="1600" height="2400"></figure>
+<div data-part="copy"><p data-node-id="" data-part="eyebrow">Why a dome</p>
+<h2 data-node-id="" class="c-heading" data-part="heading">Geometry, not mysticism</h2>
+<p data-part="paragraph">A dome is not a decorative choice. Sound behaves differently in a sphere than it does in a box. In a rectangular room, sound hits flat walls and bounces back at you in hard reflections. In a dome, the curve sends everything toward the center. You are lying in the place where it all arrives at once.</p>
+<p data-part="paragraph">People describe it as sound coming from inside their body rather than from speakers, and that is not mysticism, it is geometry.</p>
+<div data-part="actions"><a data-name="CTA" class="current-action" data-part="action" href="{base}/{edition}/frequency-experience/">Book the Frequency Experience</a><a data-name="Link arrow button" class="current-action" data-part="action" href="{base}/{edition}/the-vessyl-presents/">See what is on</a></div></div></section>
+<section data-name="Hero text only" data-node-id="862:15938" data-role="text-hero"><div data-part="copy"><p data-node-id="I862:15938;764:945" data-part="eyebrow">What happens in there</p>
+<h2 data-node-id="I862:15938;764:946" class="c-heading" data-part="heading">Three things, mostly</h2></div></section>
+<section data-name="3 col info" data-node-id="862:15939" data-role="facts"><div data-part="facts"><div data-part="fact"><h3 data-node-id="I862:15939;0" class="c-heading" data-part="heading">Sound sessions</h3>
+<p data-part="paragraph" class="current-lede">You lie on the floor for [x] minutes while someone plays live instruments and runs tracks through the system. Low frequencies you feel in your chest. No talking, no instruction, nothing you have to do correctly. Most people fall asleep at some point and that is fine.</p></div><div data-part="fact"><h3 data-node-id="I862:15939;1" class="c-heading" data-part="heading">Movement and breath</h3>
+<p data-part="paragraph" class="current-lede">Morning sessions, usually [x] minutes, [x] people maximum. Mats on the floor, facilitator in the room with you.</p></div><div data-part="fact"><h3 data-node-id="I862:15939;2" class="c-heading" data-part="heading">Performance</h3>
+<p data-part="paragraph" class="current-lede">When a musician is on the property, the Dome is where they play. The audience sits on the floor. There is no stage. See The Vessyl Presents for what is coming up.</p></div></div></section>
+<section data-name="Galery slider" data-node-id="862:15940" data-role="gallery" data-gallery="1" aria-label="The Frequency Dome gallery"><figure data-part="media" data-aspect="landscape"><img src="{base}/media/0f2aa684aaf3a01050d0.webp" alt="The Frequency Dome" loading="lazy" decoding="async" data-gallery-image="" width="2400" height="1800"><button type="button" data-gallery-open="" data-part="gallery-prev" aria-label="Open The Frequency Dome gallery"></button><button type="button" data-gallery-open="" data-part="gallery-next" tabindex="-1" aria-hidden="true"></button><span data-part="gallery-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span></figure></section>
+<section data-name="Callout" data-node-id="862:15941" data-role="callout"><div data-part="callout-panel"><figure data-part="media" data-aspect="portrait"><img src="{base}/media/c57023868faffbc61972.webp" alt="The Frequency Dome" loading="lazy" decoding="async" width="2400" height="1600"></figure><div data-part="copy"><p data-node-id="I862:15941;748:405" data-part="eyebrow">Things worth knowing</p>
+<p data-node-id="I862:15941;748:406" data-part="paragraph">You lie on the floor. There are mats, bolsters and blankets, and if the floor does not work for your body, tell us when you book and we will set up a chair or a raised platform. Go barefoot or in socks. Volume gets loud enough that you feel it, and if that is not for you, say so and we will seat you further out.</p>
+<p data-part="paragraph">If you have epilepsy, a pacemaker, an implanted medical device, or you are in the first trimester of pregnancy, talk to your doctor before you book a sound session. Low-frequency sound and strobing light are not safe for everyone. We will refund you in full if you book and then decide against it.</p>
+<div data-part="actions"><button data-name="CTA" data-node-id="I862:15941;748:407" class="current-action" data-part="action" type="button" data-pending-link="" aria-label="Book a Dome session — destination not supplied">Book a Dome session</button></div></div></div></section>
+<Newsletter pageIndex={14} />
+

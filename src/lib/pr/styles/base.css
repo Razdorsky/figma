@@ -1,0 +1,93 @@
+/* Figma PR — base (docs/figma-pr-system.md). Rosewood's system: paper and ink, a wide engraved grotesque in capitals
+   and a narrow light serif. Free fonts chosen against the references: Archivo (width 125) for Engravers Gothic,
+   Libre Caslon Display for Austin Light at statement sizes, Newsreader Light for Austin Light at text sizes. */
+@font-face { font-family: 'PR Caps'; src: url('../fonts/archivo-normal.woff2') format('woff2'); font-weight: 100 900; font-stretch: 62% 125%; font-style: normal; font-display: swap; }
+@font-face { font-family: 'PR Display'; src: url('../fonts/libre-caslon-display-normal.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'PR Text'; src: url('../fonts/newsreader-normal.woff2') format('woff2'); font-weight: 200 800; font-style: normal; font-display: swap; }
+@font-face { font-family: 'PR Text'; src: url('../fonts/newsreader-italic.woff2') format('woff2'); font-weight: 200 800; font-style: italic; font-display: swap; }
+
+html:has(body[data-edition="figma-pr"]) { background: #FAFBF5; scroll-behavior: auto; }
+body[data-edition="figma-pr"] {
+  --paper: #FAFBF5;          /* Rosewood's paper */
+  --ink: #000;
+  --ink-2: #33352f;
+  --rule: rgb(0 0 0 / 0.16);
+  --rule-strong: rgb(0 0 0 / 0.6);
+  --green: #1a3013;          /* the Vessyl deep forest green, in the role of Rosewood's #013D2D */
+  --green-hover: #24401b;
+  --on-dark: #FAFBF5;
+  --caps: 'PR Caps', 'Helvetica Neue', Arial, sans-serif;
+  --display: 'PR Display', 'Libre Caslon Display', Georgia, serif;
+  --text: 'PR Text', Newsreader, Georgia, serif;
+  --m: 40px;                 /* Rosewood's side margin */
+  --gap: 80px;               /* Rosewood's card gutter */
+  --section: 128px;          /* vertical rhythm between blocks */
+  --header-utility: 64px;
+  --header-row: 72px;
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  margin: 0; min-width: 320px; overflow-x: clip;
+  background: var(--paper); color: var(--ink);
+  font: 300 16px/1.35 var(--text); font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;
+  -webkit-user-select: none; user-select: none; /* inherited from the frozen edition: page text is not copied */
+}
+@media (max-width: 767px) {
+  body[data-edition="figma-pr"] { --m: 20px; --gap: 20px; --section: 80px; --header-row: 60px; }
+}
+
+body[data-edition="figma-pr"] {
+  & *, & *::before, & *::after { box-sizing: border-box; }
+  & :is(input, textarea, select) { -webkit-user-select: text; user-select: text; }
+  & a { color: inherit; text-decoration: none; }
+  & button, & input, & select { font: inherit; color: inherit; }
+  & button { cursor: pointer; }
+  & img, & video { display: block; max-width: 100%; }
+  & figure { margin: 0; }
+  & :focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+  & .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  /* The skip link waits, transparent and inert to the pointer, where it appears when the keyboard focuses it. */
+  & .skip-link { position: fixed; left: 16px; top: 16px; z-index: 300; padding: 12px 20px; opacity: 0; pointer-events: none; background: var(--ink); color: var(--paper); font: 600 12px/1 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; }
+  & .skip-link:focus { opacity: 1; pointer-events: auto; }
+  & br[data-frame-break] { display: none; }
+
+  /* ---- Type roles -------------------------------------------------------------------------------------------- */
+  /* Capitals: Rosewood's Engravers Gothic, 0.2 em tracking at label and button sizes, 0.1 em at title size. */
+  & .pr-caps, & .current-page [data-part="eyebrow"] {
+    font-family: var(--caps); font-stretch: 125%; font-weight: 600; text-transform: uppercase; letter-spacing: 0.2em;
+  }
+  & .current-page [data-part="eyebrow"] { margin: 0 0 20px; font-size: 12px; line-height: 1.4; color: var(--ink); }
+  /* Statements: Austin Light 48/48, −0.01 em. */
+  & .current-page .c-heading { margin: 0; font: 400 48px/1.04 var(--display); letter-spacing: -0.01em; color: var(--ink); text-wrap: balance; }
+  & .current-page [data-part="paragraph"] { margin: 0 0 16px; max-width: 36em; font: 300 16px/1.4 var(--text); color: var(--ink-2); text-wrap: pretty; }
+  & .current-page [data-part="paragraph"]:last-child { margin-bottom: 0; }
+  & .current-page .current-lede { font-size: 22px; line-height: 1.32; color: var(--ink); }
+  & .current-page [data-part="highlight"] { margin: 0 0 12px; font: italic 300 16px/1.3 var(--text); color: var(--ink); }
+  & .current-page .display-prose { font: 400 34px/1.18 var(--display); letter-spacing: -0.005em; color: var(--ink); max-width: 26em; }
+  @media (max-width: 767px) {
+    & .current-page .c-heading { font-size: 34px; line-height: 1.08; }
+    & .current-page .current-lede { font-size: 19px; }
+    & .current-page .display-prose { font-size: 26px; }
+  }
+
+  /* ---- Actions -------------------------------------------------------------------------------------------- */
+  /* Rosewood's buttons: square, 54 px, capitals 12 px tracked 0.2 em; solid first, outlined after; the designer's
+     "Link arrow" buttons are Rosewood's underlined serif links. */
+  & .current-page [data-part="actions"] { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin-top: 32px; }
+  & .pr-button, & .current-page .current-action {
+    display: inline-flex; align-items: center; justify-content: center; min-height: 54px; padding: 0 28px;
+    border: 1px solid var(--ink); border-radius: 0; background: var(--ink); color: var(--paper);
+    font: 600 12px/1.2 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; text-align: center;
+    transition: background-color 0.3s ease-out, color 0.3s ease-out, border-color 0.3s ease-out;
+  }
+  & .pr-button:hover, & .current-page .current-action:hover { background: var(--green); border-color: var(--green); }
+  & .current-page [data-part="actions"] .current-action + .current-action:not([data-name^="Link arrow"]) { background: transparent; color: var(--ink); border-color: var(--rule-strong); }
+  & .current-page [data-part="actions"] .current-action + .current-action:not([data-name^="Link arrow"]):hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  & .current-page .current-action[data-name^="Link arrow"] {
+    min-height: 0; padding: 0; border: 0; background: none; color: var(--ink);
+    font: 300 16px/1.3 var(--text); letter-spacing: 0; text-transform: none;
+    text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 8px;
+  }
+  & .current-page .current-action[data-name^="Link arrow"]:first-letter { text-transform: uppercase; }
+  & .current-page .current-action[data-name^="Link arrow"]:hover { background: none; text-decoration-color: transparent; }
+}

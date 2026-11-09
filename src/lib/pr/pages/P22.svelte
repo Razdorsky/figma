@@ -1,0 +1,41 @@
+<script lang="ts">
+  import Newsletter from '#lib/pr/components/Newsletter.svelte';
+
+  let { edition, base = '' }: { edition: 'figma-pr'; base?: string } = $props();
+</script>
+
+<section data-name="Hero Section" data-node-id="884:8732" data-role="photo-hero"><figure data-part="hero-image" data-aspect="landscape" data-film-box><img data-clip-frame src="{base}/bp/video/loop-estate.webp" alt="The property in the forest, with the pool" loading="eager" decoding="async" fetchpriority="high" width="1600" height="900"><video data-loop muted loop playsinline preload="auto" poster="{base}/bp/video/loop-estate.webp" aria-hidden="true" tabindex="-1" data-full="{base}/bp/video/film-overview.mp4"><source media="(max-width: 767px)" src="{base}/bp/video/loop-estate-m.mp4" type="video/mp4"><source src="{base}/bp/video/loop-estate.mp4" type="video/mp4"></video></figure><div data-part="hero-copy"><p data-node-id="I884:8732;756:1065" data-part="eyebrow">Take the whole property</p>
+<h1 data-node-id="I884:8732;756:1066" class="c-heading" data-part="heading">Fourteen units, the Dome, the Hearth and 118 acres, and nobody else here</h1></div></section>
+<section data-name="Description and info 60/40" data-node-id="884:8733" data-role="split" data-layout="copy-first" data-variant="description"><div data-part="copy"><p data-node-id="I884:8733;756:1501" data-part="eyebrow">Buyouts</p>
+<p data-node-id="I884:8733;756:1467" data-part="paragraph" class="current-lede">The property holds [x] people across fourteen units. Book all of them and you have the Dome, the Hearth, El Rancho, the horses, the trails and the river to yourselves, with no other guests on site.</p>
+<p data-part="paragraph" class="current-lede">People do this for retreats, for family gatherings, for company offsites, for weddings, and sometimes just because they want the place empty.</p></div>
+<div data-part="rate"><p data-node-id="I884:8733;756:1469" data-part="eyebrow">What it costs</p>
+<h2 data-node-id="I884:8733;756:1470" class="c-heading" data-part="heading">From [x] per night</h2>
+<p data-node-id="I884:8733;756:1493" data-part="paragraph">For the whole property, with a [x]-night minimum. High season is [x]. The number moves with the season, the group size and how much of the kitchen and the Dome you are using, so the honest answer is that we quote it.</p>
+<div data-part="actions"><button data-name="CTA" data-node-id="I884:8733;756:1490" class="current-action" data-part="action" type="button" data-pending-link="" aria-label="enquire about a buyout — destination not supplied">enquire about a buyout</button></div></div></section>
+<section data-name="Hero text only" data-node-id="884:8734" data-role="text-hero"><div data-part="copy"><p data-node-id="I884:8734;764:945" data-part="eyebrow">What a buyout includes</p>
+<h2 data-node-id="I884:8734;764:946" class="c-heading" data-part="heading">All of it, and someone to run the logistics</h2></div></section>
+<section data-name="Card Grid" data-node-id="884:8735" data-role="cards" data-columns="3" data-tone="white"><div data-part="card-grid"><article data-part="card" data-name="Cards"><figure data-part="media" data-aspect="landscape"><img src="{base}/media/dcdef1fda99c7f3c6a30.webp" alt="All fourteen units" loading="lazy" decoding="async" width="2400" height="1600"></figure><div data-part="copy"><h3 data-node-id="" class="c-heading" data-part="heading">All fourteen units</h3>
+<p data-part="paragraph">[x] people across the property.</p></div></article>
+<article data-part="card" data-name="Cards"><figure data-part="media" data-aspect="landscape"><img src="{base}/media/61ff1c47f37719166a70.webp" alt="The Dome" loading="lazy" decoding="async" width="2400" height="1800"></figure><div data-part="copy"><h3 data-node-id="" class="c-heading" data-part="heading">The Dome</h3>
+<p data-part="paragraph">With the schedule set by you.</p></div></article>
+<article data-part="card" data-name="Cards"><figure data-part="media" data-aspect="landscape"><img src="{base}/media/a1e1165521f4e39862e7.webp" alt="The Hearth and El Rancho" loading="lazy" decoding="async" width="2400" height="1350"></figure><div data-part="copy"><h3 data-node-id="" class="c-heading" data-part="heading">The Hearth and El Rancho</h3>
+<p data-part="paragraph">With the kitchen cooking to your plan rather than ours.</p></div></article></div></section>
+<section data-name="Callout" data-node-id="884:8736" data-role="callout"><div data-part="callout-panel"><figure data-part="media" data-aspect="portrait"><img src="{base}/media/03e8fed65275a337afaf.webp" alt="Guests outside the Dome" loading="lazy" decoding="async" width="1600" height="2400"></figure><div data-part="copy"><p data-node-id="I884:8736;748:405" data-part="eyebrow">Partial takeovers</p>
+<p data-node-id="I884:8736;748:406" data-part="paragraph">You do not have to take everything. Groups of [x] to [x] can have the villas and the Dome without the tents, which is cheaper and still gives you a private schedule. Tell us how many people and what you want to do with them.</p>
+<div data-part="actions"><button data-name="CTA" data-node-id="I884:8736;748:407" class="current-action" data-part="action" type="button" data-pending-link="" aria-label="enquire about a partial takeover — destination not supplied">enquire about a partial takeover</button></div></div></div></section>
+<section data-name="Section - 50/50 text image" data-node-id="884:8737" data-role="split" data-layout="copy-first" data-variant="editorial"><div data-part="copy"><p data-node-id="" data-part="eyebrow">enquire</p>
+<h2 data-node-id="" class="c-heading" data-part="heading">Tell us what you want to do with the property</h2>
+<p data-part="paragraph">Dates, headcount, the occasion, and what your days look like. We reply with a quote, not a brochure.</p>
+<div data-part="actions"><button data-name="CTA" class="current-action" data-part="action" type="button" data-pending-link="" aria-label="enquire now — destination not supplied">enquire now</button><button data-name="Link arrow button" class="current-action" data-part="action" type="button" data-pending-link="" aria-label="Button — destination not supplied">Button</button></div></div>
+<figure data-part="media" data-aspect="portrait"><img src="{base}/media/9772fed083830cf825f9.webp" alt="Arenal Volcano above the rainforest" loading="lazy" decoding="async" width="1024" height="1536"></figure></section>
+<section data-name="Hero text only" data-node-id="884:8738" data-role="text-hero"><div data-part="copy"><p data-node-id="I884:8738;764:945" data-part="eyebrow">Other ways to take the property</p>
+<h2 data-node-id="I884:8738;764:946" class="c-heading" data-part="heading">Retreats, groups and weddings</h2></div></section>
+<section data-name="Card Grid" data-node-id="884:8739" data-role="cards" data-columns="3" data-tone="white"><div data-part="card-grid"><article data-part="card" data-name="Cards"><figure data-part="media" data-aspect="portrait"><img src="{base}/media/72884796e0c3334ec3ef.webp" alt="Retreats" loading="lazy" decoding="async" width="1800" height="2400"></figure><div data-part="copy"><h3 data-node-id="" class="c-heading" data-part="heading"><a href="{base}/{edition}/retreats/">Retreats</a></h3>
+<p data-part="paragraph">Bring your people, use our dome.</p></div></article>
+<article data-part="card" data-name="Cards"><figure data-part="media" data-aspect="portrait"><img src="{base}/media/243d9deec040eaf0199a.webp" alt="Groups and offsites" loading="lazy" decoding="async" width="1350" height="2400"></figure><div data-part="copy"><h3 data-node-id="" class="c-heading" data-part="heading"><a href="{base}/{edition}/groups-and-offsites/">Groups and offsites</a></h3>
+<p data-part="paragraph">For companies that have had enough of hotel ballrooms.</p></div></article>
+<article data-part="card" data-name="Cards"><figure data-part="media" data-aspect="portrait"><img src="{base}/media/eba6f9c7897a9601a45f.webp" alt="Weddings" loading="lazy" decoding="async" width="1350" height="2400"></figure><div data-part="copy"><h3 data-node-id="" class="c-heading" data-part="heading"><a href="{base}/{edition}/weddings/">Weddings</a></h3>
+<p data-part="paragraph">Small, private, and outdoors.</p></div></article></div></section>
+<Newsletter pageIndex={22} />
+

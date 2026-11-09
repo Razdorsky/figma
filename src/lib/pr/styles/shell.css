@@ -1,0 +1,186 @@
+/* Figma PR — shell (docs/figma-pr-system.md): header, navigation, booking bar, menu, newsletter, footer, toast and the
+   photo gallery, after Rosewood (paper, capitals, serif links, green reserve) and Four Seasons (booking bar). */
+body[data-edition="figma-pr"] {
+
+  /* ---- Header ------------------------------------------------------------------------------------------------
+     Two tiers on paper above the picture. The whole header is sticky with a negative top equal to the utility row,
+     so the utility row scrolls away and the navigation row stays (Rosewood). */
+  & .pr-header {
+    position: sticky; top: calc(-1 * var(--header-utility)); z-index: 60;
+    background: var(--paper); color: var(--ink);
+    transition: box-shadow 0.3s ease-out;
+  }
+  & .pr-header[data-stuck] { box-shadow: 0 1px 0 var(--rule); }
+  & .pr-utility {
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: var(--header-utility);
+    margin: 0 var(--m); border-bottom: 1px solid var(--rule);
+  }
+  & .pr-utility-link {
+    justify-self: start; padding: 4px 0; border: 0; border-bottom: 2px solid currentColor; background: none;
+    font: 600 12px/1.4 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  & .pr-utility-link:last-child { justify-self: end; }
+  & .pr-brand img { width: 150px; height: auto; }
+  & .pr-nav-row {
+    position: relative; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px;
+    height: var(--header-row); padding: 0 0 0 var(--m);
+  }
+  & .pr-menu-toggle {
+    justify-self: start; display: inline-flex; align-items: center; gap: 12px; padding: 12px 0; border: 0; background: none;
+    font: 600 12px/1 var(--caps); font-stretch: 125%; letter-spacing: 0.2em;
+  }
+  & .menu-lines { display: inline-flex; flex-direction: column; justify-content: space-between; width: 22px; height: 12px; }
+  & .menu-lines i { display: block; height: 1px; background: currentColor; }
+  /* Once the utility row has left, the wordmark comes into the navigation row beside the menu button. */
+  & .pr-brand-compact { position: absolute; left: calc(var(--m) + 112px); top: 50%; translate: 0 -50%; opacity: 0; pointer-events: none; transition: opacity 0.3s ease-out; }
+  & .pr-brand-compact img { width: 112px; }
+  & .pr-header[data-stuck] .pr-brand-compact { opacity: 1; pointer-events: auto; }
+  & .pr-nav { display: flex; align-items: center; gap: 36px; transition: opacity 0.3s ease-out; }
+  & .pr-nav .nav-trigger, & .pr-nav-link {
+    display: inline-flex; align-items: center; gap: 8px; padding: 8px 0; list-style: none; cursor: pointer;
+    font: 300 17px/1.2 var(--text); color: var(--ink);
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size 0.4s var(--ease-out);
+  }
+  & .pr-nav .nav-trigger::-webkit-details-marker { display: none; }
+  & .pr-nav .nav-trigger::after { content: ""; width: 7px; height: 7px; margin-top: -4px; border-right: 1px solid; border-bottom: 1px solid; rotate: 45deg; transition: rotate 0.3s ease-out; }
+  & .pr-nav .nav-group[open] .nav-trigger::after { rotate: 225deg; margin-top: 3px; }
+  & .pr-nav .nav-trigger:hover, & .pr-nav-link:hover, & .pr-nav .nav-group[open] .nav-trigger { background-size: 100% 1px; }
+  & .pr-reserve {
+    justify-self: end; align-self: stretch; padding: 0 32px; border: 0; background: var(--green); color: var(--on-dark);
+    font: 600 12px/1 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; transition: background-color 0.3s ease-out;
+  }
+  & .pr-reserve:hover, & .pr-reserve[aria-expanded="true"] { background: var(--green-hover); }
+
+  /* Mega panels: a paper sheet under the header with 4:5 pictures and serif names. */
+  & .pr-mega {
+    position: absolute; top: 100%; left: 0; right: 0; z-index: 2; display: grid; grid-template-columns: 220px 1fr; gap: 40px;
+    padding: 40px var(--m) 48px; border-top: 1px solid var(--rule); background: var(--paper); box-shadow: 0 24px 40px -32px rgb(0 0 0 / 0.35);
+    animation: pr-sheet 0.4s var(--ease-out);
+  }
+  & .nav-group:not([open]) > .pr-mega { display: none; }
+  & .pr-mega .mega-overview { align-self: start; font: 600 12px/1.4 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; border-bottom: 1px solid; padding-bottom: 4px; justify-self: start; }
+  & .pr-mega-cards { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 24px; }
+  & .pr-mega-card { display: grid; gap: 12px; font: 300 17px/1.25 var(--text); }
+  & .pr-mega-image { display: block; aspect-ratio: 4 / 5; overflow: hidden; background: #e9ebe3; }
+  & .pr-mega-image img { width: 100%; height: 100%; object-fit: cover; transition: scale 0.8s var(--ease-out); }
+  & .pr-mega-card:hover .pr-mega-image img { scale: 1.05; }
+
+  /* Booking bar (Four Seasons): dates and guests, opened by the reserve button. */
+  & .pr-booking {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 220px)) auto 1fr; align-items: end; gap: 24px;
+    padding: 24px var(--m) 28px; border-top: 1px solid var(--rule); background: var(--paper);
+  }
+  & .pr-booking[hidden] { display: none; }
+  & .pr-field { display: grid; gap: 8px; }
+  & .pr-field span { font: 600 11px/1 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); }
+  & .pr-field :is(input, select) {
+    width: 100%; height: 44px; padding: 0 2px; border: 0; border-bottom: 1px solid var(--rule-strong); border-radius: 0; background: transparent;
+    font: 300 18px/1 var(--text); color: var(--ink); appearance: none;
+  }
+  & .pr-field select { background: linear-gradient(45deg, transparent 50%, currentColor 50%) right 8px center / 6px 6px no-repeat, transparent; }
+  & .pr-booking .pr-button { min-height: 48px; }
+  & .pr-booking-note { margin: 0; align-self: center; font: italic 300 15px/1.3 var(--text); color: var(--ink-2); }
+
+  /* ---- Menu (full screen, paper) ------------------------------------------------------------------------------ */
+  & .pr-menu { position: fixed; inset: 0; width: 100%; height: 100svh; max-width: none; max-height: none; margin: 0; padding: 0 var(--m) 48px; border: 0; overflow: auto; background: var(--paper); color: var(--ink); z-index: 100; }
+  & .pr-menu::backdrop { background: rgb(0 0 0 / 0.3); }
+  & .pr-menu[open] { animation: pr-fade 0.4s var(--ease-out); }
+  & .pr-menu.closing { animation: pr-fade-out 0.3s var(--ease) forwards; }
+  & .pr-menu .menu-top { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 96px; margin-bottom: 48px; border-bottom: 1px solid var(--rule); }
+  & .pr-menu .menu-top > a { grid-column: 2; }
+  & .pr-menu .menu-top img { width: 160px; height: auto; }
+  & .pr-menu .icon-button { grid-column: 3; justify-self: end; display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid var(--rule-strong); border-radius: 0; background: none; }
+  & .pr-menu .icon-button svg { width: 20px; height: 20px; }
+  & .pr-menu .menu-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px var(--gap); max-width: 1360px; margin: 0 auto; }
+  & .pr-menu .menu-column h2 { margin: 0 0 20px; font: 600 12px/1.4 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; }
+  & .pr-menu .menu-column a { display: block; padding: 6px 0; font: 400 26px/1.2 var(--display); transition: opacity 0.3s ease-out; }
+  & .pr-menu .menu-columns:hover a:not(:hover) { opacity: 0.45; }
+  & .pr-menu .menu-footer { display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: center; justify-content: center; max-width: 1360px; margin: 64px auto 0; padding-top: 32px; border-top: 1px solid var(--rule); }
+  & .pr-menu .nav-book { display: inline-flex; align-items: center; min-height: 54px; padding: 0 28px; background: var(--green); color: var(--on-dark); font: 600 12px/1 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; }
+  & .pr-menu .language-trigger { display: inline-flex; align-items: center; gap: 8px; border: 0; background: none; font: 600 12px/1 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; }
+  & .pr-menu .language-trigger svg { width: 18px; height: 18px; }
+
+  /* ---- Newsletter: Rosewood's "Stay connected" row between hairlines ---------------------------------------- */
+  & .pr-newsletter, & .current-page > section.pr-newsletter { margin: var(--section) var(--m) 0; padding: 56px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: none; color: var(--ink); }
+  & .pr-newsletter .newsletter-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px var(--gap); align-items: end; max-width: none; }
+  & .pr-newsletter .newsletter-eyebrow { margin: 0 0 16px; font: 600 12px/1.4 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; }
+  & .pr-newsletter h2 { margin: 0 0 12px; font: 400 32px/1.1 var(--display); letter-spacing: -0.005em; }
+  & .pr-newsletter p { margin: 0; font: 300 16px/1.4 var(--text); color: var(--ink-2); max-width: 34em; }
+  & .pr-newsletter .newsletter-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px 24px; align-items: end; }
+  & .pr-newsletter .newsletter-form input { width: 100%; height: 54px; padding: 0 2px; border: 0; border-bottom: 1px solid var(--rule-strong); border-radius: 0; background: transparent; font: 300 18px/1 var(--text); color: var(--ink); }
+  & .pr-newsletter .newsletter-form button { min-height: 54px; padding: 0 28px; border: 0; border-radius: 0; background: var(--ink); color: var(--paper); font: 600 12px/1 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; transition: background-color 0.3s ease-out; }
+  & .pr-newsletter .newsletter-form button:hover { background: var(--green); }
+  & .pr-newsletter .newsletter-status { grid-column: 1 / -1; min-height: 20px; font: italic 300 15px/1.4 var(--text); color: var(--ink-2); }
+
+  /* ---- Footer ---------------------------------------------------------------------------------------------- */
+  & .pr-footer { padding: 72px 0 0; background: var(--paper); color: var(--ink); }
+  & .pr-footer .footer-inner { margin: 0 var(--m); }
+  & .pr-footer .footer-top { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 56px; }
+  & .pr-footer .footer-top .brand img { width: 150px; height: auto; }
+  & .pr-footer .header-actions { display: flex; align-items: center; gap: 28px; }
+  & .pr-footer :is(.language-trigger, .nav-book) { padding: 4px 0; border: 0; border-bottom: 2px solid currentColor; background: none; font: 600 12px/1.4 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; }
+  & .pr-footer .footer-columns { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 40px; margin: 0; }
+  & .pr-footer .footer-group h2 { margin: 0 0 20px; font: 600 12px/1.4 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); }
+  & .pr-footer .footer-group :is(a, button) { display: block; margin: 0 0 10px; padding: 0; border: 0; background: none; text-align: left; font: 300 16px/1.5 var(--text); color: var(--ink); }
+  & .pr-footer .footer-group h2 a { font: inherit; letter-spacing: inherit; }
+  & .pr-footer .footer-group :is(a, button):hover { text-decoration: underline; text-underline-offset: 6px; }
+  & .pr-footer .footer-bottom { display: grid; justify-items: center; gap: 18px; margin-top: 72px; padding: 0 0 40px; border-top: 0; text-align: center; }
+  & .pr-footer .pr-symbol { display: block; width: 64px; color: var(--ink); }
+  & .pr-footer .pr-symbol svg { display: block; width: 100%; height: auto; fill: currentColor; }
+  & .pr-footer .footer-bottom p { margin: 0; font: 600 11px/1.6 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); }
+  & .pr-footer .footer-bottom button { padding: 0; border: 0; background: none; font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit; }
+  & .pr-footer-band { height: 28px; background: var(--green); }
+
+  /* ---- Toast and gallery ----------------------------------------------------------------------------------- */
+  & .preview-toast { position: fixed; left: 50%; bottom: 24px; z-index: 300; translate: -50% 0; width: max-content; max-width: calc(100% - 32px); padding: 16px 22px; background: var(--ink); color: var(--paper); font: 300 15px/1.45 var(--text); animation: pr-fade 0.3s var(--ease-out); }
+  & .gallery-dialog { position: fixed; inset: 0; width: 100%; height: 100svh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: #0c0d0b; color: var(--on-dark); z-index: 150; }
+  & .gallery-dialog::backdrop { background: #0c0d0b; }
+  & .gallery-stage { position: absolute; inset: 72px 72px 112px; display: grid; place-items: center; overflow: hidden; touch-action: pan-y; }
+  & .gallery-stage img { max-width: 100%; max-height: 100%; object-fit: contain; transition: opacity 0.2s; }
+  & .gallery-count { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } /* read out, not shown */
+  & .gallery-dialog .icon-button { display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid rgb(250 251 245 / 0.4); border-radius: 0; background: rgb(0 0 0 / 0.3); color: inherit; }
+  & .gallery-dialog .icon-button svg { width: 20px; height: 20px; }
+  & .gallery-close { position: absolute; right: 24px; top: 16px; z-index: 3; }
+  & .gallery-arrow { position: absolute; top: 50%; translate: 0 -50%; z-index: 3; }
+  & .gallery-prev { left: 16px; }
+  & .gallery-next { right: 16px; }
+  & .gallery-thumbnails { position: absolute; left: 0; right: 0; bottom: 24px; display: flex; justify-content: center; gap: 10px; overflow-x: auto; padding: 4px 20px; }
+  & .gallery-thumbnails button { flex-shrink: 0; padding: 0; border: 1px solid transparent; background: none; opacity: 0.5; }
+  & .gallery-thumbnails button[aria-current="true"] { opacity: 1; border-color: var(--on-dark); }
+  & .gallery-thumbnails img { width: 72px; height: 52px; object-fit: cover; }
+  & .gallery-edge { position: absolute; top: 0; bottom: 0; z-index: 2; width: 30%; border: 0; background: none; }
+  & .gallery-edge.left { left: 0; } & .gallery-edge.right { right: 0; }
+  & .current-page [data-gallery] img { cursor: zoom-in; }
+
+  @media (max-width: 1100px) {
+    & .pr-nav { gap: 24px; }
+    & .pr-mega-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    & .pr-footer .footer-columns { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width: 899px) {
+    & .pr-utility { display: none; }
+    & .pr-header { top: 0; }
+    & .pr-nav { display: none; }
+    & .pr-brand-compact { left: 50%; translate: -50% -50%; opacity: 1; pointer-events: auto; }
+    & .pr-nav-row { padding-right: var(--m); }
+    /* The reserve button becomes a bar along the foot of the screen (Rosewood's phone reserve bar). */
+    & .pr-reserve { position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; width: 100%; height: 56px; padding: 0 20px; }
+    & .pr-booking { position: fixed; left: 0; right: 0; bottom: 56px; z-index: 70; grid-template-columns: 1fr 1fr; padding: 20px var(--m) 24px; box-shadow: 0 -16px 32px -24px rgb(0 0 0 / 0.4); }
+    & .pr-booking .pr-field:nth-of-type(3), & .pr-booking .pr-button, & .pr-booking-note { grid-column: 1 / -1; }
+    & .pr-footer { padding-bottom: 56px; }
+    & .pr-menu .menu-columns { grid-template-columns: 1fr 1fr; }
+    & .pr-newsletter .newsletter-inner { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 599px) {
+    & .pr-menu .menu-columns { grid-template-columns: 1fr; gap: 36px; }
+    & .pr-menu .menu-column a { font-size: 22px; }
+    & .pr-menu .menu-top { height: 72px; margin-bottom: 32px; }
+    & .pr-footer .footer-columns { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
+    & .pr-footer .footer-top { flex-direction: column; align-items: flex-start; }
+    & .pr-newsletter .newsletter-form { grid-template-columns: 1fr; }
+    & .pr-newsletter h2 { font-size: 28px; }
+  }
+}
+@keyframes pr-sheet { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+@keyframes pr-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pr-fade-out { to { opacity: 0; } }

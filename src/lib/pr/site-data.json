@@ -1,0 +1,198 @@
+[
+  {
+    "index": 1,
+    "id": "857:15224",
+    "name": "Home",
+    "slug": "",
+    "photo": true
+  },
+  {
+    "index": 2,
+    "id": "814:7234",
+    "name": "Where you sleep",
+    "slug": "where-you-sleep",
+    "photo": false
+  },
+  {
+    "index": 3,
+    "id": "814:7245",
+    "name": "The Villas",
+    "slug": "villas",
+    "photo": true
+  },
+  {
+    "index": 4,
+    "id": "814:7255",
+    "name": "The Treehouse",
+    "slug": "treehouse",
+    "photo": true
+  },
+  {
+    "index": 5,
+    "id": "814:7265",
+    "name": "Glamping Tents",
+    "slug": "glamping-tents",
+    "photo": true
+  },
+  {
+    "index": 6,
+    "id": "814:7335",
+    "name": "Rates and offers",
+    "slug": "rates-and-offers",
+    "photo": false
+  },
+  {
+    "index": 7,
+    "id": "814:7277",
+    "name": "Experiences",
+    "slug": "experiences",
+    "photo": false
+  },
+  {
+    "index": 8,
+    "id": "814:7286",
+    "name": "The Day and the Half Day",
+    "slug": "day-and-half-day",
+    "photo": true
+  },
+  {
+    "index": 9,
+    "id": "814:7296",
+    "name": "The Frequency Experience",
+    "slug": "frequency-experience",
+    "photo": true
+  },
+  {
+    "index": 10,
+    "id": "814:7315",
+    "name": "Arenal After Dark",
+    "slug": "arenal-after-dark",
+    "photo": true
+  },
+  {
+    "index": 11,
+    "id": "814:7324",
+    "name": "For Two",
+    "slug": "for-two",
+    "photo": true
+  },
+  {
+    "index": 12,
+    "id": "814:7305",
+    "name": "Horses and the River",
+    "slug": "horses-and-the-river",
+    "photo": true
+  },
+  {
+    "index": 13,
+    "id": "814:9956",
+    "name": "The Vessyl Presents",
+    "slug": "the-vessyl-presents",
+    "photo": false
+  },
+  {
+    "index": 14,
+    "id": "862:15932",
+    "name": "The Frequency Dome",
+    "slug": "the-frequency-dome",
+    "photo": true
+  },
+  {
+    "index": 15,
+    "id": "862:15944",
+    "name": "The Harmonic Hearth",
+    "slug": "the-harmonic-hearth",
+    "photo": true
+  },
+  {
+    "index": 16,
+    "id": "862:15978",
+    "name": "Sound and movement",
+    "slug": "sound-and-movement",
+    "photo": false
+  },
+  {
+    "index": 17,
+    "id": "862:15955",
+    "name": "Horses and the land",
+    "slug": "horses-and-the-land",
+    "photo": true
+  },
+  {
+    "index": 18,
+    "id": "862:15968",
+    "name": "The recording studio",
+    "slug": "the-recording-studio",
+    "photo": true
+  },
+  {
+    "index": 19,
+    "id": "882:8107",
+    "name": "Eating here",
+    "slug": "eating-here",
+    "photo": true
+  },
+  {
+    "index": 20,
+    "id": "884:8330",
+    "name": "El Rancho",
+    "slug": "el-rancho",
+    "photo": true
+  },
+  {
+    "index": 21,
+    "id": "884:8529",
+    "name": "Moloka",
+    "slug": "moloka",
+    "photo": true
+  },
+  {
+    "index": 22,
+    "id": "884:8730",
+    "name": "Take the whole property",
+    "slug": "take-the-whole-property",
+    "photo": true
+  },
+  {
+    "index": 23,
+    "id": "884:8986",
+    "name": "Retreats",
+    "slug": "retreats",
+    "photo": true
+  },
+  {
+    "index": 24,
+    "id": "884:9222",
+    "name": "Groups and offsites",
+    "slug": "groups-and-offsites",
+    "photo": true
+  },
+  {
+    "index": 25,
+    "id": "944:7523",
+    "name": "Weddings",
+    "slug": "weddings",
+    "photo": true
+  },
+  {
+    "index": 26,
+    "id": "944:7742",
+    "name": "Arenal",
+    "slug": "arenal",
+    "photo": true
+  },
+  {
+    "index": 27,
+    "id": "965:7503",
+    "name": "Getting here",
+    "slug": "getting-here",
+    "photo": false
+  },
+  {
+    "index": 28,
+    "id": "965:7711",
+    "name": "Things to do around here",
+    "slug": "things-to-do-around-here",
+    "photo": true
+  }
+]
