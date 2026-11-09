@@ -105,6 +105,8 @@ On slow connections the rest of what the clip waits for is the page itself (its 
 | plunge | The Harmonic Hearth | 289 KB | 165 KB |
 | tuning | Sound and movement | 133 KB | 95 KB |
 
+One clip had a phone version that its page never named: the inside of the Dome on The Frequency Experience (`loop-inside-m.mp4`, 563 KB instead of 1,169 KB); its phone source was added the same day.
+
 **Where they live.** `public/enhanced/clips/`, a folder only this edition publishes: `scripts/build-pages.mjs` copies `enhanced/` into the Figma Enhanced artifact alone and re-roots its paths like the others. The shared `public/bp/video/` (Blueprint's films, also used here) is untouched. The next-page block takes each clip's phone path from `src/lib/enhanced/next.ts` (`loop()`): the fifteen in `enhancedPhone` from this folder, the rest from `/bp/video/`.
 
 **Checked.** At 390px every one of the 15 plays its phone version (`currentSrc`), at 1440px the large one; frames compared side by side show the same picture. When the first clip starts moving on a phone (same method as stage 2):
