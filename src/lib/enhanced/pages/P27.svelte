@@ -7,7 +7,7 @@
 
 <section data-name="Hero text only" data-node-id="965:7506" data-role="text-hero"><div data-part="copy"><p data-node-id="I965:7506;764:945" data-part="eyebrow">Plan your visit</p>
 <h1 data-node-id="I965:7506;764:946" class="c-heading" data-part="heading">Getting here</h1>
-<p data-node-id="I965:7506;764:948" data-part="paragraph" class="current-lede">Three hours by car from San José, two and a half from Liberia, or fly Sansa into La Fortuna.</p></div></section>
+<p data-node-id="I965:7506;764:948" data-part="paragraph" class="current-lede">Three hours by car from San José, two and a half from Liberia, or fly Sansa into La Fortuna.</p></div><div class="specimen" data-ratio="1" data-side="right" data-scale="0.6" aria-hidden="true" style="--rot: 16deg; --t: 38%"><img src="{base}/media/atlas/morpho.webp" alt="" loading="lazy" decoding="async"></div></section>
 <section data-name="Description and info 60/40" data-node-id="965:7507" data-role="split" data-layout="copy-first" data-variant="description"><div data-part="copy"><p data-node-id="I965:7507;756:1501" data-part="eyebrow">From Liberia (LIR)</p>
 <p data-node-id="I965:7507;756:1467" data-part="paragraph" class="current-lede">[x] hours by road. This is the easier airport if you are flying from North America, and most people use it.</p>
 <p data-part="paragraph" class="current-lede">We will send a driver for [x] each way, up to [x] people and luggage. Book it when you book your room and we will be waiting at arrivals with your name on a sign.</p>

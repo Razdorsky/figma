@@ -363,3 +363,33 @@ The early prototype (owner's references 15 and 16; `~/Documents/Questionarie/Ves
 - Markup: `data-portal="arch"` or `"bowl"` on the designer's media figure (P09, P10, P11); `data-film-box`, the scene and the buttons on the two circle shots (P14, P15).
 - Styles: `styles/portal.css`. Behaviour: `setupPortals` in `interactions.js` (arrives once at a fifth on screen; the waiting state is set without motion, so nothing fades on load); `showChange` ends a scene whose picture leaves.
 - Checked: layout at 69 widths in Chrome, WebKit and Firefox (nothing new); axe 0 on all pages; arrival, zoom, shape and proportion in the three engines at 1440 and 390, and still under reduced motion; the circle buttons play their scene with sound and stop when the step changes; galleries, menu and newsletter.
+
+## 2.9 The artistic layer of the Atlas (2026-11-09)
+
+### What the reference does
+
+The "Atlas" prototype (owner's references 17–20; `VESSYL/local-source-backups/0-app-content-raw/marketing-site/brand-everything/2026-11-02/blueprint-preview/2026-11-03-scenes/prototype/index.html`):
+- **The engraving develops into the film** (shader 142–247, timing 380–397): a plate drawn from the film's first frame; while the scene holds, a front with a noisy edge climbs from the foot with the scroll, and near the front the plate's lines linger over the picture. The film stands on the same frame; scrolling back brings the lines back. The owner singled this one out.
+- **Engraved plates develop into photographs** (CSS 50–55, JS 362–366): from the point where the pointer enters (a radial mask). The owner: there is no hover on a phone, so it needs its own mechanism.
+- **Drawings in the margins** (CSS 57–68): morpho, toucan, heliconia, monstera, drawing themselves with the scroll (`--draw`), multiplied onto the paper.
+- **Fireflies** (`canvas.flies`, JS 368–372): few, slow, warm, over the forest at night.
+
+### The trial and the owner's choice
+
+One plate was drawn first, for the opening of Arenal, in two styles, each with a recording of its development. The owner chose **variant A** (2026-11-09): fine steel-engraving line in warm sepia on cream paper. It lies on the frame almost without double contours; B was denser and drifted in the clouds.
+
+### Decisions
+
+- **Every plate is drawn from the real frame or photograph it covers** (codex image generation from the source, composition kept so the plate lies on the picture), nothing added, no night invented. Plates for photographs shown cropped are drawn from the crop every screen shares, so they line up at every width.
+- **The engraving develops into the film**: on Arenal's opening the screen holds while the plate develops (70svh more before the description rises over it); on Home, "Where you actually are", the pool and the volcano develop as the section crosses the screen. The canvas holds only two still images (the plate and the film's first frame), since the film waits on that frame; once the plate has gone the film plays, and scrolling back brings the lines back. Pressing "Play with sound" before that shows the film at once.
+- **Plates develop into photographs**: the map on Where you sleep develops with the scroll, from the middle, and keeps the designer's labels (the engraving also leaves out the Google labels of the designer's satellite picture until it develops). The three cards on Arenal (Getting here, Things to do around here, When to come) open from the point where the pointer enters and close when it leaves; on a touch screen they open from the middle when the card reaches the middle of the screen, or on a tap; a keyboard focus opens them too. Things to do around here waits for its right photographs (step 3).
+- **Drawings in the margins**, only beside the designer's centred headings on the land pages: monstera (Where you sleep), kiskadee (Horses and the land, from that page's photograph), scarlet macaw (Arenal, from the overview film), morpho (Getting here), toucan and torch ginger (Things to do around here, the ginger from that page's photograph). Morpho, monstera and toucan are the Atlas's own drawings, in the same style. No Latin names: a wrong one would be worse than none. Each stands in the margin it is measured to have, centred, and stays away where the margin is under 72px; phones have no margins, so none there.
+- **Fireflies** over the two real night pictures: the Dome under the Milky Way (Frequency Dome opening) and the Dome at night in the portal of Arenal After Dark, kept to the foliage.
+- **Reduced motion**: no canvas, no plates and no fireflies; the drawings stand complete.
+
+### Built (2026-11-09)
+
+- Images: `public/media/atlas/` (plates, first frames, drawings), from `scratchpad` generation runs.
+- Markup: `data-develop="hold|pass"` with `data-plate` and `data-life` on the opening figures (P26, P01); `data-plate-card` and an `img.plate-img` on the map (P02, "scroll") and the three cards (P26); `div.specimen` with `data-side`, `data-ratio` (P02, P17, P26, P27, P28); `data-fireflies` (P14, P10).
+- Styles: `styles/atlas.css`. Behaviour in `interactions.js`: `setupDevelop`, `drawDevelop`, `updateDevelop` (WebGL), `setupPlates`, `updatePlates`, `plateFrom`, `placeSpecimens`, `updateSpecimens`, `setupFireflies`, `drawFireflies`; the film under a developing plate waits on its first frame (`syncVideo`).
+- Checked: layout at 69 widths in Chrome, WebKit and Firefox; axe 0 on all pages; the development, the cards, the drawings and the fireflies in the three engines at 1440 and 390 and under reduced motion; the drawings never touch text and never leave their section at eight widths from 900 to 2560.
