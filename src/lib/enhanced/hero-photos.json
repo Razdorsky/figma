@@ -1,0 +1,149 @@
+{
+ "villas": {
+  "sizes": "(max-width: 599px) 319vw, (max-width: 767px) 192vw, (max-width: 1023px) 122vw, 100vw",
+  "set": [
+   [
+    "/enhanced/photos/2b61d0b9909a48665218-800.webp",
+    800
+   ],
+   [
+    "/enhanced/photos/2b61d0b9909a48665218-1200.webp",
+    1200
+   ],
+   [
+    "/enhanced/photos/2b61d0b9909a48665218-1600.webp",
+    1600
+   ],
+   [
+    "/media/2b61d0b9909a48665218.webp",
+    2400
+   ]
+  ]
+ },
+ "arenal-after-dark": {
+  "sizes": "(max-width: 599px) 160vw, 100vw",
+  "set": [
+   [
+    "/enhanced/photos/217d8eafeb5342a6cc73-800.webp",
+    800
+   ],
+   [
+    "/enhanced/photos/217d8eafeb5342a6cc73-1200.webp",
+    1200
+   ],
+   [
+    "/enhanced/photos/217d8eafeb5342a6cc73-1600.webp",
+    1600
+   ],
+   [
+    "/media/217d8eafeb5342a6cc73.webp",
+    1800
+   ]
+  ]
+ },
+ "eating-here": {
+  "sizes": "(max-width: 599px) 378vw, (max-width: 767px) 227vw, (max-width: 1023px) 144vw, (max-width: 1279px) 108vw, 100vw",
+  "set": [
+   [
+    "/enhanced/photos/fb2fb92538ca4c2ce0c1-800.webp",
+    800
+   ],
+   [
+    "/enhanced/photos/fb2fb92538ca4c2ce0c1-1200.webp",
+    1200
+   ],
+   [
+    "/enhanced/photos/fb2fb92538ca4c2ce0c1-1600.webp",
+    1600
+   ],
+   [
+    "/media/fb2fb92538ca4c2ce0c1.webp",
+    2400
+   ]
+  ]
+ },
+ "moloka": {
+  "sizes": "(max-width: 599px) 319vw, (max-width: 767px) 191vw, (max-width: 1023px) 121vw, 100vw",
+  "set": [
+   [
+    "/enhanced/photos/9203238de1f599aa3053-800.webp",
+    800
+   ],
+   [
+    "/enhanced/photos/9203238de1f599aa3053-1200.webp",
+    1200
+   ],
+   [
+    "/enhanced/photos/9203238de1f599aa3053-1600.webp",
+    1600
+   ],
+   [
+    "/media/9203238de1f599aa3053.webp",
+    2400
+   ]
+  ]
+ },
+ "groups-and-offsites": {
+  "sizes": "(max-width: 599px) 284vw, (max-width: 767px) 170vw, (max-width: 1023px) 108vw, 100vw",
+  "set": [
+   [
+    "/enhanced/photos/698de65973782acf1018-800.webp",
+    800
+   ],
+   [
+    "/enhanced/photos/698de65973782acf1018-1200.webp",
+    1200
+   ],
+   [
+    "/enhanced/photos/698de65973782acf1018-1600.webp",
+    1600
+   ],
+   [
+    "/media/698de65973782acf1018.webp",
+    2400
+   ]
+  ]
+ },
+ "weddings": {
+  "sizes": "(max-width: 599px) 319vw, (max-width: 767px) 192vw, (max-width: 1023px) 121vw, 100vw",
+  "set": [
+   [
+    "/enhanced/photos/c52099090a2b2ca82d49-800.webp",
+    800
+   ],
+   [
+    "/enhanced/photos/c52099090a2b2ca82d49-1200.webp",
+    1200
+   ],
+   [
+    "/enhanced/photos/c52099090a2b2ca82d49-1600.webp",
+    1600
+   ],
+   [
+    "/media/c52099090a2b2ca82d49.webp",
+    2400
+   ]
+  ]
+ },
+ "things-to-do-around-here": {
+  "sizes": "(max-width: 599px) 378vw, (max-width: 767px) 227vw, (max-width: 1023px) 144vw, (max-width: 1279px) 108vw, 100vw",
+  "set": [
+   [
+    "/enhanced/photos/c497476865b545968151-800.webp",
+    800
+   ],
+   [
+    "/enhanced/photos/c497476865b545968151-1200.webp",
+    1200
+   ],
+   [
+    "/enhanced/photos/c497476865b545968151-1600.webp",
+    1600
+   ],
+   [
+    "/media/c497476865b545968151.webp",
+    2400
+   ]
+  ]
+ }
+}

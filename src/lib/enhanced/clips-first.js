@@ -23,6 +23,8 @@
     if (el.tagName === 'IMG' && el.getAttribute('loading') === 'lazy' && el.getAttribute('src')) {
       el.setAttribute('data-held-src', el.getAttribute('src'));
       el.removeAttribute('src');
+      // A photograph in sizes for the screen (stage 4) would load from its srcset alone, so that waits too.
+      if (el.getAttribute('srcset')) { el.setAttribute('data-held-srcset', el.getAttribute('srcset')); el.removeAttribute('srcset'); }
       held.push(el);
     }
   }
@@ -38,7 +40,8 @@
     clearTimeout(timer);
     if (reader) { reader.disconnect(); reader = null; }
     for (var i = 0; i < held.length; i++) {
-      var el = held[i], src = el.getAttribute('data-held-src');
+      var el = held[i], src = el.getAttribute('data-held-src'), set = el.getAttribute('data-held-srcset');
+      if (set) { el.setAttribute('srcset', set); el.removeAttribute('data-held-srcset'); }
       if (src) { el.setAttribute('src', src); el.removeAttribute('data-held-src'); }
     }
     held = [];

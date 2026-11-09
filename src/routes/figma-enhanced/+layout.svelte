@@ -5,6 +5,7 @@
   import {page} from '$app/state';
   import {canvas, pages, base} from '#lib/enhanced/site.ts';
   import heroes from '#lib/enhanced/heroes.json';
+  import heroPhotos from '#lib/enhanced/hero-photos.json';
   import {installInteractions, enhancePage, closeOverlays, smooth} from '#lib/enhanced/interactions.js';
   import 'lenis/dist/lenis.css';
   import '#lib/enhanced/styles/shell.css';
@@ -36,6 +37,9 @@
   // Moderate prewarming: the page's own first picture (the poster of its opening film, or its opening photograph) is
   // asked for at once, before the stylesheets and scripts reveal it.
   const hero = $derived((heroes as Record<string, string[]>)[(page.params.slug || '').replace(/^\/|\/$/g, '')]?.[0]);
+  // Speed, stage 4: an opening photograph in sizes for the screen is preloaded the way the page will pick it, so the
+  // browser never fetches two sizes of it.
+  const heroSet = $derived((heroPhotos as unknown as Record<string, {sizes: string; set: [string, number][]}>)[(page.params.slug || '').replace(/^\/|\/$/g, '')]);
   onMount(installInteractions);
   // Step 2.2: any glide still running stops when a navigation starts (Back right after a wheel included).
   beforeNavigate(() => {closeOverlays();smooth()?.stop();});
@@ -130,7 +134,8 @@
   <link rel="preload" href={garamond} as="font" type="font/woff2" crossorigin="anonymous" />
   <link rel="preload" href={roboto400} as="font" type="font/woff2" crossorigin="anonymous" />
   <link rel="preload" href={roboto500} as="font" type="font/woff2" crossorigin="anonymous" />
-  {#if hero}<link rel="preload" href={`${base.replace(/\/$/, '')}${hero}`} as="image" fetchpriority="high" />{/if}
+  {#if hero && heroSet && hero.startsWith('/media/')}<link rel="preload" href={`${base.replace(/\/$/, '')}${hero}`} imagesrcset={heroSet.set.map(([path, width]) => `${base.replace(/\/$/, '')}${path} ${width}w`).join(', ')} imagesizes={heroSet.sizes} as="image" fetchpriority="high" />
+  {:else if hero}<link rel="preload" href={`${base.replace(/\/$/, '')}${hero}`} as="image" fetchpriority="high" />{/if}
   {@html clipsFirstScript}
   {@html `<script>try{if(!sessionStorage.getItem('vessyl:intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){var d=document.documentElement;d.dataset.intro='on';sessionStorage.setItem('vessyl:intro','1');setTimeout(function(){if(d.dataset.intro==='on'){d.dataset.intro='leaving';setTimeout(function(){d.dataset.intro='done'},800)}},3600)}}catch(e){}</script>`}
 </svelte:head>

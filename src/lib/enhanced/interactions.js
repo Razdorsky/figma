@@ -2,6 +2,7 @@
 import Lenis from 'lenis';
 import {base as siteBase} from './site.ts';
 import heroes from './heroes.json';
+import heroPhotos from './hero-photos.json';
 
 // Step 2.2: wheel scrolling glides as on /blueprint/ 452c7d0 (docs/figma-enhanced-step2.md). Touch stays native,
 // and there is no Lenis for visitors who prefer reduced motion.
@@ -501,6 +502,26 @@ function setupPortals() {
 // touched or focused, so the page transition shows it at once; once a page has settled, the page its next-page block
 // leads to is warmed the same way. Films are never fetched ahead. heroes.json lists the pictures.
 const warmed = new Set();
+// A page's first picture as the page itself will ask for it: an opening photograph in sizes for the screen picks the
+// same size here (speed, stage 4, hero-photos.json).
+// The gallery shows the photograph itself, not the size a card picked for the screen (speed, stage 4); a picture still
+// held for the first clip (clips-first.js) gives its address from data-held-src.
+function fullPhoto(img) {
+  const own = img.getAttribute('src') || img.dataset.heldSrc || '';
+  return own ? new URL(own, location.href).href : img.currentSrc;
+}
+function firstPicture(slug, path) {
+  const root = siteBase.replace(/\/$/, '');
+  const img = new Image();
+  img.decoding = 'async';
+  const photo = heroPhotos[slug];
+  if (photo && path.startsWith('/media/')) {
+    img.sizes = photo.sizes;
+    img.srcset = photo.set.map(([candidate, width]) => `${root}${candidate} ${width}w`).join(', ');
+  }
+  img.src = root + path;
+  return img;
+}
 function warmPage(href) {
   let url;
   try {url = new URL(href, location.href);} catch {return;}
@@ -509,13 +530,13 @@ function warmPage(href) {
   const list = match ? heroes[match[1]] : null;
   if (!list) return;
   for (const path of list) {
-    const src = siteBase.replace(/\/$/, '') + path;
-    if (warmed.has(src)) continue;
-    warmed.add(src);
+    if (warmed.has(path)) continue;
+    warmed.add(path);
     const img = new Image();
-    img.decoding = 'async';
     img.fetchPriority = 'low';
-    img.src = src;
+    const ready = firstPicture(match[1], path);
+    if (ready.srcset) {img.sizes = ready.sizes;img.srcset = ready.srcset;}
+    img.src = ready.src;
   }
 }
 function warmNext() {
@@ -648,7 +669,7 @@ export function installInteractions() {
   if (root.dataset.intro === 'on') {
     lenis?.stop();
     const slug = location.pathname.match(/\/figma-enhanced\/(.*?)\/?$/)?.[1] ?? '';
-    const pictures = (heroes[slug] || []).map(path => {const img = new Image();img.src = siteBase.replace(/\/$/, '') + path;return img.decode().catch(() => {});});
+    const pictures = (heroes[slug] || []).map(path => firstPicture(slug, path).decode().catch(() => {}));
     const ready = Promise.all([document.fonts?.ready, firstClipMoving(), ...pictures]).catch(() => {});
     const cap = new Promise(resolve => setTimeout(resolve, Math.max(0, 3000 - performance.now())));
     Promise.race([ready, cap]).then(() => {
@@ -749,7 +770,7 @@ export function installInteractions() {
   function openGallery(group, selected, trigger) {
     const dialog = gallery();
     if (!dialog || !group) return;
-    images = [...group.querySelectorAll('img[data-gallery-image]')].map(img => ({src:img.currentSrc || img.src, alt:img.alt})).filter((entry,index,all) => all.findIndex(other => other.src === entry.src) === index);
+    images = [...group.querySelectorAll('img[data-gallery-image]')].map(img => ({src:fullPhoto(img), alt:img.alt})).filter((entry,index,all) => all.findIndex(other => other.src === entry.src) === index);
     if (!images.length) return;
     galleryOpener = trigger;
     dialog.querySelector('.gallery-thumbnails').replaceChildren(...images.map((entry,index) => {
@@ -790,7 +811,7 @@ export function installInteractions() {
     const thumbnail = target.closest('[data-gallery-index]');
     if (thumbnail) {show(Number(thumbnail.dataset.galleryIndex));return;}
     const galleryTrigger = target.closest('[data-gallery-open],img[data-gallery-image]');
-    if (galleryTrigger) {openGallery(galleryTrigger.closest('[data-gallery]'), galleryTrigger.currentSrc || galleryTrigger.src, galleryTrigger);return;}
+    if (galleryTrigger) {openGallery(galleryTrigger.closest('[data-gallery]'), fullPhoto(galleryTrigger), galleryTrigger);return;}
   });
   on('cancel', event => {if (event.target === menu()) {event.preventDefault();closeMenu();}}, {capture:true});
   on('close', event => {
@@ -817,7 +838,7 @@ export function installInteractions() {
         closeMegas();next?.focus();return;
       }
     }
-    if (['Enter',' '].includes(event.key) && target?.matches('img[data-gallery-image]')) {event.preventDefault();openGallery(target.closest('[data-gallery]'), target.currentSrc || target.src, target);}
+    if (['Enter',' '].includes(event.key) && target?.matches('img[data-gallery-image]')) {event.preventDefault();openGallery(target.closest('[data-gallery]'), fullPhoto(target), target);}
   });
   on('touchstart', event => {if (event.target.closest('.gallery-stage')) touchX = event.changedTouches[0].clientX;}, {passive:true});
   on('touchend', event => {if (event.target.closest('.gallery-stage')) {const dx = event.changedTouches[0].clientX - touchX;if (Math.abs(dx) > 45) show(active + (dx < 0 ? 1 : -1));}}, {passive:true});

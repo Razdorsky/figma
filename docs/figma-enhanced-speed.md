@@ -118,3 +118,33 @@ One clip had a phone version that its page never named: the inside of the Dome o
 | The Harmonic Hearth | 0.88 s | 0.77 s | 4.10 s | 3.56 s |
 | Horses and the River | 0.93 s | 0.82 s | 4.56 s | 3.76 s |
 | The recording studio | 0.74 s | 0.68 s | 3.37 s | 3.03 s |
+
+## Stage 4. Photographs in sizes for the screen (2026-11-09)
+
+**What was wrong.** The designer's photographs are 1800–2400px wide and 0.4–1.25 MB each (WebP at quality 92), and every screen downloaded them whole, although a card on a large screen is drawn 300–600px wide and a photograph on a phone often fills only the screen's width.
+
+**The files.** Each of the 86 photographs on this edition's pages has smaller copies 800, 1200 and 1600px wide (only those narrower than the photograph itself), made with ImageMagick: `magick webp:public/media/<hash>.webp -filter Lanczos -resize <w>x -quality 85 -define webp:method=6 public/enhanced/photos/<hash>-<w>.webp`. 232 files, 47 MB, in `public/enhanced/photos/` (published only with this edition, like the clips of stage 3). Side by side at the same size the copies cannot be told from the photograph. `src/lib/enhanced/photo-widths.json` lists, per photograph, its own width and the copies it has.
+
+**The mechanic.** Every `<img>` of a photograph that has copies carries `srcset` (the copies and the photograph itself, by width) and `sizes` (how wide it is drawn), and the browser takes the smallest file that is sharp on that screen, its pixel density included. `src` stays the photograph itself.
+- `sizes` was measured, not guessed: every photograph on every page drawn at ten screen widths from 360 to 2560, and where it covers its frame (`object-fit: cover`) by the width it is really drawn at, so a wide photograph in a tall frame on a phone counts as wider than the screen. Per occurrence: phones up to 599px, 600–767, 768–1023, 1024–1279, 1280–1919, and from 1920 either a share of the screen or the fixed width it stops growing at; the largest share within each band, rounded up. Photographs not drawn at load (some gallery pictures) take `100vw`.
+- The next-page block computes its own `sizes` from the photograph's proportions (`next.ts`, `coverSizes`): its frame is 89% of the screen wide (at most 1680px) and 64svh tall below 900px, `min(78svh, 56vw)` above, and the photograph covers it.
+- An opening photograph is preloaded with the same `imagesrcset` and `imagesizes` (`+layout.svelte`, `hero-photos.json`), the opening mark waits for that same size, and warming on link intent asks for that same size (`interactions.js`, `firstPicture`), so no photograph is fetched in two sizes.
+- The gallery shows the photograph itself, not the size the card took (`fullPhoto`).
+- A held lazy photograph (stage 2) has its `srcset` held with its `src`, or the browser would load it from the `srcset` alone.
+- `scripts/build-pages.mjs` re-roots `/enhanced/` paths after a comma too, so every candidate of a `srcset` points into /figma-enhanced/.
+
+**A new photograph** (step 3) needs its copies made with the command above, an entry in `photo-widths.json`, and `srcset`/`sizes` on its `<img>`: the same three candidates and the photograph, and `sizes` measured the same way.
+
+**Checked.** On every page at 390px (2× and 3×), 768px (2×), 1440px (1× and 2×) and 1920px (1×), 798 photographs in all: every one took a file at least as wide as the screen needs, except the Blueprint picture of the Dome in blue on The Frequency Dome (its own older `srcset`, 1080px where 1332 would be exact on a 3× phone). The villas' opening photograph is fetched once (1600px at 1440, the photograph itself on a 3× phone). The gallery opens the photograph itself. Positions and sizes on all pages unchanged.
+
+Photographs downloaded when a page is read top to bottom:
+
+| Page | Before | Phone 390 @3× | Screen 1440 @1× | Screen 1440 @2× |
+|---|---|---|---|---|
+| Home | 9.2 MB | 3.3 MB | 2.4 MB | 4.3 MB |
+| Where you sleep | 5.5 MB | 3.0 MB | 2.0 MB | 3.1 MB |
+| The Villas | 4.7 MB | 2.7 MB | 1.7 MB | 3.5 MB |
+| Arenal | 5.7 MB | 3.1 MB | 1.9 MB | 3.8 MB |
+| Eating here | 7.3 MB | 2.4 MB | 1.7 MB | 3.6 MB |
+
+An opening photograph that covers a tall phone screen still needs the photograph itself on a 3× phone, so the first screen of a photo-opening page weighs the same there as before.

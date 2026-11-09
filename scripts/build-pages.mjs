@@ -72,7 +72,7 @@ for await (const file of files(out)) {
       // preloads, which take their address from the bundler as a root path.
       .replace(/(["'(,])\/(media|typography|brand|bp|enhanced|_app)\//g, `$1${prefix}/$2/`)
       // srcset lists: every candidate after a comma and space.
-      .replace(/(, )\/(media|bp)\//g, `$1${prefix}/$2/`));
+      .replace(/(, )\/(media|bp|enhanced)\//g, `$1${prefix}/$2/`));
     if (result !== source) {
       await fs.writeFile(file, result);
       html += 1;

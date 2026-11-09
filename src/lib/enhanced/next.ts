@@ -5,8 +5,9 @@
 // placeholder), and that page's opening film or photograph; a page that opens on text shows its first photograph.
 // The button inside the picture is named the way the designer names links to a page ("See the treehouse").
 import { pages, type PageMeta } from '#lib/enhanced/site.ts';
+import photoWidths from '#lib/enhanced/photo-widths.json';
 
-type Media = { loop: string; mobile: string } | { photo: string; width: number; height: number; position?: string };
+type Media = { loop: string; mobile: string } | { photo: string; width: number; height: number; position?: string; srcset?: string; sizes: string };
 export type Door = { page: PageMeta; name: string; line: string; label: string; media: Media };
 
 // Every clip has a phone version (speed, stage 3, docs/figma-enhanced-speed.md): the ones cut for Blueprint sit beside
@@ -14,7 +15,18 @@ export type Door = { page: PageMeta; name: string; line: string; label: string; 
 const enhancedPhone = new Set(['loop-benches', 'loop-dome', 'loop-halter', 'loop-handpan', 'loop-hearth', 'loop-plunge', 'loop-poolview', 'loop-river', 'loop-saddle', 'loop-stars', 'loop-studio', 'loop-swim', 'loop-tuning', 'loop-violin', 'loop-yoga']);
 const loop = (name: string): Media => ({ loop: name, mobile: enhancedPhone.has(name) ? `/enhanced/clips/${name}-m.mp4` : `/bp/video/${name}-m.mp4` });
 // position: the subject's place in the photograph, as that page crops it (focus.css).
-const photo = (src: string, width: number, height: number, position?: string): Media => ({ photo: src, width, height, position });
+// Speed, stage 4: the photograph in sizes for the screen (public/enhanced/photos/, listed in photo-widths.json). The
+// frame (next.css) is 89% of the screen wide, at most 1680px, and 64svh tall below 900px, min(78svh, 56vw) above; the
+// photograph covers it, so a wide one is drawn wider than the frame: sizes follow its proportions (phones up to about
+// 2.2 times taller than wide, tablets up to 1.6).
+const sizesFor = photoWidths as Record<string, { width: number; sizes: number[] }>;
+const photoSet = (src: string) => sizesFor[src] && [...sizesFor[src].sizes.map(w => `/enhanced/photos/${src}-${w}.webp ${w}w`), `/media/${src}.webp ${sizesFor[src].width}w`];
+const coverSizes = (width: number, height: number) => {
+  const ratio = width / height;
+  const vw = (frameHeight: number) => `${Math.ceil(Math.max(0.89, frameHeight * ratio) * 100)}vw`;
+  return `(max-width: 599px) ${vw(1.41)}, (max-width: 899px) ${vw(1.02)}, (max-width: 1919px) ${vw(0.56)}, ${Math.max(1680, Math.round(1150 * ratio))}px`;
+};
+const photo = (src: string, width: number, height: number, position?: string): Media => ({ photo: src, width, height, position, srcset: photoSet(src)?.join(', '), sizes: coverSizes(width, height) });
 
 const doors: Record<number, Omit<Door, 'page' | 'name'> & { name?: string }> = {
   1: { name: 'The Vessyl', line: 'A dome, a river and fourteen places to sleep, on 118 acres above Arenal.', label: 'Back to the home page', media: loop('loop-pool') },

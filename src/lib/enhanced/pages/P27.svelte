@@ -22,7 +22,7 @@
 <h2 data-node-id="I965:7508;756:1470" class="c-heading" data-part="heading">[x] each way</h2>
 <p data-node-id="I965:7508;756:1493" data-part="paragraph">[x] minutes, [x] per person, [x] flights a day in high season. Airstrip pickup [x].</p>
 <div data-part="actions"><button data-name="CTA" data-node-id="I965:7508;756:1490" class="current-action" data-part="action" type="button" data-pending-link="" aria-label="Book a transfer — destination not supplied">Book a transfer</button></div></div></section>
-<section data-name="Section - 50/50 image text" data-node-id="965:7509" data-role="split" data-layout="image-first" data-variant="editorial"><figure data-part="media" data-aspect="portrait"><img src="{base}/media/bc1c3e7f217cc52b0c86.webp" alt="A golf cart on the gravel track through the forest" loading="lazy" decoding="async" width="1854" height="2400"></figure>
+<section data-name="Section - 50/50 image text" data-node-id="965:7509" data-role="split" data-layout="image-first" data-variant="editorial"><figure data-part="media" data-aspect="portrait"><img src="{base}/media/bc1c3e7f217cc52b0c86.webp" srcset="{base}/enhanced/photos/bc1c3e7f217cc52b0c86-800.webp 800w, {base}/enhanced/photos/bc1c3e7f217cc52b0c86-1200.webp 1200w, {base}/enhanced/photos/bc1c3e7f217cc52b0c86-1600.webp 1600w, {base}/media/bc1c3e7f217cc52b0c86.webp 1854w" sizes="(max-width: 767px) 89vw, (max-width: 1919px) 44vw, 824px" alt="A golf cart on the gravel track through the forest" loading="lazy" decoding="async" width="1854" height="2400"></figure>
 <div data-part="copy"><p data-node-id="" data-part="eyebrow">Driving yourself</p>
 <h2 data-node-id="" class="c-heading" data-part="heading">The last stretch is not lit</h2>
 <p data-part="paragraph">The road to the property is [x]. There is parking for [x] cars.{' '}If you are arriving after dark, tell us.</p></div></section>
@@ -44,7 +44,7 @@
 <p data-part="paragraph">[Full address]</p>
 <p data-part="paragraph">GPS: [lat, long]</p>
 <div data-part="actions"><button data-name="CTA" data-node-id="I965:7513;748:584;750:1289;750:1257" class="current-action" data-part="action" type="button" data-pending-link="" aria-label="Open in Google Maps — destination not supplied">Open in Google Maps</button></div></div>
-<figure data-part="media" data-aspect="landscape"><img src="{base}/media/11358b370ad895b42644.webp" alt="The pool and the main house among the trees, with the Dome beyond" loading="lazy" decoding="async" width="2400" height="1798"></figure></section>
+<figure data-part="media" data-aspect="landscape"><img src="{base}/media/11358b370ad895b42644.webp" srcset="{base}/enhanced/photos/11358b370ad895b42644-800.webp 800w, {base}/enhanced/photos/11358b370ad895b42644-1200.webp 1200w, {base}/enhanced/photos/11358b370ad895b42644-1600.webp 1600w, {base}/media/11358b370ad895b42644.webp 2400w" sizes="(max-width: 599px) 90vw, (max-width: 767px) 89vw, (max-width: 1919px) 62vw, 1164px" alt="The pool and the main house among the trees, with the Dome beyond" loading="lazy" decoding="async" width="2400" height="1798"></figure></section>
 <Next pageIndex={27} />
 <Newsletter pageIndex={27} />
 

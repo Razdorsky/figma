@@ -29,7 +29,7 @@
             <source src={`${base}/bp/video/${media.loop}.mp4`} type="video/mp4" />
           </video>
         {:else}
-          <img src={`${base}/media/${media.photo}.webp`} alt="" loading="lazy" decoding="async" width={media.width} height={media.height} style={media.position ? `object-position: ${media.position}` : undefined} />
+          <img src={`${base}/media/${media.photo}.webp`} srcset={media.srcset?.split(', ').map(part => `${base}${part}`).join(', ')} sizes={media.sizes} alt="" loading="lazy" decoding="async" width={media.width} height={media.height} style={media.position ? `object-position: ${media.position}` : undefined} />
         {/if}
       </span>
       <span class="next-go"><span class="next-label">{next.label}</span><span class="next-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.5 12h14.5M13 6l6 6-6 6" /></svg></span></span>
