@@ -25,7 +25,7 @@
                below the first screen (clips-first.js); the clip loads on approach (interactions.js, setupClipsFirst). -->
           <img data-clip-frame src={`${base}/bp/video/${media.loop}.webp`} alt="" loading="lazy" decoding="async" />
           <video data-loop muted loop playsinline preload="none" aria-hidden="true" tabindex="-1">
-            {#if media.mobile}<source media="(max-width: 767px)" src={`${base}/bp/video/${media.loop}-m.mp4`} type="video/mp4" />{/if}
+            <source media="(max-width: 767px)" src={`${base}${media.mobile}`} type="video/mp4" />
             <source src={`${base}/bp/video/${media.loop}.mp4`} type="video/mp4" />
           </video>
         {:else}

@@ -27,8 +27,9 @@ if (edition !== 'figma' && edition !== 'blueprint' && edition !== 'figma-enhance
 
 const dist = path.resolve('dist');
 const out = path.resolve('outputs/github-pages');
-// bp holds the Blueprint edition's own photographs and films.
-const roots = ['_app', 'media', 'brand', ...(edition === 'blueprint' ? ['bp'] : [])];
+// bp holds the Blueprint edition's own photographs and films; enhanced holds files only Figma Enhanced uses (the phone
+// versions of its clips, docs/figma-enhanced-speed.md, stage 3).
+const roots = ['_app', 'media', 'brand', ...(edition === 'blueprint' ? ['bp'] : []), ...(edition === 'figma-enhanced' ? ['enhanced'] : [])];
 
 await fs.rm(out, { recursive: true, force: true });
 await fs.mkdir(out, { recursive: true });
@@ -66,10 +67,10 @@ for await (const file of files(out)) {
     const source = await fs.readFile(file, 'utf8');
     const result = moved(source
       // SvelteKit's relative asset paths (../../_app/...) assume the site root.
-      .replace(/(["'(])(?:\.\.\/)+(_app|brand|media|typography|bp)\//g, `$1${prefix}/$2/`)
+      .replace(/(["'(])(?:\.\.\/)+(_app|brand|media|typography|bp|enhanced)\//g, `$1${prefix}/$2/`)
       // Static media and typography written as root paths by the page components, and font
       // preloads, which take their address from the bundler as a root path.
-      .replace(/(["'(,])\/(media|typography|brand|bp|_app)\//g, `$1${prefix}/$2/`)
+      .replace(/(["'(,])\/(media|typography|brand|bp|enhanced|_app)\//g, `$1${prefix}/$2/`)
       // srcset lists: every candidate after a comma and space.
       .replace(/(, )\/(media|bp)\//g, `$1${prefix}/$2/`));
     if (result !== source) {
@@ -79,7 +80,7 @@ for await (const file of files(out)) {
   } else if (file.endsWith('.js') && file.includes(`${path.sep}_app${path.sep}`)) {
     const source = await fs.readFile(file, 'utf8');
     // Client-rendered pages build the same root paths at runtime (`${base}/media/...`).
-    const result = moved(source.replace(/(["'`}])\/(media|typography|brand|bp)\//g, `$1${prefix}/$2/`));
+    const result = moved(source.replace(/(["'`}])\/(media|typography|brand|bp|enhanced)\//g, `$1${prefix}/$2/`));
     if (result !== source) {
       await fs.writeFile(file, result);
       js += 1;

@@ -8,7 +8,7 @@ Terms: a **clip** is a short silent looping video (`public/bp/video/loop-*.mp4`,
 
 1. Stop loading photographs that a clip covers.
 2. Clips first: the clip of the first screen at the highest priority; everything below the first screen waits until it moves; clips further down start loading about a screen and a half before they appear; the opening mark leaves once the first clip moves.
-3. Phone versions for the clips that have none (16 of 35; first the five that open pages).
+3. Phone versions for the clips that have none (16 of 35 in the folder; 15 of them play on this edition's pages, five of those open pages).
 4. Photographs in sizes for the screen.
 
 Dropped while planning, with the reason: "first the still, then the clip" (it put the clip second); re-encoding or cropping the existing phone versions (the conclusion came from Lighthouse's worst test profile, not from a real problem: 1.5 MB for a 3.4 s clip is normal); separate phone-sized first frames (a gain of 0.1–0.2 MB on a few pages).
@@ -80,3 +80,39 @@ The designer's photographs stay in `public/media/` and in the frozen /figma/ edi
 Checked as well: the pictures held at the start are all given back (none left without an address), on a first load and after a navigation inside the site; a clip further down is loaded (`readyState` 4) before it comes into view; with the clips' files blocked, the first frame stands beneath each clip in Chrome, WebKit and Firefox, so no clip box is ever empty; the position and size of every clip figure and the height of every page are unchanged (28 pages × 8 widths).
 
 On slow connections the rest of what the clip waits for is the page itself (its scripts, styles and fonts) and its first frame; on The Frequency Experience the phone still loads the 5.7 MB desktop clip (stage 3).
+
+## Stage 3. Phone versions for every clip (2026-11-09)
+
+**What was wrong.** Phones (up to 767px wide) play a lighter version of a clip, `<source media="(max-width: 767px)" src="…-m.mp4">`, but 15 of the clips on this edition's pages had none, so a phone downloaded the version made for large screens: on The Frequency Experience the 5.7 MB Dome clip, ahead of everything else.
+
+**The mechanic.** Each of the 15 now has a phone version made the way the existing ones are: 1280×720, 30 frames a second, H.264 High, x264 `-preset slow -crf 27` (the existing ones are CRF 26–31), no sound track, a key frame every 2s, `+faststart` so it can play before it has fully arrived. They are cut from the large-screen clips (1920×1080). The phone source stands first in each `<video>`; screens from 768px keep the large version.
+
+| Clip | Page | Large | Phone |
+|---|---|---|---|
+| dome | The Frequency Experience (opening) | 5,677 KB | 3,370 KB |
+| violin | The Frequency Dome | 2,219 KB | 788 KB |
+| stars | The Frequency Dome (opening) | 1,873 KB | 769 KB |
+| river | Horses and the River (opening) | 1,569 KB | 785 KB |
+| saddle | Horses and the River | 1,520 KB | 1,042 KB |
+| hearth | The Harmonic Hearth (opening) | 1,449 KB | 682 KB |
+| studio | The recording studio (opening); Horses and the land, next page | 1,345 KB | 533 KB |
+| handpan | The recording studio | 1,133 KB | 774 KB |
+| poolview | Home | 1,004 KB | 677 KB |
+| swim | Horses and the land | 833 KB | 555 KB |
+| benches | The Harmonic Hearth | 398 KB | 268 KB |
+| halter | Horses and the land | 361 KB | 251 KB |
+| yoga | Sound and movement | 348 KB | 258 KB |
+| plunge | The Harmonic Hearth | 289 KB | 165 KB |
+| tuning | Sound and movement | 133 KB | 95 KB |
+
+**Where they live.** `public/enhanced/clips/`, a folder only this edition publishes: `scripts/build-pages.mjs` copies `enhanced/` into the Figma Enhanced artifact alone and re-roots its paths like the others. The shared `public/bp/video/` (Blueprint's films, also used here) is untouched. The next-page block takes each clip's phone path from `src/lib/enhanced/next.ts` (`loop()`): the fifteen in `enhancedPhone` from this folder, the rest from `/bp/video/`.
+
+**Checked.** At 390px every one of the 15 plays its phone version (`currentSrc`), at 1440px the large one; frames compared side by side show the same picture. When the first clip starts moving on a phone (same method as stage 2):
+
+| Page | Stage 2, fast | Stage 3, fast | Stage 2, slow | Stage 3, slow |
+|---|---|---|---|---|
+| The Frequency Experience | 1.01 s | 0.92 s | 5.85 s | 4.37 s |
+| The Frequency Dome | 0.87 s | 0.82 s | 4.02 s | 3.70 s |
+| The Harmonic Hearth | 0.88 s | 0.77 s | 4.10 s | 3.56 s |
+| Horses and the River | 0.93 s | 0.82 s | 4.56 s | 3.76 s |
+| The recording studio | 0.74 s | 0.68 s | 3.37 s | 3.03 s |
