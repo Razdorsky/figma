@@ -136,6 +136,8 @@ The owner likes these as techniques, not as the places where they first appeared
 
 **Opening mark and moderate prewarming** (owner, 2026-11-09): the Vessyl mark from /blueprint/ on the first visit; WOFF2 fonts with preload, mega-menu thumbnails loaded on intent, a page's first picture warmed on link intent, the next page's warmed when idle; no film prefetch and no data-saver gating. Details in `docs/figma-enhanced-step2.md`.
 
+**Speed on phones** (owner, 2026-11-09): clips first, then everything else, in four stages; every loading mechanic is described in `docs/figma-enhanced-speed.md`.
+
 **Checkpoint 2:**
 - The owner reviews each feature as it lands.
 - Performance budget: Lighthouse on Home and one inner page on desktop and mobile. Films and 3D load lazily.

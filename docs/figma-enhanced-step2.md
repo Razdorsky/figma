@@ -417,6 +417,7 @@ The owner: one of the site's versions opens with the Vessyl logo appearing smoot
 - **A page's first picture** loads at low priority when a link to it is pointed at, focused or touched (`warmPage`, the list in `src/lib/enhanced/heroes.json`: the poster of a page's opening film, or its opening photograph; text openings have none). SvelteKit also fetches the page's data on hover (`data-sveltekit-preload-data="hover"`).
 - **The next page:** once the current page has loaded and the browser is idle, the first picture of the page behind the next-page block is fetched (`warmNext`).
 - **No films are prefetched.** Nothing depends on data saver or the connection speed.
+- What came after (clips first, phone versions, photographs in sizes for the screen) is in `docs/figma-enhanced-speed.md`.
 
 ### Measured (Lighthouse 12, live, 2026-11-09)
 
