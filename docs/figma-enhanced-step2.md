@@ -397,3 +397,22 @@ One plate was drawn first, for the opening of Arenal, in two styles, each with a
 ## 2.10 The 3D Dome — cancelled (2026-11-09)
 
 Built and published the same day (aeae673): a three.js scene in the slot of the shingles photograph beside "Geometry, not mysticism" on the Frequency Dome, the prototype's Dome and cladding in the site's copper, waves in the site's other colours, Arenal behind. The owner then cancelled it ("we cancel the 3D scene with the Dome and skip this step"). The commit was reverted: the scene, its cladding, styles and the `three` dependency are gone, and the designer's photograph stands in its slot again.
+
+## Opening mark and moderate prewarming (2026-11-09)
+
+The owner: one of the site's versions opens with the Vessyl logo appearing smoothly, and Figma Enhanced lacks both that screen and some prewarming, "not a full one, but at least a moderate one". The proposal was accepted with one correction: prewarming is never switched off for data saver or a slow connection ("this should not be done").
+
+### Opening mark
+
+- Taken from /blueprint/ 452c7d0 (`src/lib/blueprint/components/Intro.svelte`): the symbol builds from the bottom up as it is drawn, then the word appears out of a blur, then the whole screen lifts away. Here it is white, like the site's pages, with the mark in the designer's copper (`#a2551b`, `public/brand/logo-copper.svg`).
+- It leaves when the page is ready: the fonts are in and the page's first picture is decoded. It never leaves before the mark has played and held a moment (2.1s from the start of the load) and never stays past 3s; if the page script comes late or not at all, the head script lifts it by itself at 3.6s. Scrolling waits for it.
+- Once per visit (sessionStorage `vessyl:intro`, set as soon as it shows), and never under reduced motion.
+- Built: `components/Intro.svelte`, `styles/intro.css`, the head script in `src/routes/figma-enhanced/+layout.svelte`, and the exit in `interactions.js` (`installInteractions`).
+
+### Moderate prewarming
+
+- **Fonts:** Roboto is now WOFF2 (`src/lib/enhanced/fonts/roboto-{400,500,600,700}.woff2`, from the same TTF files with fontTools: each ~124 KB → ~56 KB). EB Garamond and Roboto 400/500, the faces of the first screen, are preloaded.
+- **The mega menu:** its panels are hidden with `visibility`, so their pictures loaded at once even though they stand in the viewport: about 19 covers at 2400px, ~22 MB on every first load. They now use 640px thumbnails (`public/media/thumbs/`, 27 files; the menu dialog uses them too) and load only when a panel is pointed at, focused or opened.
+- **A page's first picture** loads at low priority when a link to it is pointed at, focused or touched (`warmPage`, the list in `src/lib/enhanced/heroes.json`: the poster of a page's opening film, or its opening photograph; text openings have none). SvelteKit also fetches the page's data on hover (`data-sveltekit-preload-data="hover"`).
+- **The next page:** once the current page has loaded and the browser is idle, the first picture of the page behind the next-page block is fetched (`warmNext`).
+- **No films are prefetched.** Nothing depends on data saver or the connection speed.

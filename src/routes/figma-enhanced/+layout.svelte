@@ -22,12 +22,20 @@
   import '#lib/enhanced/styles/change.css';
   import '#lib/enhanced/styles/portal.css';
   import '#lib/enhanced/styles/atlas.css';
+  import '#lib/enhanced/styles/intro.css';
+  import Intro from '#lib/enhanced/components/Intro.svelte';
+  // Moderate prewarming: the fonts of the first screen load with the page (the same files the stylesheets name).
+  import garamond from '../../assets/fonts/eb-garamond-latin-wght-normal.woff2?url';
+  import roboto400 from '#lib/enhanced/fonts/roboto-400.woff2?url';
+  import roboto500 from '#lib/enhanced/fonts/roboto-500.woff2?url';
 
   let {children}: {children:Snippet} = $props();
   onMount(installInteractions);
   // Step 2.2: any glide still running stops when a navigation starts (Back right after a wheel included).
   beforeNavigate(() => {closeOverlays();smooth()?.stop();});
   afterNavigate(() => {
+    // Moderate prewarming: SvelteKit fetches a page's data while its link is pointed at.
+    document.body.setAttribute('data-sveltekit-preload-data', 'hover');
     const edition = 'figma-enhanced';
     const item = pages.find(item => item.slug === (page.params.slug || '').replace(/^\/|\/$/g,''));
     document.body.dataset.edition = edition;
@@ -112,5 +120,13 @@
   });
 </script>
 
+<svelte:head>
+  <link rel="preload" href={garamond} as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href={roboto400} as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href={roboto500} as="font" type="font/woff2" crossorigin="anonymous" />
+  {@html `<script>try{if(!sessionStorage.getItem('vessyl:intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){var d=document.documentElement;d.dataset.intro='on';sessionStorage.setItem('vessyl:intro','1');setTimeout(function(){if(d.dataset.intro==='on'){d.dataset.intro='leaving';setTimeout(function(){d.dataset.intro='done'},800)}},3600)}}catch(e){}</script>`}
+</svelte:head>
+
+<Intro />
 {@render children()}
 <div class="preview-toast" role="status" hidden></div>

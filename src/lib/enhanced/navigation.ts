@@ -14,6 +14,8 @@ const covers: Record<number, string> = {
   25: 'c52099090a2b2ca82d49', 26: '21ac2d49d2ab56699e04', 27: 'bc1c3e7f217cc52b0c86', 28: 'c497476865b545968151'
 };
 export const cover = (index: number) => `/media/${covers[index]}.webp`;
+// The same photograph at 640px for the mega panels and the menu preview, which show it at about 260–380px.
+export const thumb = (index: number) => `/media/thumbs/${covers[index]}.webp`;
 
 export type NavGroup = { id: string; title: string; overview?: PageMeta; items: PageMeta[] };
 

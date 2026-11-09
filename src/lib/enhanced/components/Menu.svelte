@@ -3,7 +3,7 @@
   // four groups fit in the header. On wide screens the photograph of the page under the pointer or focus shows beside
   // the lists (interactions.js, previewMenu); it starts on the page you are on.
   import { booking, route } from '#lib/enhanced/site.ts';
-  import { cover, groups } from '#lib/enhanced/navigation.ts';
+  import { thumb, groups } from '#lib/enhanced/navigation.ts';
 
   type Props = {
     edition: 'figma-enhanced';
@@ -33,13 +33,13 @@
         <section class="menu-column">
           <h2>{group.title}</h2>
           {#each group.overview ? [group.overview, ...group.items] : group.items as item (item.index)}
-            <a href={route(edition, item.slug, base)} data-cover={asset(cover(item.index))}>{item.name}</a>
+            <a href={route(edition, item.slug, base)} data-cover={asset(thumb(item.index))}>{item.name}</a>
           {/each}
         </section>
       {/each}
     </div>
-    <figure class="menu-preview" aria-hidden="true" data-cover={asset(cover(page.index))} data-name={page.name}>
-      <span class="menu-preview-image"><img src={asset(cover(page.index))} alt="" loading="lazy" decoding="async" /></span>
+    <figure class="menu-preview" aria-hidden="true" data-cover={asset(thumb(page.index))} data-name={page.name}>
+      <span class="menu-preview-image"><img src={asset(thumb(page.index))} alt="" loading="lazy" decoding="async" /></span>
       <figcaption>{page.name}</figcaption>
     </figure>
   </div>

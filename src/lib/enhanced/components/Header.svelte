@@ -3,7 +3,7 @@
   // Legacy Blueprint mega menu. Corrected to the placement map (2026-11-08): every menu group that fits beside MENU
   // gets a trigger and a panel; the menu itself shows each page's photograph (Menu.svelte). Behaviour: interactions.js.
   import { booking, route } from '#lib/enhanced/site.ts';
-  import { cover, groups } from '#lib/enhanced/navigation.ts';
+  import { thumb, groups } from '#lib/enhanced/navigation.ts';
 
   type Props = {
     edition: 'figma-enhanced';
@@ -55,7 +55,7 @@
       <div class="mega-cards" style={`--count: ${group.items.length}`}>
         {#each group.items as item (item.index)}
           <a class="mega-card" href={route(edition, item.slug, base)}>
-            <span class="mega-image"><img src={asset(cover(item.index))} alt="" loading="lazy" decoding="async" /></span>
+            <span class="mega-image"><img data-src={asset(thumb(item.index))} alt="" decoding="async" /></span>
             <span class="mega-label">{item.name}</span>
           </a>
         {/each}

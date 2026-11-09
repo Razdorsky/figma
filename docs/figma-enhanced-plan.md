@@ -134,6 +134,8 @@ The owner likes these as techniques, not as the places where they first appeared
 
 2.10 **The 3D Dome scene** (reference 14) — **cancelled by the owner, 2026-11-09** ("we cancel the 3D scene with the Dome and skip this step"); it was built and published that day (aeae673) and reverted. Planned as: a small scene, not a page. The copper Dome against Arenal, a scroll-driven camera and rings at its base, telling one thing about the Dome. Build it with a fallback still for weak devices and reduced motion.
 
+**Opening mark and moderate prewarming** (owner, 2026-11-09): the Vessyl mark from /blueprint/ on the first visit; WOFF2 fonts with preload, mega-menu thumbnails loaded on intent, a page's first picture warmed on link intent, the next page's warmed when idle; no film prefetch and no data-saver gating. Details in `docs/figma-enhanced-step2.md`.
+
 **Checkpoint 2:**
 - The owner reviews each feature as it lands.
 - Performance budget: Lighthouse on Home and one inner page on desktop and mobile. Films and 3D load lazily.

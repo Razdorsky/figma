@@ -1,0 +1,17 @@
+/* Figma Enhanced — the opening mark on the first visit (components/Intro.svelte). White, as the site's pages, with the
+   mark in the designer's copper; the page loads beneath it. */
+body[data-edition="figma-enhanced"] .site-intro { display: none; }
+html:is([data-intro="on"], [data-intro="leaving"]) body[data-edition="figma-enhanced"] .site-intro {
+  position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; background: #fff; color: #a2551b;
+}
+html[data-intro="on"] { overflow: hidden; }
+body[data-edition="figma-enhanced"] .site-intro-mark { display: grid; justify-items: center; gap: clamp(14px, 1.6vw, 21px); }
+body[data-edition="figma-enhanced"] .site-intro-symbol { width: clamp(80px, 8.5vw, 116px); }
+body[data-edition="figma-enhanced"] .site-intro-word { width: clamp(150px, 16vw, 220px); }
+body[data-edition="figma-enhanced"] .site-intro :is(.site-intro-symbol, .site-intro-word) svg { display: block; width: 100%; height: auto; fill: currentColor; }
+html[data-intro="on"] body[data-edition="figma-enhanced"] .site-intro-symbol { animation: site-intro-rise 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s both; }
+html[data-intro="on"] body[data-edition="figma-enhanced"] .site-intro-word { animation: site-intro-word 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.85s both; }
+html[data-intro="leaving"] body[data-edition="figma-enhanced"] .site-intro { animation: site-intro-lift 0.8s cubic-bezier(0.4, 0, 0.2, 1) both; }
+@keyframes site-intro-rise { from { clip-path: inset(100% 0 0 0); opacity: 0.4; } to { clip-path: inset(0 0 0 0); opacity: 1; } }
+@keyframes site-intro-word { from { opacity: 0; filter: blur(8px); } to { opacity: 1; filter: blur(0); } }
+@keyframes site-intro-lift { to { opacity: 0; filter: blur(12px); visibility: hidden; } }

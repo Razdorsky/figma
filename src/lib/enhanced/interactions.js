@@ -1,5 +1,7 @@
 // One delegated controller survives SvelteKit page changes. Abort on unmount.
 import Lenis from 'lenis';
+import {base as siteBase} from './site.ts';
+import heroes from './heroes.json';
 
 // Step 2.2: wheel scrolling glides as on /blueprint/ 452c7d0 (docs/figma-enhanced-step2.md). Touch stays native,
 // and there is no Lenis for visitors who prefer reduced motion.
@@ -25,9 +27,16 @@ function closeMegas(focusTrigger = false) {
   });
   updateHeader();
 }
+// Prewarming: a mega panel's photographs (640px copies) load when its trigger is pointed at, focused or opened, not
+// with the page; until then the panel is out of sight and costs nothing.
+function warmMega(trigger) {
+  const panel = document.getElementById(trigger?.getAttribute('aria-controls') || '');
+  panel?.querySelectorAll('img[data-src]').forEach(img => {img.src = img.dataset.src;img.removeAttribute('data-src');});
+}
 function openMega(trigger, focusFirst) {
   const panel = document.getElementById(trigger.getAttribute('aria-controls') || '');
   if (!panel) return;
+  warmMega(trigger);
   closeMegas();
   panel.dataset.open = 'true';
   panel.inert = false;
@@ -662,6 +671,35 @@ function drawFireflies(now) {
   fireflies.frame = fireflies.items.some(f => f.visible) ? requestAnimationFrame(drawFireflies) : 0;
 }
 
+// Moderate prewarming (owner, 2026-11-09): the first picture of a page (its photograph, or the poster of its loop,
+// which covers the photograph; on Arenal its plate and first frame) loads quietly when a link to it is pointed at,
+// touched or focused, so the page transition shows it at once; once a page has settled, the page its next-page block
+// leads to is warmed the same way. Films are never fetched ahead. heroes.json lists the pictures.
+const warmed = new Set();
+function warmPage(href) {
+  let url;
+  try {url = new URL(href, location.href);} catch {return;}
+  if (url.origin !== location.origin) return;
+  const match = url.pathname.match(/\/figma-enhanced\/(.*?)\/?$/);
+  const list = match ? heroes[match[1]] : null;
+  if (!list) return;
+  for (const path of list) {
+    const src = siteBase.replace(/\/$/, '') + path;
+    if (warmed.has(src)) continue;
+    warmed.add(src);
+    const img = new Image();
+    img.decoding = 'async';
+    img.fetchPriority = 'low';
+    img.src = src;
+  }
+}
+function warmNext() {
+  const link = document.querySelector('.current-page [data-next] a');
+  if (!link) return;
+  const go = () => warmPage(link.href);
+  if ('requestIdleCallback' in window) requestIdleCallback(go, {timeout: 4000}); else setTimeout(go, 2500);
+}
+
 // The Home arch (/blueprint/ 452c7d0): it opens with the scroll through its 185svh block, following the page
 // with a short lag (scrub), on screens from 900px and without reduced motion.
 const arch = {el: null, target: 0, current: 0, frame: 0};
@@ -751,6 +789,7 @@ export function enhancePage() {
   setupDevelop();
   setupPlates();
   setupFireflies();
+  if (document.readyState === 'complete') warmNext(); else addEventListener('load', warmNext, {once: true});
   refreshHeader();
   document.querySelectorAll('[data-gallery] img[data-gallery-image]').forEach(img => {
     img.tabIndex = 0;
@@ -779,6 +818,23 @@ export function installInteractions() {
   const gallery = () => document.querySelector('.gallery-dialog');
 
   if (!reduced.matches) lenis = new Lenis({lerp: 0.09, wheelMultiplier: 0.9, smoothWheel: true, autoRaf: true, stopInertiaOnNavigate: true});
+  // The opening mark (components/Intro.svelte): it leaves when the fonts are in and the page's first picture is decoded,
+  // not before the mark has played and held a moment (2.1s from the start of the load) and not after 3s; the page scrolls only then.
+  const root = document.documentElement;
+  if (root.dataset.intro === 'on') {
+    lenis?.stop();
+    const slug = location.pathname.match(/\/figma-enhanced\/(.*?)\/?$/)?.[1] ?? '';
+    const pictures = (heroes[slug] || []).map(path => {const img = new Image();img.src = siteBase.replace(/\/$/, '') + path;return img.decode().catch(() => {});});
+    const ready = Promise.all([document.fonts?.ready, ...pictures]).catch(() => {});
+    const cap = new Promise(resolve => setTimeout(resolve, Math.max(0, 3000 - performance.now())));
+    Promise.race([ready, cap]).then(() => {
+      setTimeout(() => {
+        // The head script lifts the mark by itself at 3.6s, in case this script came late or not at all.
+        if (root.dataset.intro === 'on') root.dataset.intro = 'leaving';
+        setTimeout(() => {root.dataset.intro = 'done';lenis?.start();}, 800);
+      }, Math.max(0, 2100 - performance.now()));
+    });
+  }
   let railFrame = 0, headerFrame = 0;
   addEventListener('resize', () => {cancelAnimationFrame(railFrame);railFrame = requestAnimationFrame(() => {markRails();setupArch();updateDrift();updateRise();updateNext();setupRail();setupChange();updateDevelop();updatePlates();updateHeader();});}, {signal});
   addEventListener('scroll', () => {if (!headerFrame) headerFrame = requestAnimationFrame(() => {headerFrame = 0;updateArch();updateDrift();updateRise();updateNext();updateRail();updateChange();updateDevelop();updatePlates();updateHeader();});}, {passive:true, signal});
@@ -799,6 +855,17 @@ export function installInteractions() {
     // The browser brings the focused card into view after this event; the rail settles on the next frame.
     if (target?.closest('[data-rail][data-armed]')) requestAnimationFrame(() => railFocus(target));
   });
+  // Prewarming on intent: a link's page picture, and a mega panel's photographs from its trigger.
+  const intent = event => {
+    const target = event.target instanceof Element ? event.target : null;
+    const trigger = target?.closest('[data-mega-trigger]');
+    if (trigger) warmMega(trigger);
+    const link = target?.closest('a[href]');
+    if (link) warmPage(link.href);
+  };
+  on('pointerover', intent);
+  on('focusin', intent);
+  on('touchstart', intent, {passive: true});
   // Step 2.9: engraved plates open from where the pointer enters their card and close when it leaves; a tap opens or
   // closes one on a touch screen; leaving a card with the keyboard closes it again.
   const fine = () => matchMedia('(hover: hover) and (pointer: fine)').matches;
