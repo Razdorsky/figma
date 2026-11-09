@@ -148,3 +148,26 @@ Photographs downloaded when a page is read top to bottom:
 | Eating here | 7.3 MB | 2.4 MB | 1.7 MB | 3.6 MB |
 
 An opening photograph that covers a tall phone screen still needs the photograph itself on a 3× phone, so the first screen of a photo-opening page weighs the same there as before.
+
+## Result on the live site (2026-11-10, after stage 4, ded49b8)
+
+What a phone (390×844, 3×) downloads without scrolling:
+
+| Page | Before (0a1bbbc) | After |
+|---|---|---|
+| The Frequency Experience | 8.2 MB | 5.5 MB (the phone Dome clip is 3.4 MB of it) |
+| The Treehouse | 4.5 MB | 2.8 MB |
+| The Frequency Dome | 3.8 MB | 1.6 MB |
+| Home | 3.4 MB | 1.4 MB |
+| The Villas | 1.3 MB | 1.3 MB (its opening photograph covers a tall phone screen and needs the full file) |
+
+Lighthouse 12, median of three runs (mobile is Lighthouse's simulated slow 4G). Lighthouse measures the still first frame, not the moment a clip starts moving; that is measured in the stage tables above.
+
+| Page | Before: score / LCP / weight | After: score / LCP / weight |
+|---|---|---|
+| Home, desktop | 98 / 0.7 s / 7.5 MB | 98 / 0.6 s / 3.6 MB |
+| Home, mobile | 91 / 3.1 s / 4.2 MB | 93 / 2.7 s / 1.7 MB |
+| Treehouse, desktop | 90 / 1.8 s / 9.3 MB | 97 / 0.8 s / 5.3 MB |
+| Treehouse, mobile | 72 / 10.5 s / 6.8 MB | 82 / 4.3 s / 2.6 MB |
+
+Speed Index stays about 4 s on mobile and 1.6 s on desktop: the opening mark covers the first visit for 2.1–3 s by design.
