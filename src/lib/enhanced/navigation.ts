@@ -3,6 +3,7 @@
 // that opens on text by the first photograph a reader meets on it. Glamping Tents shares the Villas' opener, so it
 // shows a tent.
 import { pages, type PageMeta } from '#lib/enhanced/site.ts';
+import { msg } from '#lib/enhanced/i18n.ts';
 
 const covers: Record<number, string> = {
   1: '81536a0be9ccf3efc5a4', 2: '0b6f7938d784334e4a7e', 3: '2b61d0b9909a48665218', 4: '38bd44acd09f7a1caa67',
@@ -22,10 +23,10 @@ export type NavGroup = { id: string; title: string; overview?: PageMeta; items: 
 // In the order of the designer's menu. The header shows as many as fit beside MENU (header.css, data-rank); The
 // Property has no overview page.
 export const groups: NavGroup[] = [
-  { id: 'stay', title: 'Where you sleep', overview: pages[1], items: pages.slice(2, 6) },
-  { id: 'experiences', title: 'Experiences', overview: pages[6], items: pages.slice(7, 13) },
-  { id: 'property', title: 'The Property', items: pages.slice(13, 18) },
-  { id: 'eating', title: 'Eating here', overview: pages[18], items: pages.slice(19, 21) },
-  { id: 'whole', title: 'Take the whole property', overview: pages[21], items: pages.slice(22, 25) },
-  { id: 'visit', title: 'Plan your visit', overview: pages[25], items: pages.slice(26, 28) }
+  { id: 'stay', title: msg('Where you sleep'), overview: pages[1], items: pages.slice(2, 6) },
+  { id: 'experiences', title: msg('Experiences'), overview: pages[6], items: pages.slice(7, 13) },
+  { id: 'property', title: msg('The Property'), items: pages.slice(13, 18) },
+  { id: 'eating', title: msg('Eating here'), overview: pages[18], items: pages.slice(19, 21) },
+  { id: 'whole', title: msg('Take the whole property'), overview: pages[21], items: pages.slice(22, 25) },
+  { id: 'visit', title: msg('Plan your visit'), overview: pages[25], items: pages.slice(26, 28) }
 ];

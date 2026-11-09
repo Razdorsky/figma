@@ -3,7 +3,7 @@
   import {onMount, type Snippet} from 'svelte';
   import {afterNavigate, beforeNavigate, onNavigate} from '$app/navigation';
   import {page} from '$app/state';
-  import {canvas, pages, base} from '#lib/enhanced/site.ts';
+  import {canvas, pages, base, parseSlug} from '#lib/enhanced/site.ts';
   import heroes from '#lib/enhanced/heroes.json';
   import heroPhotos from '#lib/enhanced/hero-photos.json';
   import {installInteractions, enhancePage, closeOverlays, smooth} from '#lib/enhanced/interactions.js';
@@ -36,10 +36,10 @@
   let {children}: {children:Snippet} = $props();
   // Moderate prewarming: the page's own first picture (the poster of its opening film, or its opening photograph) is
   // asked for at once, before the stylesheets and scripts reveal it.
-  const hero = $derived((heroes as Record<string, string[]>)[(page.params.slug || '').replace(/^\/|\/$/g, '')]?.[0]);
+  const hero = $derived((heroes as Record<string, string[]>)[parseSlug(page.params.slug).slug]?.[0]);
   // Speed, stage 4: an opening photograph in sizes for the screen is preloaded the way the page will pick it, so the
   // browser never fetches two sizes of it.
-  const heroSet = $derived((heroPhotos as unknown as Record<string, {sizes: string; set: [string, number][]}>)[(page.params.slug || '').replace(/^\/|\/$/g, '')]);
+  const heroSet = $derived((heroPhotos as unknown as Record<string, {sizes: string; set: [string, number][]}>)[parseSlug(page.params.slug).slug]);
   onMount(installInteractions);
   // Step 2.2: any glide still running stops when a navigation starts (Back right after a wheel included).
   beforeNavigate(() => {closeOverlays();smooth()?.stop();});
@@ -47,7 +47,10 @@
     // Moderate prewarming: SvelteKit fetches a page's data while its link is pointed at.
     document.body.setAttribute('data-sveltekit-preload-data', 'hover');
     const edition = 'figma-enhanced';
-    const item = pages.find(item => item.slug === (page.params.slug || '').replace(/^\/|\/$/g,''));
+    const {locale, slug} = parseSlug(page.params.slug);
+    const item = pages.find(item => item.slug === slug);
+    // Spanish pages (docs/figma-enhanced-spanish.md): the document language follows the page.
+    document.documentElement.lang = locale;
     document.body.dataset.edition = edition;
     document.body.dataset.page = item?.slug || 'home';
     document.body.dataset.heroTheme = item?.photo ? 'photo' : 'paper';

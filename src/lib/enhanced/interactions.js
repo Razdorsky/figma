@@ -1,6 +1,13 @@
 // One delegated controller survives SvelteKit page changes. Abort on unmount.
 import Lenis from 'lenis';
 import {base as siteBase} from './site.ts';
+import es from './content/es.json';
+
+// Spanish pages (docs/figma-enhanced-spanish.md): interface words follow the document language. The literals of say()
+// are in the coverage check (scripts/enhanced-strings.mjs).
+const say = text => (document.documentElement.lang === 'es' ? es[text] ?? text : text);
+// A page's slug without the language: /figma-enhanced/es/villas/ → villas.
+const pageSlug = path => (path.match(/\/figma-enhanced\/(.*?)\/?$/)?.[1] ?? '').replace(/^es(\/|$)/, '');
 import heroes from './heroes.json';
 import heroPhotos from './hero-photos.json';
 
@@ -119,9 +126,9 @@ function filmControls(box) {
   const mute = box.querySelector('[data-film-mute]');
   if (!video || !toggle || !mute) return;
   toggle.dataset.paused = String(video.paused);
-  toggle.setAttribute('aria-label', video.paused ? 'Play the film' : 'Pause the film');
+  toggle.setAttribute('aria-label', video.paused ? say('Play the film') : say('Pause the film'));
   mute.dataset.muted = String(video.muted);
-  mute.setAttribute('aria-label', video.muted ? 'Turn the sound on' : 'Mute the film');
+  mute.setAttribute('aria-label', video.muted ? say('Turn the sound on') : say('Mute the film'));
 }
 function fadeVolume(video, to, ms) {
   cancelAnimationFrame(video._fade || 0);
@@ -527,14 +534,14 @@ function warmPage(href) {
   try {url = new URL(href, location.href);} catch {return;}
   if (url.origin !== location.origin) return;
   const match = url.pathname.match(/\/figma-enhanced\/(.*?)\/?$/);
-  const list = match ? heroes[match[1]] : null;
+  const list = match ? heroes[pageSlug(url.pathname)] : null;
   if (!list) return;
   for (const path of list) {
     if (warmed.has(path)) continue;
     warmed.add(path);
     const img = new Image();
     img.fetchPriority = 'low';
-    const ready = firstPicture(match[1], path);
+    const ready = firstPicture(pageSlug(url.pathname), path);
     if (ready.srcset) {img.sizes = ready.sizes;img.srcset = ready.srcset;}
     img.src = ready.src;
   }
@@ -616,7 +623,7 @@ function markRails() {
     if (scrolls && !rail.querySelector('a[href], button, input, [tabindex]')) {
       rail.tabIndex = 0;
       rail.setAttribute('role', 'region');
-      rail.setAttribute('aria-label', (rail.closest('section')?.querySelector('h2')?.textContent.trim() || 'Cards') + ', scrolls sideways');
+      rail.setAttribute('aria-label', (rail.closest('section')?.querySelector('h2')?.textContent.trim() || say('Cards')) + say(', scrolls sideways'));
     } else if (rail.hasAttribute('tabindex')) {
       rail.removeAttribute('tabindex'); rail.removeAttribute('role'); rail.removeAttribute('aria-label');
     }
@@ -639,7 +646,7 @@ export function enhancePage() {
     img.setAttribute('role', 'button');
     img.setAttribute('aria-haspopup','dialog');
     img.setAttribute('aria-controls','photo-gallery');
-    img.setAttribute('aria-label', 'Open photo gallery');
+    img.setAttribute('aria-label', say('Open photo gallery'));
   });
   document.querySelectorAll('[data-gallery-open]').forEach(button=>{button.setAttribute('aria-haspopup','dialog');button.setAttribute('aria-controls','photo-gallery');});
   document.querySelectorAll('a[href]').forEach(link => {
@@ -668,7 +675,7 @@ export function installInteractions() {
   const root = document.documentElement;
   if (root.dataset.intro === 'on') {
     lenis?.stop();
-    const slug = location.pathname.match(/\/figma-enhanced\/(.*?)\/?$/)?.[1] ?? '';
+    const slug = pageSlug(location.pathname);
     const pictures = (heroes[slug] || []).map(path => firstPicture(slug, path).decode().catch(() => {}));
     const ready = Promise.all([document.fonts?.ready, firstClipMoving(), ...pictures]).catch(() => {});
     const cap = new Promise(resolve => setTimeout(resolve, Math.max(0, 3000 - performance.now())));
@@ -775,7 +782,7 @@ export function installInteractions() {
     galleryOpener = trigger;
     dialog.querySelector('.gallery-thumbnails').replaceChildren(...images.map((entry,index) => {
       const button = document.createElement('button');
-      button.type = 'button';button.dataset.galleryIndex = String(index);button.setAttribute('aria-label', `View photo ${index + 1}`);
+      button.type = 'button';button.dataset.galleryIndex = String(index);button.setAttribute('aria-label', `${say('View photo')} ${index + 1}`);
       const image = new Image();image.src = entry.src;image.alt = '';button.append(image);
       return button;
     }));
@@ -803,8 +810,7 @@ export function installInteractions() {
     if (open) {resetPendingMenu();opener=open;const dialog=menu();if(dialog&&!dialog.open){dialog.showModal();lenis?.stop();dialog.scrollTop=0;open.setAttribute('aria-expanded','true');dialog.querySelector('[data-menu-close]')?.focus();const figure=dialog.querySelector('.menu-preview');if(figure){previewWanted='';previewMenu(figure.dataset.cover,figure.dataset.name);}}return;}
     if(target===menu()){const box=target.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom){closeMenu();return;}}
     if (target.closest('[data-menu-close]')) {closeMenu();return;}
-    if (target.closest('[data-language-trigger]')) {notify('This preview is in English. Localized page copy has not been supplied yet.');return;}
-    if (target.closest('[data-pending-link]')) {event.preventDefault();notify('This destination is still a placeholder in the supplied design.');return;}
+    if (target.closest('[data-pending-link]')) {event.preventDefault();notify(say('This destination is still a placeholder in the supplied design.'));return;}
     if (target.closest('.gallery-close')) {gallery()?.close();return;}
     if (target.closest('.gallery-prev,.gallery-edge.left')) {show(active - 1);return;}
     if (target.closest('.gallery-next,.gallery-edge.right')) {show(active + 1);return;}

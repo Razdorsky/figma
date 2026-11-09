@@ -2,8 +2,8 @@ import fs from 'node:fs/promises';
 const sources={blueprint:'src/lib/blueprint/site-data.json',figma:'src/lib/site-data.json','figma-enhanced':'src/lib/enhanced/site-data.json','figma-pr':'src/lib/pr/site-data.json'};
 const pagesFor={};for(const [edition,file] of Object.entries(sources))pagesFor[edition]=JSON.parse(await fs.readFile(file,'utf8'));
 const base=(process.env.SITE_BASE_PATH||'').replace(/\/$/,'');
-// Blueprint pages also exist in Spanish under /blueprint/es/.
-const localesFor={blueprint:['en','es'],figma:['en'],'figma-enhanced':['en'],'figma-pr':['en']};
+// Blueprint and Figma Enhanced pages also exist in Spanish under /blueprint/es/ and /figma-enhanced/es/.
+const localesFor={blueprint:['en','es'],figma:['en'],'figma-enhanced':['en','es'],'figma-pr':['en']};
 const routes=['blueprint','figma','figma-enhanced','figma-pr'].flatMap(edition=>localesFor[edition].flatMap(locale=>pagesFor[edition].map(p=>{const slug=[locale==='en'?'':locale,p.slug].filter(Boolean).join('/');return {edition,locale,index:p.index,slug,path:`${base}/${edition}/${slug?slug+'/':''}`};})));
 await fs.writeFile('dist/routes.json',JSON.stringify(routes,null,2)+'\n');
 // The shared page shell says lang="en"; the Spanish pages say what they are.

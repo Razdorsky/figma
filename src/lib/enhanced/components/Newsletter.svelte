@@ -1,7 +1,8 @@
 <script lang="ts">
   import {base} from '#lib/enhanced/site.ts';
-  type Props = { pageIndex: number };
-  let { pageIndex }: Props = $props();
+  import { tr, type Locale } from '#lib/enhanced/i18n.ts';
+  type Props = { pageIndex: number; locale?: Locale };
+  let { pageIndex, locale = 'en' }: Props = $props();
   let events = $derived(pageIndex === 13);
   // The closing photograph the footer melts into (docs/figma-enhanced-plan.md, step 1.5; Legacy reference 13). Placement
   // map, 2026-11-08: it belongs to the page's world and never repeats a photograph already on the page; each has a
@@ -26,12 +27,12 @@
     const input=form.elements.namedItem('email') as HTMLInputElement;
     if(!input.checkValidity()){
       formState='error';
-      status=input.value?'This address is incomplete. Check it, for example name@example.com.':'Enter your email address, for example name@example.com.';
+      status=input.value?tr(locale, 'This address is incomplete. Check it, for example name@example.com.'):tr(locale, 'Enter your email address, for example name@example.com.');
       input.focus();
       return;
     }
     formState='notice';
-    status='Subscriptions are not connected in this local preview. Your address has not been sent or saved.';
+    status=tr(locale, 'Subscriptions are not connected in this local preview. Your address has not been sent or saved.');
   }
   function edit(){if(formState==='error'){formState='';status='';}}
 </script>
@@ -50,16 +51,16 @@
   {/if}
   <div class="newsletter-inner">
     <div>
-      <p class="newsletter-eyebrow">{events ? 'Coming events' : 'Best time to visit us'}</p>
-      <h2 id="newsletter-title">{events ? 'Tell me what is coming up' : 'Three or four emails a year'}</h2>
+      <p class="newsletter-eyebrow">{events ? tr(locale, 'Coming events') : tr(locale, 'Best time to visit us')}</p>
+      <h2 id="newsletter-title">{events ? tr(locale, 'Tell me what is coming up') : tr(locale, 'Three or four emails a year')}</h2>
       <p>
         {events
-          ? 'Nothing on tonight is a normal state of affairs. The calendar runs [how often], and we announce new nights by email first, because they are small and they sell out.'
-          : 'What is open, who is playing, what the river is doing. Nothing else.'}
+          ? tr(locale, 'Nothing on tonight is a normal state of affairs. The calendar runs [how often], and we announce new nights by email first, because they are small and they sell out.')
+          : tr(locale, 'What is open, who is playing, what the river is doing. Nothing else.')}
       </p>
     </div>
     <form class="newsletter-form" novalidate onsubmit={submit} data-state={formState || undefined}>
-      <label class="sr-only" for="newsletter-email">Email address</label>
+      <label class="sr-only" for="newsletter-email">{tr(locale, 'Email address')}</label>
       <input
         id="newsletter-email"
         name="email"
@@ -71,7 +72,7 @@
         aria-describedby="newsletter-status"
         oninput={edit}
       />
-      <button type="submit">SUBSCRIBE</button>
+      <button type="submit">{tr(locale, 'SUBSCRIBE')}</button>
       <p id="newsletter-status" class="newsletter-status" aria-live="polite">{status}</p>
     </form>
   </div>

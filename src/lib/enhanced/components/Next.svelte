@@ -5,19 +5,20 @@
   // owner's correction). The whole block takes the click; a click carries the picture into the next page's opening
   // (+layout.svelte, motion.css).
   import { base, route } from '#lib/enhanced/site.ts';
+  import { tr, type Locale } from '#lib/enhanced/i18n.ts';
   import { door } from '#lib/enhanced/next.ts';
-  type Props = { pageIndex: number };
-  let { pageIndex }: Props = $props();
+  type Props = { pageIndex: number; locale?: Locale };
+  let { pageIndex, locale = 'en' }: Props = $props();
   let next = $derived(door(pageIndex));
   let media = $derived(next.media);
 </script>
 
 <section class="next-page" data-name="Next page" data-next aria-labelledby="next-page-title">
   <div class="next-head">
-    <h2 id="next-page-title" class="next-name">{next.name}</h2>
-    <p class="next-line">{next.line}</p>
+    <h2 id="next-page-title" class="next-name">{tr(locale, next.name)}</h2>
+    <p class="next-line">{tr(locale, next.line)}</p>
   </div>
-  <a class="next-door" href={route('figma-enhanced', next.page.slug, base)}>
+  <a class="next-door" href={route('figma-enhanced', next.page.slug, base, locale)}>
     <span class="next-frame">
       <span class="next-media" data-next-media>
         {#if 'loop' in media}
@@ -32,7 +33,7 @@
           <img src={`${base}/media/${media.photo}.webp`} srcset={media.srcset?.split(', ').map(part => `${base}${part}`).join(', ')} sizes={media.sizes} alt="" loading="lazy" decoding="async" width={media.width} height={media.height} style={media.position ? `object-position: ${media.position}` : undefined} />
         {/if}
       </span>
-      <span class="next-go"><span class="next-label">{next.label}</span><span class="next-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.5 12h14.5M13 6l6 6-6 6" /></svg></span></span>
+      <span class="next-go"><span class="next-label">{tr(locale, next.label)}</span><span class="next-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.5 12h14.5M13 6l6 6-6 6" /></svg></span></span>
     </span>
   </a>
 </section>

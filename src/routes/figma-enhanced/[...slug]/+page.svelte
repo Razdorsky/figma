@@ -1,5 +1,6 @@
 <script lang="ts">
-import {base} from '#lib/enhanced/site.ts';
+import {base,route} from '#lib/enhanced/site.ts';
+import {tr} from '#lib/enhanced/i18n.ts';
 import Header from '#lib/enhanced/components/Header.svelte';
 import Footer from '#lib/enhanced/components/Footer.svelte';
 import Menu from '#lib/enhanced/components/Menu.svelte';
@@ -38,10 +39,10 @@ let {data}: {data:PageData}=$props();
 const components=[P01,P02,P03,P04,P05,P06,P07,P08,P09,P10,P11,P12,P13,P14,P15,P16,P17,P18,P19,P20,P21,P22,P23,P24,P25,P26,P27,P28];
 let Content=$derived(components[data.page.index-1]);
 </script>
-<svelte:head><title>{data.page.name} — The Vessyl</title><meta name="description" content={`${data.page.name} — The Vessyl in Arenal, Costa Rica`}/><meta name="theme-color" content={canvas(data.edition,data.page.index)}/></svelte:head>
-<a class="skip-link" href="#content">Skip to content</a>
-<Header edition={data.edition} page={data.page} {base}/>
-<main class="current-page" id="content" data-page={data.page.slug||'home'} data-index={String(data.page.index).padStart(2,'0')}><Content edition={data.edition} {base}/></main>
-<Footer edition={data.edition} page={data.page} {base}/>
-<Menu edition={data.edition} page={data.page} {base}/>
-<Gallery/>
+<svelte:head><title>{tr(data.locale,data.page.name)} — The Vessyl</title><meta name="description" content={`${tr(data.locale,data.page.name)} — ${tr(data.locale,'The Vessyl in Arenal, Costa Rica')}`}/><link rel="alternate" hreflang="en" href={route(data.edition,data.page.slug,base,'en')}/><link rel="alternate" hreflang="es" href={route(data.edition,data.page.slug,base,'es')}/><meta name="theme-color" content={canvas(data.edition,data.page.index)}/></svelte:head>
+<a class="skip-link" href="#content">{tr(data.locale,'Skip to content')}</a>
+<Header edition={data.edition} page={data.page} {base} locale={data.locale}/>
+<main class="current-page" id="content" data-page={data.page.slug||'home'} data-index={String(data.page.index).padStart(2,'0')}><Content edition={data.edition} {base} locale={data.locale}/></main>
+<Footer edition={data.edition} page={data.page} {base} locale={data.locale}/>
+<Menu edition={data.edition} page={data.page} {base} locale={data.locale}/>
+<Gallery locale={data.locale}/>

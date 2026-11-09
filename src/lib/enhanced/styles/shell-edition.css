@@ -81,3 +81,7 @@ body[data-edition="figma-enhanced"] .menu-preview { display: none; }
 @media (min-width: 681px) and (max-width: 1100px) {
   body[data-edition="figma-enhanced"] .menu-columns { gap: 4vw; }
 }
+
+/* Spanish pages (docs/figma-enhanced-spanish.md): the designer's EN | ES is a link to the page in the other language;
+   the current language is underlined. */
+body[data-edition="figma-enhanced"] .language-trigger [data-lang-current] { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
