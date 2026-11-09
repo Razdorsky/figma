@@ -417,3 +417,16 @@ The owner: one of the site's versions opens with the Vessyl logo appearing smoot
 - **A page's first picture** loads at low priority when a link to it is pointed at, focused or touched (`warmPage`, the list in `src/lib/enhanced/heroes.json`: the poster of a page's opening film, or its opening photograph; text openings have none). SvelteKit also fetches the page's data on hover (`data-sveltekit-preload-data="hover"`).
 - **The next page:** once the current page has loaded and the browser is idle, the first picture of the page behind the next-page block is fetched (`warmNext`).
 - **No films are prefetched.** Nothing depends on data saver or the connection speed.
+
+### Measured (Lighthouse 12, live, 2026-11-09)
+
+Before: one run each on b58578d. After: the median of three runs on 0a1bbbc. Mobile is Lighthouse's simulated slow 4G.
+
+| Page | Before: score / LCP / SI / weight | After: score / LCP / SI / weight |
+|---|---|---|
+| Home, desktop | 100 / 0.7s / 0.6s / 20.2 MB | 98 / 0.7s / 1.6s / 7.5 MB |
+| Home, mobile | 94 / 2.6s / 2.6s / 16.9 MB | 91 / 3.1s / 4.0s / 4.2 MB |
+| Treehouse, desktop | 90 / 2.0s / 0.8s / 18.5 MB | 90 / 1.8s / 1.6s / 9.3 MB |
+| Treehouse, mobile | 75 / 32.9s / 1.7s / 17.1 MB | 72 / 10.5s (runs 4.3–10.5s) / 4.1s / 6.8 MB |
+
+The weight fell by 2.5–4 times (the mega menu's covers). Speed Index rose because the opening mark covers the page for 2.1–3s by design. On phones the opening film's 1920px poster (317 KB on Treehouse) competes with the 1.3–1.5 MB mobile film; phone-sized posters and responsive photographs are the next gain (step 3).
