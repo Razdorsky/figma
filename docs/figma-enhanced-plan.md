@@ -122,7 +122,7 @@ The owner likes these as techniques, not as the places where they first appeared
 - The horizontal rail (reference 4) stands out from the blocks around it, minimally (owner, 2026-11-09: "it should stand out somehow, but minimally"; no piling on details).
 - The text-and-photo change (reference 6) gets decisive transitions: an iris or wipe in the circle and line-by-line text, each change on its own beat. No numbering or counters of mine; the designer's numbers stay and visibly turn over at each step, and every picture has the same impact (owner, 2026-11-09).
 
-2.8 **Photo portals and frosted glass** from the early prototype (references 15–16): arched or rounded-bottom frames with an inner border and a slow zoom-in on arrival, and frosted panels over film or 3D. No captions inside the photos.
+2.8 **Photo portals and frosted glass** from the early prototype (references 15–16; published 2026-11-09 on the tall 50/50 photographs of P09, P10 and P11, see `docs/figma-enhanced-step2.md`): arched or rounded-bottom frames with an inner border and a slow zoom-in on arrival, and frosted panels over film or 3D. No captions inside the photos.
 
 2.9 **The artistic layer** from the "atlas" prototype (references 17–20):
 - the engraving that develops into the film as you scroll;

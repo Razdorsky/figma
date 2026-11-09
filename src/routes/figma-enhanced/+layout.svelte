@@ -20,6 +20,7 @@
   import '#lib/enhanced/styles/next.css';
   import '#lib/enhanced/styles/rail.css';
   import '#lib/enhanced/styles/change.css';
+  import '#lib/enhanced/styles/portal.css';
 
   let {children}: {children:Snippet} = $props();
   onMount(installInteractions);

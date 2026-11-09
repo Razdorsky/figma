@@ -19,7 +19,7 @@
 <p data-part="paragraph">Dinner and [inclusions]</p></div><div data-part="fact"><p data-node-id="804:3164" data-part="eyebrow">drinks</p>
 <p data-node-id="804:3165" data-part="paragraph">[Included or extra]</p></div><div data-part="fact"><p data-node-id="804:3167" data-part="eyebrow">transportation</p>
 <p data-node-id="804:3168" data-part="paragraph">[Price] return from La Fortuna</p></div></div></section>
-<section data-name="Section - 50/50 image text" data-node-id="814:7320" data-role="split" data-layout="image-first" data-variant="editorial"><figure data-part="media" data-aspect="portrait"><img src="{base}/media/46c02cfc7ce0c5cd9c65.webp" alt="The Dome at night, lights strung along the path on the hill" loading="lazy" decoding="async" width="2400" height="1502"></figure>
+<section data-name="Section - 50/50 image text" data-node-id="814:7320" data-role="split" data-layout="image-first" data-variant="editorial"><figure data-part="media" data-portal="arch" data-aspect="portrait"><img src="{base}/media/46c02cfc7ce0c5cd9c65.webp" alt="The Dome at night, lights strung along the path on the hill" loading="lazy" decoding="async" width="2400" height="1502"></figure>
 <div data-part="copy"><p data-node-id="I814:7320;750:1885;748:551" data-part="eyebrow">The dome</p>
 <h2 data-node-id="I814:7320;750:1885;748:552" class="c-heading" data-part="heading">Lit from inside</h2>
 <p data-part="paragraph">On a clear night the volcano is black against the sky and the valley below is a scatter of lights. On a cloudy night you hear more than you see, and that is its own thing.</p></div></section>

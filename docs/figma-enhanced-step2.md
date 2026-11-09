@@ -342,3 +342,24 @@ The owner found the techniques of 2.1–2.3 placed in single spots. The placemen
 ## Booking address (2026-11-09)
 
 The owner's booking engine replaces the old link everywhere: `https://reservations.orbebooking.com/Search/Init/PAS6c/en/` and `/es/`, by language. Figma Enhanced is in English, so it uses `/en/` (`site.ts` and the designer's booking buttons on pages 01–06). Blueprint follows the page's language (`booking(locale)` in `src/lib/blueprint/site.ts`). The frozen `/figma/` changes too, on the owner's word (see `docs/figma-adaptation.md`), with `/en/`.
+
+## 2.8 Photo portals and frosted glass (2026-11-09)
+
+### What the reference does
+
+The early prototype (owner's references 15 and 16; `~/Documents/Questionarie/Vessyl-Prototype`, commit 5dc5649):
+- **Portals** (`app/globals.css` `.photo-portal` 1129–1215, `.reveal` 646–666): two geometric frames, one with an arch above, one rounded below. A thin light border, an inner border 0.7rem inside, a deep shadow and a gradient that darkens the far end. On arrival the frame rises 2rem as it appears and the photograph comes in from 130% to 100% over six seconds. The owner: the captions inside ("Landscape / 10.5321° N") are superfluous.
+- **Frosted glass** (`.journey-path::after` 1030–1043): `linear-gradient(135deg, rgba(7,9,8,.56), rgba(7,9,8,.14) 78%)` with `backdrop-filter: blur(10px)`. The owner likes the fill, not the numbering and lines.
+
+### Decisions
+
+- **Where** (my proposal in the placement map; the owner said "2.8 приступай" without choosing another): the three tall 50/50 photographs that look into the Dome. Frequency Experience, "Into the Dome" (guests under the projection, with its loop and sound scene): the arch. Arenal After Dark, "Lit from inside" (the Dome at night): the arch, the Dome's own outline. For Two, "A private session in the Dome": the rounding below, the prototype's second shape. One portal a page, so each page keeps one shape.
+- **Kept from the reference**: both shapes, the inner frame at 0.7rem, the deep soft shadow, the gradient on the far end, the rise of 2rem and the six-second zoom from 130%. **Changed**: no captions (the owner); the straight corners take the site's 10px; the prototype's darkening filter on the photograph is left out (on a light page it dulls the picture), only the gradient remains.
+- **Phones**: the designer turns these photographs landscape (4:3) on phones, where an arch comes out low and wide (the owner's worry about wide photographs); a portal keeps an upright 4:5 frame.
+- **Glass**: the fill was already on the text of twelve openings, every film button and the mega menu, and since 2.6 on the next-page button. New: the two loops in the change circles that come from footage with sound (the violinist on the Dome, Amenities overview 70.3–80.5; the Hearth's round room, programming 48.7–56.5 from its own shot) get the same frosted button, round at the foot of the circle; only the current picture's button can be pressed, and a scene playing with sound ends when its step leaves. Every loop from footage with sound now has its button; the loops without one come from silent cuts. The 3D scene's caption follows in 2.10.
+
+### Built (2026-11-09)
+
+- Markup: `data-portal="arch"` or `"bowl"` on the designer's media figure (P09, P10, P11); `data-film-box`, the scene and the buttons on the two circle shots (P14, P15).
+- Styles: `styles/portal.css`. Behaviour: `setupPortals` in `interactions.js` (arrives once at a fifth on screen; the waiting state is set without motion, so nothing fades on load); `showChange` ends a scene whose picture leaves.
+- Checked: layout at 69 widths in Chrome, WebKit and Firefox (nothing new); axe 0 on all pages; arrival, zoom, shape and proportion in the three engines at 1440 and 390, and still under reduced motion; the circle buttons play their scene with sound and stop when the step changes; galleries, menu and newsletter.

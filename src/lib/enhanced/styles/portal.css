@@ -1,0 +1,57 @@
+/* Figma Enhanced — step 2.8 (docs/figma-enhanced-step2.md): photo portals from the early prototype (owner's reference
+   15, `.photo-portal` in Vessyl-Prototype app/globals.css). The designer's tall photographs that look into the Dome take
+   one of the prototype's two shapes: an arch above (the Dome's own outline) or a rounding below. A thin light frame sits
+   0.7rem inside the edge, a gradient darkens the far end, and a deep, soft shadow lifts the frame off the page. On
+   arrival the frame rises 2rem as it appears and the picture comes in from 130% to 100% over six seconds
+   (interactions.js, setupPortals). No captions inside, as the owner asked. The radius of the straight corners is the
+   site's own (10px). */
+body[data-edition="figma-enhanced"] .current-page [data-part="media"][data-portal] {
+  isolation: isolate; overflow: hidden; background: #101412; box-shadow: 0 48px 110px -64px rgb(16 12 6 / 0.85);
+}
+body[data-edition="figma-enhanced"] .current-page [data-part="media"][data-portal="arch"] {
+  border-radius: 50% 50% var(--r-photo) var(--r-photo) / 38% 38% var(--r-photo) var(--r-photo);
+}
+body[data-edition="figma-enhanced"] .current-page [data-part="media"][data-portal="bowl"] {
+  border-radius: var(--r-photo) var(--r-photo) 50% 50% / var(--r-photo) var(--r-photo) 34% 34%;
+}
+body[data-edition="figma-enhanced"] .current-page [data-part="media"][data-portal]::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, rgb(7 9 8 / 0.06), transparent 50%, rgb(7 9 8 / 0.5)), linear-gradient(90deg, rgb(7 9 8 / 0.14), transparent 45%);
+}
+body[data-edition="figma-enhanced"] .current-page [data-part="media"][data-portal="bowl"]::before {
+  background: linear-gradient(180deg, rgb(7 9 8 / 0.5), transparent 52%, rgb(7 9 8 / 0.06)), linear-gradient(90deg, rgb(7 9 8 / 0.14), transparent 45%);
+}
+body[data-edition="figma-enhanced"] .current-page [data-part="media"][data-portal]::after {
+  content: ""; position: absolute; inset: 0.7rem; z-index: 2; pointer-events: none;
+  border: 1px solid rgb(245 235 231 / 0.42); border-radius: inherit;
+}
+
+/* Arrival: set by interactions.js once the frame is a fifth on screen; without it (no script) the portal simply stands. */
+/* The waiting state is set at once; only the arrival moves. */
+body[data-edition="figma-enhanced"] .current-page [data-part="media"][data-portal][data-armed] { opacity: 0; transform: translateY(2rem); }
+body[data-edition="figma-enhanced"] .current-page [data-part="media"][data-portal][data-armed] > :is(img, video) { transform: scale(1.3); }
+body[data-edition="figma-enhanced"] .current-page [data-part="media"][data-portal][data-armed][data-arrived] {
+  opacity: 1; transform: none; transition: opacity 0.9s ease, transform 1.1s cubic-bezier(0.18, 0.7, 0.18, 1);
+}
+body[data-edition="figma-enhanced"] .current-page [data-part="media"][data-portal][data-armed][data-arrived] > :is(img, video) {
+  transform: none; transition: transform 6s cubic-bezier(0.18, 0.7, 0.18, 1);
+}
+
+/* Step 2.8, glass: the loops in the change circles that come from footage with sound get the same frosted button as every
+   other film, a round one at the foot of the circle; only the current picture's button is there to press. */
+body[data-edition="figma-enhanced"] .current-page > [data-change] [data-shot][data-film-box] :is(.film-play, .film-controls) {
+  left: 50%; right: auto; bottom: 7%; translate: -50% 0;
+}
+body[data-edition="figma-enhanced"] .current-page > [data-change] [data-shot][data-film-box] .film-play { width: 44px; padding: 0; justify-content: center; }
+body[data-edition="figma-enhanced"] .current-page > [data-change] [data-shot][data-film-box] .film-play span { display: none; }
+body[data-edition="figma-enhanced"] .current-page > [data-change][data-armed] [data-shot]:not([data-current]) :is(.film-play, .film-controls) { visibility: hidden; }
+
+/* On phones the designer turns these photographs landscape (4:3), where an arch comes out low and wide; a portal keeps
+   an upright frame so it stays a doorway. */
+@media (max-width: 767px) {
+  body[data-edition="figma-enhanced"] .current-page [data-variant] > [data-part="media"][data-portal] { aspect-ratio: 4 / 5; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body[data-edition="figma-enhanced"] .current-page [data-part="media"][data-portal][data-armed],
+  body[data-edition="figma-enhanced"] .current-page [data-part="media"][data-portal][data-armed] > :is(img, video) { opacity: 1; transform: none; transition: none; }
+}

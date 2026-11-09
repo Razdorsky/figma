@@ -406,6 +406,8 @@ function showChange(item, index, jump) {
     node.toggleAttribute('data-current', i === index);
     node.toggleAttribute('data-previous', !jump && i === previous && previous !== index);
   });
+  // A scene playing with sound in a picture that is leaving ends, and its loop returns (step 2.8).
+  item.shots.forEach((shot, i) => {if (i !== index && shot.matches('[data-film-box]')) endScene(shot);});
   item.shots.forEach(shot => {const video = shot.querySelector('video');if (video) syncVideo(video);});
 }
 function updateChange(jump = false) {
@@ -425,6 +427,29 @@ function updateChange(jump = false) {
     if (item.index < 0 && box.top > innerHeight * 0.5) continue;
     if (index !== item.index) showChange(item, index, jump);
   }
+}
+
+// Step 2.8 (docs/figma-enhanced-step2.md): the photo portals arrive once, when a fifth of the frame is on screen: the
+// frame rises as it appears and the picture comes in from 130% (portal.css). Reduced motion leaves them standing.
+let portalObserver;
+function setupPortals() {
+  portalObserver?.disconnect();
+  const portals = document.querySelectorAll('.current-page [data-portal]:not([data-arrived])');
+  if (!portals.length || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  portalObserver = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      entry.target.setAttribute('data-arrived', '');
+      portalObserver.unobserve(entry.target);
+    }
+  }, {threshold: 0.2});
+  portals.forEach(portal => {
+    const box = portal.getBoundingClientRect();
+    // A portal already passed when the page opens (Back, a restored scroll) stands as it is.
+    if (box.bottom < 0) {portal.setAttribute('data-arrived', '');return;}
+    portal.setAttribute('data-armed', '');
+    portalObserver.observe(portal);
+  });
 }
 
 // The Home arch (/blueprint/ 452c7d0): it opens with the scroll through its 185svh block, following the page
@@ -512,6 +537,7 @@ export function enhancePage() {
   setupNext();
   setupRail();
   setupChange(true);
+  setupPortals();
   refreshHeader();
   document.querySelectorAll('[data-gallery] img[data-gallery-image]').forEach(img => {
     img.tabIndex = 0;

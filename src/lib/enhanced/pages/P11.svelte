@@ -18,7 +18,7 @@
 <p data-node-id="803:3036" data-part="paragraph" class="current-lede">You arrive as the light goes.</p></div><div data-part="fact"><h3 data-node-id="803:3052" class="c-heading" data-part="heading">Dinner</h3>
 <p data-node-id="803:3053" data-part="paragraph" class="current-lede">Dinner is included.</p></div><div data-part="fact"><h3 data-node-id="803:3055" class="c-heading" data-part="heading">The Dome</h3>
 <p data-node-id="803:3056" data-part="paragraph" class="current-lede">A private session in the Dome, just the two of you.</p></div></div></section>
-<section data-name="Section - 50/50 image text" data-node-id="814:7329" data-role="split" data-layout="image-first" data-variant="editorial"><figure data-part="media" data-aspect="portrait"><img src="{base}/media/c9f36f747db728e9734c.webp" alt="A woman sitting cross-legged on a mat during a session in the Dome" loading="lazy" decoding="async" width="1600" height="2400"></figure>
+<section data-name="Section - 50/50 image text" data-node-id="814:7329" data-role="split" data-layout="image-first" data-variant="editorial"><figure data-part="media" data-portal="bowl" data-aspect="portrait"><img src="{base}/media/c9f36f747db728e9734c.webp" alt="A woman sitting cross-legged on a mat during a session in the Dome" loading="lazy" decoding="async" width="1600" height="2400"></figure>
 <div data-part="copy"><p data-node-id="I814:7329;750:1885;748:551" data-part="eyebrow">just for two</p>
 <h2 data-node-id="I814:7329;750:1885;748:552" class="c-heading" data-part="heading">A private session{' '}in the Dome,</h2>
 <p data-part="paragraph">A private session in the Dome, just the two of you and whoever is running it. Then dinner, [where and how it is set]. Then [inclusion].</p></div></section>
