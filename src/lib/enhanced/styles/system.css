@@ -258,6 +258,13 @@ body[data-edition="figma-enhanced"] .current-page [data-role="topics"] > [data-p
 body[data-edition="figma-enhanced"] .current-page [data-role="topics"] li { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 15px 50px; border-bottom: 1px solid var(--rule); color: var(--ink); }
 body[data-edition="figma-enhanced"] .current-page [data-role="topics"] li:last-child { border-bottom: 0; }
 body[data-edition="figma-enhanced"] .current-page [data-role="topics"] h3 { font-size: var(--t-highlight); line-height: 1.9; color: var(--ink); }
+/* The designer's "+" on each topic (owner, 2026-11-10: every element of the frame stays); its details are not supplied,
+   so it answers like every other pending control (interactions.js, data-pending-link). */
+body[data-edition="figma-enhanced"] .current-page [data-role="topics"] [data-part="expand"] {
+  flex: none; display: grid; place-items: center; min-width: 44px; min-height: 44px; padding: 0; border: 0; border-radius: 50%;
+  background: none; color: var(--ink); font: 400 28px/1 var(--font-display); cursor: pointer; transition: color var(--dur-2) var(--ease), background-color var(--dur-2) var(--ease);
+}
+body[data-edition="figma-enhanced"] .current-page [data-role="topics"] [data-part="expand"]:hover { color: var(--heading); background: var(--surface-warm); }
 
 /* ---- Map: full width, the frame's crop of the aerial photograph, labels on their buildings -------- */
 body[data-edition="figma-enhanced"] .current-page [data-role="map"] { position: relative; padding: 0; }

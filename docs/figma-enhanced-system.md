@@ -37,7 +37,7 @@ The second pass starts again from the designer's markup (step 0, e2fd33c) and fo
 | `src/lib/enhanced/styles/shell.css`, `shell-edition.css` | Header, menu and footer layout from the Figma edition. |
 
 The markup is the designer's, with these changes:
-- the nine "Button" placeholders, the gallery dots and the empty "+" controls are removed;
+- the gallery dots are removed. (The nine "Button" placeholders and the three "+" controls of the Weddings topics were removed too, and restored on 2026-11-10 at the owner's word: every text and control of the frame stays. They answer as pending controls.)
 - frame line breaks are removed;
 - `alt` texts describe the photographs;
 - twelve heroes carry `data-hero-text="glass"`.

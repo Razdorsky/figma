@@ -80,7 +80,7 @@ Goal: one system under all 28 pages, so that pages stop looking assembled from h
 - **Buttons:** primary, the Legacy translucent gradient button on photos, and a text link with arrow.
 - **Cards** and **photo frames:** one shape per group, three aspect ratios.
 - **States:** hover, focus, pressed, disabled; newsletter error and success.
-- **Clean-up:** remove the "Button" placeholders, the empty "+" topics and the gallery dots without photos. Write alt texts that describe the pictures.
+- **Clean-up:** remove the gallery dots without photos. Write alt texts that describe the pictures. (The "Button" placeholders and the empty "+" topics were removed at first and restored on 2026-11-10: the owner keeps every text and control of the frame.)
 
 1.5 **Surfaces and rhythm.**
 - Light, beige and dark bands meet at clean edges. Each page opens with one of a few hero types instead of one template.
