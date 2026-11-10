@@ -4,7 +4,7 @@
   import {onMount, type Snippet} from 'svelte';
   import {afterNavigate, beforeNavigate, onNavigate} from '$app/navigation';
   import {page} from '$app/state';
-  import {canvas, pages} from '#lib/pr/site.ts';
+  import {canvas, pages, parseSlug} from '#lib/pr/site.ts';
   import {installInteractions, enhancePage, closeOverlays} from '#lib/pr/interactions.js';
   import '#lib/pr/styles/base.css';
   import '#lib/pr/styles/shell.css';
@@ -19,7 +19,10 @@
   beforeNavigate(() => closeOverlays());
   afterNavigate(() => {
     const edition = 'figma-pr';
-    const item = pages.find(item => item.slug === (page.params.slug || '').replace(/^\/|\/$/g,''));
+    const {locale, slug} = parseSlug(page.params.slug);
+    const item = pages.find(item => item.slug === slug);
+    // Spanish pages (docs/figma-spanish.md): the document language follows the page.
+    document.documentElement.lang = locale;
     document.body.dataset.edition = edition;
     document.body.dataset.page = item?.slug || 'home';
     document.body.dataset.heroTheme = item?.photo ? 'photo' : 'paper';

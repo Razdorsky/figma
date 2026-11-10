@@ -7,8 +7,8 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 
 const manifestPath = 'scripts/figma-freeze.json';
-const sourceRoots = ['src/lib/pages', 'src/lib/components', 'src/assets', 'src/routes/figma'];
-const sourceFiles = ['src/lib/site.ts', 'src/lib/site-data.json', 'src/lib/interactions.js', 'src/data/media.json', 'src/shared.css', 'src/figma.css', 'src/app.html', 'src/hooks.server.ts', 'src/routes/+layout.svelte', 'src/routes/+layout.ts', 'vite.config.ts'];
+const sourceRoots = ['src/lib/pages', 'src/lib/components', 'src/lib/content', 'src/assets', 'src/routes/figma'];
+const sourceFiles = ['src/lib/site.ts', 'src/lib/site-data.json', 'src/lib/i18n.ts', 'src/lib/interactions.js', 'src/data/media.json', 'src/shared.css', 'src/figma.css', 'src/app.html', 'src/hooks.server.ts', 'src/routes/+layout.svelte', 'src/routes/+layout.ts', 'vite.config.ts'];
 
 async function walk(dir) {
   const out = [];

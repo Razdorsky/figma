@@ -32,7 +32,7 @@
         <span class="menu-lines" aria-hidden="true"><i></i><i></i><i></i></span>
         <span>{tr(locale, 'MENU')}</span>
       </button>
-      <nav class="header-nav" aria-label="Main navigation">
+      <nav class="header-nav" aria-label={tr(locale, 'Main navigation')}>
         {#each shown as group, rank (group.id)}
           <button type="button" class="nav-trigger" data-mega-trigger data-rank={rank + 1} aria-expanded="false" aria-controls={`mega-${group.id}`}>
             <span>{tr(locale, group.title)}</span>

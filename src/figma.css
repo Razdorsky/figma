@@ -1025,3 +1025,22 @@ body[data-edition="figma"] .current-page[data-index="28"] img[src$="/96aad99ec0a
      proportions at the same width and the same centre (70.7% down the photo). */
   body[data-edition="figma"] .current-page[data-index="28"] img[src$="/50ec394cef65e5d3d539.webp"] { position: absolute; inset: auto; width: 135.28%; height: 202.03%; max-width: none; left: -0.02%; top: -92.8%; object-fit: fill; }
 }
+
+/* Spanish pages (docs/figma-spanish.md): the designer's EN | ES is a link to the page in the other language; the
+   current language is underlined. */
+body[data-edition="figma"] .language-trigger [data-lang-current] { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+
+/* Spanish pages only (docs/figma-spanish.md): Spanish words are longer than the English the frames were measured for,
+   so three one-line rules of the English layout give way. The English pages are untouched. */
+@media (min-width: 1366px) {
+  /* Fact labels ("CAPACIDAD DEL HEARTH") wrap in their columns instead of running into the next one. */
+  html[lang="es"] body[data-edition="figma"] .current-page [data-role="facts"] [data-part="fact"] > p:first-child { white-space: normal; }
+}
+@media (min-width: 1200px) {
+  /* A pair of buttons that no longer fits the 496px copy block puts the second one on the next row. */
+  html[lang="es"] body[data-edition="figma"] .current-page [data-variant="editorial"] [data-part="actions"] { flex-wrap: wrap; }
+}
+@media (min-width: 681px) and (max-width: 760px) {
+  /* The footer's five columns are too narrow for "EXPERIENCIAS" and "LA PROPIEDAD"; three columns, as on tablets. */
+  html[lang="es"] body[data-edition="figma"] .footer-columns { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 24px; }
+}

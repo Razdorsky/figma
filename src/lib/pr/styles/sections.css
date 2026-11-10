@@ -254,3 +254,7 @@ body[data-edition="figma-pr"] .current-page {
     & > section[data-role="events"] [data-part="event"] { grid-template-columns: minmax(0, 1fr); gap: 10px; }
   }
 }
+
+/* Spanish pages only (docs/figma-spanish.md): a long Spanish word in a fact heading ("Presentaciones" in a 220px
+   column at 900px) breaks at a Spanish syllable instead of running past the column; shorter words never break. */
+html[lang="es"] body[data-edition="figma-pr"] .current-page :is([data-role="facts"], [data-role="amenities"]) :is(h2, h3) { hyphens: auto; hyphenate-limit-chars: 12 5 5; overflow-wrap: break-word; }

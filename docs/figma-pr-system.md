@@ -109,7 +109,8 @@ and the reserve button becomes a bar along the foot of the screen; below 600 px 
 ## Header
 
 `src/lib/pr/components/Header.svelte`, `src/lib/pr/styles/shell.css`. Rosewood's tiers on paper:
-- the utility row: the language button "EN | ES" on the left, the dark wordmark in the middle, an underlined
+- the utility row: the designer's "EN | ES" on the left, a link to the page in the other language (Spanish since
+  2026-11-10, `docs/figma-spanish.md`), the dark wordmark in the middle, an underlined
   "CHECK AVAILABILITY" link to Orbe on the right;
 - the navigation row: "MENU" with three lines, the Stay and Experiences groups (the frame's two menus) whose panels
   show the pages as picture cards with an "Overview ↗" link, the "Rates & offers" link, and the reserve button.
@@ -169,6 +170,14 @@ no text selection) with these additions.
   move without animation.
 
 One scroll listener drives settling, the opening fade and the header on one animation frame.
+
+## Spanish
+
+Every page also exists in Latin American Spanish under `/figma-pr/es/` (owner, 2026-11-10). The dictionary is
+`src/lib/pr/content/es.json`, the helpers `src/lib/pr/i18n.ts`; EN | ES in the utility row and the footer, and the
+globe in the menu, switch to the same page in the other language, and the utility row's 2px rule marks the current
+language. The booking bar speaks Spanish ("Entrada", "Salida", "Huéspedes", "2 adultos") and opens Orbe's Spanish
+results. How it works, the translation and the checks: `docs/figma-spanish.md`.
 
 ## Fonts licensing
 

@@ -486,3 +486,18 @@ The owner's booking engine replaces the old link everywhere, by language: `https
 - The edition is in English, so every booking link uses `/en/`: `src/lib/site.ts` (header, menu, footer) and the designer's booking buttons on pages 01–06. `scripts/convert-pages-to-svelte.mjs` writes the same address, so a rebuild of the pages keeps it.
 - `node scripts/figma-freeze.mjs --update` refreshed the fingerprints of exactly these seven files; the other 188 are unchanged.
 - No other text, layout or behaviour changed.
+
+## Spanish — 2026-11-10 (owner request)
+
+The owner asked for the Figma edition in Spanish ("/figma и /figma-pr делай перевод ES"). Every page also exists under
+`/figma/es/`, in the approved Latin American Spanish of Figma Enhanced and Blueprint. How it works, the translation and
+the checks: [docs/figma-spanish.md](figma-spanish.md).
+
+- The English pages keep their text and layout. The designer's "EN | ES" and the menu's globe are now links to the
+  page in the other language, with the current language underlined, and each page names its Spanish alternate.
+- The designer's line breaks stay in English; in Spanish the broken element shows the whole sentence.
+- The booking links use `/en/` on English pages and `/es/` on Spanish pages. `scripts/convert-pages-to-svelte.mjs` still
+  writes the English address; the page components now carry `/{locale}/`.
+- `node scripts/figma-freeze.mjs --update` was run after comparing the English output before and after; the guard now
+  also covers `src/lib/i18n.ts` and the dictionary `src/lib/content/es.json`.
+

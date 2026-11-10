@@ -184,3 +184,8 @@ body[data-edition="figma-pr"] {
 @keyframes pr-sheet { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
 @keyframes pr-fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes pr-fade-out { to { opacity: 0; } }
+
+/* Spanish pages (docs/figma-spanish.md): the designer's EN | ES is a link to the page in the other language. The
+   utility row's 2px rule moves from the whole link to the current language. */
+body[data-edition="figma-pr"] :is(.pr-utility, .pr-footer) .language-trigger { border-bottom-color: transparent; }
+body[data-edition="figma-pr"] .language-trigger [data-lang-current] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 7px; }

@@ -1,21 +1,23 @@
 <script lang="ts">
-  import { booking, pages, route } from '#lib/site.ts';
+  import { bookingFor, pages, route } from '#lib/site.ts';
+  import { tr, other, type Locale } from '#lib/i18n.ts';
 
   type Props = {
     edition: 'blueprint' | 'figma';
     page: { index: number; slug: string; name: string; photo: boolean };
     base?: string;
+    locale?: Locale;
   };
 
-  let { edition, base = '' }: Props = $props();
+  let { edition, page, base = '', locale = 'en' }: Props = $props();
 </script>
 
-<dialog class="site-menu" id="site-menu" aria-label="Explore The Vessyl">
+<dialog class="site-menu" id="site-menu" aria-label={tr(locale, 'Explore The Vessyl')}>
   <div class="menu-top">
-    <a href={route(edition, '', base)}>
+    <a href={route(edition, '', base, locale)}>
       <img src={`${base.replace(/\/$/, '')}/brand/logo-dark.svg`} alt="VESSYL" width="220" height="41" />
     </a>
-    <button type="button" class="icon-button" data-menu-close aria-label="Close menu">
+    <button type="button" class="icon-button" data-menu-close aria-label={tr(locale, 'Close menu')}>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
         <path d="m6 6 12 12M18 6 6 18" />
       </svg>
@@ -23,52 +25,53 @@
   </div>
   <div class="menu-columns">
     <section class="menu-column">
-      <h2>Where you sleep</h2>
+      <h2>{tr(locale, 'Where you sleep')}</h2>
       {#each pages.slice(1, 6) as item (item.index)}
-        <a href={route(edition, item.slug, base)}>{item.name}</a>
+        <a href={route(edition, item.slug, base, locale)}>{tr(locale, item.name)}</a>
       {/each}
     </section>
     <section class="menu-column">
-      <h2>Experiences</h2>
+      <h2>{tr(locale, 'Experiences')}</h2>
       {#each pages.slice(6, 13) as item (item.index)}
-        <a href={route(edition, item.slug, base)}>{item.name}</a>
+        <a href={route(edition, item.slug, base, locale)}>{tr(locale, item.name)}</a>
       {/each}
     </section>
     <section class="menu-column">
-      <h2>The Property</h2>
+      <h2>{tr(locale, 'The Property')}</h2>
       {#each pages.slice(13, 18) as item (item.index)}
-        <a href={route(edition, item.slug, base)}>{item.name}</a>
+        <a href={route(edition, item.slug, base, locale)}>{tr(locale, item.name)}</a>
       {/each}
     </section>
     <section class="menu-column">
-      <h2>Eating here</h2>
+      <h2>{tr(locale, 'Eating here')}</h2>
       {#each pages.slice(18, 21) as item (item.index)}
-        <a href={route(edition, item.slug, base)}>{item.name}</a>
+        <a href={route(edition, item.slug, base, locale)}>{tr(locale, item.name)}</a>
       {/each}
     </section>
     <section class="menu-column">
-      <h2>Take the whole property</h2>
+      <h2>{tr(locale, 'Take the whole property')}</h2>
       {#each pages.slice(21, 25) as item (item.index)}
-        <a href={route(edition, item.slug, base)}>{item.name}</a>
+        <a href={route(edition, item.slug, base, locale)}>{tr(locale, item.name)}</a>
       {/each}
     </section>
     <section class="menu-column">
-      <h2>Plan your visit</h2>
+      <h2>{tr(locale, 'Plan your visit')}</h2>
       {#each pages.slice(25, 28) as item (item.index)}
-        <a href={route(edition, item.slug, base)}>{item.name}</a>
+        <a href={route(edition, item.slug, base, locale)}>{tr(locale, item.name)}</a>
       {/each}
     </section>
   </div>
   <div class="menu-footer">
-    <a class="nav-book" href={booking} target="_blank" rel="noopener noreferrer">CHECK AVAILABILITY ↗</a>
-    <button type="button" class="language-trigger" data-language-trigger aria-label="Language: English">
+    <a class="nav-book" href={bookingFor(locale)} target="_blank" rel="noopener noreferrer">{tr(locale, 'CHECK AVAILABILITY ↗')}</a>
+    <!-- The designer's globe and EN: a link to this page in the other language (docs/figma-spanish.md). -->
+    <a class="language-trigger" data-language-trigger data-sveltekit-reload href={route(edition, page.slug, base, other(locale))} hreflang={other(locale)} aria-label={tr(locale, 'Language: English. Switch to Spanish')}>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
         <circle cx="12" cy="12" r="9" />
         <ellipse cx="12" cy="12" rx="4" ry="9" />
         <path d="M3 12h18M5 7h14M5 17h14" />
       </svg>
-      <span>EN</span>
-    </button>
+      <span>{locale === 'es' ? 'ES' : 'EN'}</span>
+    </a>
   </div>
   <div class="preview-toast dialog-toast" role="status" hidden></div>
 </dialog>

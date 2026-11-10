@@ -1,4 +1,9 @@
 // One delegated controller survives SvelteKit page changes. Abort on unmount.
+import es from './content/es.json';
+
+// Spanish pages (docs/figma-spanish.md): interface words follow the document language. The literals of say() are in
+// the coverage check (scripts/spanish-strings.mjs).
+const say = text => (document.documentElement.lang === 'es' ? es[text] ?? text : text);
 let resetPendingMenu = () => {};
 export function closeOverlays() {
   resetPendingMenu();
@@ -14,7 +19,7 @@ export function enhancePage() {
     img.setAttribute('role', 'button');
     img.setAttribute('aria-haspopup','dialog');
     img.setAttribute('aria-controls','photo-gallery');
-    img.setAttribute('aria-label', 'Open photo gallery');
+    img.setAttribute('aria-label', say('Open photo gallery'));
   });
   document.querySelectorAll('[data-gallery-open]').forEach(button=>{button.setAttribute('aria-haspopup','dialog');button.setAttribute('aria-controls','photo-gallery');});
   document.querySelectorAll('a[href]').forEach(link => {
@@ -77,7 +82,7 @@ export function installInteractions() {
     galleryOpener = trigger;
     dialog.querySelector('.gallery-thumbnails').replaceChildren(...images.map((entry,index) => {
       const button = document.createElement('button');
-      button.type = 'button';button.dataset.galleryIndex = String(index);button.setAttribute('aria-label', `View photo ${index + 1}`);
+      button.type = 'button';button.dataset.galleryIndex = String(index);button.setAttribute('aria-label', `${say('View photo')} ${index + 1}`);
       const image = new Image();image.src = entry.src;image.alt = '';button.append(image);
       return button;
     }));
@@ -92,8 +97,7 @@ export function installInteractions() {
     if (open) {resetPendingMenu();opener=open;const dialog=menu();if(dialog&&!dialog.open){dialog.showModal();dialog.scrollTop=0;open.setAttribute('aria-expanded','true');dialog.querySelector('[data-menu-close]')?.focus();}return;}
     if(target===menu()){const box=target.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom){closeMenu();return;}}
     if (target.closest('[data-menu-close]')) {closeMenu();return;}
-    if (target.closest('[data-language-trigger]')) {notify('This preview is in English. Localized page copy has not been supplied yet.');return;}
-    if (target.closest('[data-pending-link]')) {event.preventDefault();notify('This destination is still a placeholder in the supplied design.');return;}
+    if (target.closest('[data-pending-link]')) {event.preventDefault();notify(say('This destination is still a placeholder in the supplied design.'));return;}
     if (target.closest('.gallery-close')) {gallery()?.close();return;}
     if (target.closest('.gallery-prev,.gallery-edge.left')) {show(active - 1);return;}
     if (target.closest('.gallery-next,.gallery-edge.right')) {show(active + 1);return;}

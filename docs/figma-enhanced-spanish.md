@@ -27,9 +27,10 @@ English is the source. The Spanish is a dictionary keyed by the English text: `s
   placeholder notice) in the document's language.
 - Internal links keep the reader's language: page links are written `{base}/{edition}/{lp}…`, where `lp` is `es/` on
   Spanish pages; components build theirs with `route(edition, slug, base, locale)`.
-- `node scripts/enhanced-strings.mjs` (part of `npm run check`) lists every English string the edition shows
-  (972 on 2026-11-10) and fails when the dictionary misses one or keeps one that is no longer used. A changed English
-  text therefore shows up as untranslated instead of going stale. `--list` prints the strings.
+- `node scripts/spanish-strings.mjs` (part of `npm run check`; it checks Figma and Figma PR too, see
+  `docs/figma-spanish.md`) lists every English string the edition shows (973 on 2026-11-10) and fails when the
+  dictionary misses one or keeps one that is no longer used. A changed English text therefore shows up as untranslated
+  instead of going stale. `--list figma-enhanced` prints the strings.
 
 ## The language switch
 
@@ -41,12 +42,14 @@ their words (the text that changes with the photograph, step 2.7), and a fresh p
 ## Booking
 
 The booking buttons open Orbe in the reader's language: `bookingFor(locale)` in `src/lib/enhanced/site.ts` gives
-`…/Search/Init/PAS6c/en/` or `…/Search/Init/PAS6c/es/` (owner, 2026-11-09).
+`…/Search/Init/PAS6c/en/` or `…/Search/Init/PAS6c/es/` (owner, 2026-11-09). The designer's booking buttons on pages
+01–06 write `…/PAS6c/{locale}/` (corrected 2026-11-10: on the first Spanish publication they still opened `/en/`).
 
 ## Translation
 
 Translated from the English directly into es-LA with the `translate-to-es-la` skill, then the mandatory second pass:
-every one of the 972 pairs reread against its English, and a typography and placeholder sweep.
+every one of the 972 pairs reread against its English, and a typography and placeholder sweep. On 2026-11-10 the
+navigation's label for screen readers ("Main navigation" → "Navegación principal") was added; it had stayed English.
 
 Decisions, following the approved Blueprint Spanish (`src/lib/blueprint/content/es.json`, 253 identical strings
 reused as they are):
@@ -66,8 +69,8 @@ reused as they are):
 
 ## Checks
 
-- `npm run check`: types, the 148 routes, the frozen Figma edition unchanged, Blueprint's and this edition's Spanish
-  coverage.
+- `npm run check`: types, the routes (148 then, 204 after Figma and Figma PR got Spanish), the frozen Figma
+  edition, the Spanish coverage of every edition.
 - No English string of the dictionary is left on a Spanish page (built HTML).
 - In the browser: the Spanish home page hydrates in Spanish, a click to another page stays in Spanish, EN | ES goes to
   the English page and back, the booking button opens Orbe's `/es/`, the gallery and the placeholder notice speak

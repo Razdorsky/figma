@@ -2,6 +2,11 @@
 // newsletter, placeholders) with the PR edition's own mechanics: the sticky header, the booking bar, the clips, the
 // pictures that settle on scroll, the opening that eases off, and the centre-focus gallery carousel.
 // One delegated controller survives SvelteKit page changes. Abort on unmount.
+import es from './content/es.json';
+
+// Spanish pages (docs/figma-spanish.md): interface words follow the document language. The literals of say() are in
+// the coverage check (scripts/spanish-strings.mjs).
+const say = text => (document.documentElement.lang === 'es' ? es[text] ?? text : text);
 let resetPendingMenu = () => {};
 export function closeOverlays() {
   resetPendingMenu();
@@ -34,7 +39,7 @@ function setupClips() {
     const box = video.closest('[data-part="hero-image"]');
     if (box && !box.parentElement.querySelector('.pr-film-toggle')) {
       const button = document.createElement('button');
-      button.type = 'button'; button.className = 'pr-film-toggle'; button.setAttribute('aria-pressed', 'false'); button.setAttribute('aria-label', 'Pause the video');
+      button.type = 'button'; button.className = 'pr-film-toggle'; button.setAttribute('aria-pressed', 'false'); button.setAttribute('aria-label', say('Pause the video'));
       button.innerHTML = '<svg class="icon-pause" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 2h3v10H3zM8 2h3v10H8z"/></svg><svg class="icon-play" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5v11l9-5.5z"/></svg>';
       box.parentElement.append(button);
     }
@@ -85,14 +90,14 @@ function setupCarousels() {
     section.setAttribute('data-pr-carousel', '');
     section.setAttribute('data-gallery', section.getAttribute('data-gallery') || '1');
     const wrap = document.createElement('div'); wrap.className = 'pr-carousel';
-    const track = document.createElement('div'); track.className = 'pr-carousel-track'; track.tabIndex = 0; track.setAttribute('role', 'region'); track.setAttribute('aria-label', 'Photographs');
+    const track = document.createElement('div'); track.className = 'pr-carousel-track'; track.tabIndex = 0; track.setAttribute('role', 'region'); track.setAttribute('aria-label', say('Photographs'));
     photos.forEach((img, i) => {
       const fig = document.createElement('figure'); fig.className = 'pr-carousel-slide';
       const copy = document.createElement('img'); copy.src = img.getAttribute('src'); copy.alt = img.alt; copy.loading = 'lazy'; copy.decoding = 'async'; copy.setAttribute('data-gallery-image', '');
       fig.append(copy); track.append(fig);
     });
     const bar = document.createElement('div'); bar.className = 'pr-carousel-bar';
-    bar.innerHTML = '<button type="button" class="pr-carousel-arrow" data-step="-1" aria-label="Previous photograph"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg></button><span class="pr-carousel-line" aria-hidden="true"><i></i></span><button type="button" class="pr-carousel-arrow" data-step="1" aria-label="Next photograph"><svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></svg></button>';
+    bar.innerHTML = '<button type="button" class="pr-carousel-arrow" data-step="-1" aria-label="' + say('Previous photograph') + '"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg></button><span class="pr-carousel-line" aria-hidden="true"><i></i></span><button type="button" class="pr-carousel-arrow" data-step="1" aria-label="' + say('Next photograph') + '"><svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></svg></button>';
     wrap.append(track, bar); section.append(wrap);
     const slides = [...track.children];
     const line = bar.querySelector('.pr-carousel-line');
@@ -127,7 +132,7 @@ export function enhancePage() {
     img.setAttribute('role', 'button');
     img.setAttribute('aria-haspopup','dialog');
     img.setAttribute('aria-controls','photo-gallery');
-    img.setAttribute('aria-label', 'Open photo gallery');
+    img.setAttribute('aria-label', say('Open photo gallery'));
   });
   document.querySelectorAll('[data-gallery-open]').forEach(button=>{button.setAttribute('aria-haspopup','dialog');button.setAttribute('aria-controls','photo-gallery');});
   document.querySelectorAll('a[href]').forEach(link => {
@@ -190,7 +195,7 @@ export function installInteractions() {
     galleryOpener = trigger;
     dialog.querySelector('.gallery-thumbnails').replaceChildren(...images.map((entry,index) => {
       const button = document.createElement('button');
-      button.type = 'button';button.dataset.galleryIndex = String(index);button.setAttribute('aria-label', `View photo ${index + 1}`);
+      button.type = 'button';button.dataset.galleryIndex = String(index);button.setAttribute('aria-label', `${say('View photo')} ${index + 1}`);
       const image = new Image();image.src = entry.src;image.alt = '';button.append(image);
       return button;
     }));
@@ -205,8 +210,7 @@ export function installInteractions() {
     if (open) {resetPendingMenu();opener=open;const dialog=menu();if(dialog&&!dialog.open){dialog.showModal();dialog.scrollTop=0;open.setAttribute('aria-expanded','true');dialog.querySelector('[data-menu-close]')?.focus();}return;}
     if(target===menu()){const box=target.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom){closeMenu();return;}}
     if (target.closest('[data-menu-close]')) {closeMenu();return;}
-    if (target.closest('[data-language-trigger]')) {notify('This preview is in English. Localized page copy has not been supplied yet.');return;}
-    if (target.closest('[data-pending-link]')) {event.preventDefault();notify('This destination is still a placeholder in the supplied design.');return;}
+    if (target.closest('[data-pending-link]')) {event.preventDefault();notify(say('This destination is still a placeholder in the supplied design.'));return;}
     if (target.closest('.gallery-close')) {gallery()?.close();return;}
     if (target.closest('.gallery-prev,.gallery-edge.left')) {show(active - 1);return;}
     if (target.closest('.gallery-next,.gallery-edge.right')) {show(active + 1);return;}
@@ -272,7 +276,7 @@ export function installInteractions() {
     const film = target.closest('.pr-film-toggle');
     if (film) {
       const pressed = film.getAttribute('aria-pressed') !== 'true';
-      film.setAttribute('aria-pressed', String(pressed)); film.setAttribute('aria-label', pressed ? 'Play the video' : 'Pause the video');
+      film.setAttribute('aria-pressed', String(pressed)); film.setAttribute('aria-label', pressed ? say('Play the video') : say('Pause the video'));
       film.parentElement.querySelectorAll('video[data-loop]').forEach(syncClip);
     }
   });
